@@ -54,12 +54,11 @@ public class Graph<X> implements StructureBehavior<VertexNode<X>> {
 		VertexNode<X> temp;
 		for(int i=1; i < vertices.getSize()+1; i++) {
 			temp= vertices.consult(i);
-			//System.out.println("Vertex:"+temp);
-			msg = msg+"\n"+"Vertex:"+temp+"\n";
+			msg = msg+"Vertex:"+temp+"\n";
 			for(int y=1; y < temp.getEdges().getSize()+1; y++) {
 				msg = msg + "Edge of:"+temp.getElement()+" "+"to"+temp.getEdges().consult(y)+" "+"with weight:"+((GraphNode<X>)temp.getEdges().consult(y)).getWeight() +"\n";
-				//System.out.println("Edge of:"+temp.getElement()+" "+"to"+temp.getEdges().consult(y)+" "+"with weight:"+((GraphNode<X>)temp.getEdges().consult(y)).getWeight());
 			}
+			msg = msg + "\n";
 		}
 		return msg;
 	}
