@@ -4,8 +4,8 @@ import com.logic.interfaces.StructureBehavior;
 
 public class LinkedList<X> implements StructureBehavior<X>{
 
-	LinkedListNode<X> head, tail;
-	int size;
+	private LinkedListNode<X> head, tail;
+	private int size;
 	
 	public LinkedListNode<X> getHead() {
 		return head;

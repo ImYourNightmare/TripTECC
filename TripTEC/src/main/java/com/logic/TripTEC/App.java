@@ -20,16 +20,22 @@ public class App
         //api.Test();
         //System.out.println(api.placeDetails(api.getContext(), api.getPlaceId()).await());
     	Graph<Integer> grafo = new Graph<Integer>();
-    	VertexNode<Integer> nodo = new VertexNode<Integer>(1);
-    	VertexNode<Integer> nodo2 = new VertexNode<Integer>(3);
-    	grafo.create(nodo);
-    	grafo.createEdge(nodo, 3, 5);
-    	grafo.createEdge(nodo, 2, 7);
-    	grafo.createEdge(nodo, 1, 9);
+    	VertexNode<Integer> nodo1 = new VertexNode<Integer>(1);
+    	VertexNode<Integer> nodo2 = new VertexNode<Integer>(2);
+    	VertexNode<Integer> nodo3 = new VertexNode<Integer>(3);
+    	VertexNode<Integer> nodo4 = new VertexNode<Integer>(4);
+    	VertexNode<Integer> nodo5 = new VertexNode<Integer>(5);
+    	grafo.create(nodo1);
     	grafo.create(nodo2);
-    	grafo.createEdge(nodo2, 6, 2);
-    	grafo.createEdge(nodo2, 7, 1);
-    	grafo.createEdge(nodo2, 9, 15);
-    	System.out.println(grafo);
+    	grafo.create(nodo3);
+    	grafo.create(nodo4);
+    	grafo.create(nodo5);
+    	grafo.createEdge(nodo1, nodo2, 5);
+    	grafo.createEdge(nodo1, nodo3, 2);
+    	grafo.createEdge(nodo2, nodo1, 2);
+    	grafo.createEdge(nodo1, nodo4, 2);
+    	grafo.createEdge(nodo1, nodo5, 2);
+    	//System.out.println(grafo);
+    	grafo.DFS(nodo1);
     }
 }
