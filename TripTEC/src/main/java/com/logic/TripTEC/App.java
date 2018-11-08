@@ -35,7 +35,7 @@ public class App
     	grafo.createEdge(nodo2, nodo1, 2);
     	grafo.createEdge(nodo1, nodo4, 2);
     	grafo.createEdge(nodo1, nodo5, 2);
-    	//System.out.println(grafo);
-    	grafo.DFS(nodo1);
+    	System.out.println(grafo);
+    	//grafo.DFS(nodo1);
     }
 }
