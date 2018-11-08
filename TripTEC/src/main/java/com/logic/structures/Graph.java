@@ -9,24 +9,24 @@ public class Graph<X> implements StructureBehavior<VertexNode<X>> {
 	public void create(VertexNode<X> element) {
 		vertices.create((VertexNode<X>) element);
 	}
-	public void createEdge(VertexNode<X> Oelement,VertexNode<X> Delement, int weight ) {
-		vertices.consult(Oelement).getEdges().create(new GraphEdge<X>(Delement,weight));
+	public void createEdge(VertexNode<X> oVertex,VertexNode<X> dVertex, int weight ) {
+		vertices.consult(oVertex).getEdges().create(new GraphEdge<X>(dVertex,weight));
 	}
-	public void remove(VertexNode<X> element) {
-		vertices.remove((VertexNode<X>) element);
+	public void remove(VertexNode<X> vertex) {
+		vertices.remove((VertexNode<X>) vertex);
 	}
-	public void removeEdge(VertexNode<X> Oelement, GraphEdge<X> Node) {
-		vertices.consult(Oelement).getEdges().remove(Node);
+	public void removeEdge(VertexNode<X> oVertex, GraphEdge<X> Edge) {
+		vertices.consult(oVertex).getEdges().remove(Edge);
 	}
-	public VertexNode<X> consult(VertexNode<X> element) {
+	public VertexNode<X> consult(VertexNode<X> vertex) {
 		for(int i=0 ; i < vertices.getSize() ; i++) {
-			if(this.vertices.consult(i) == element)
+			if(this.vertices.consult(i) == vertex)
 				return this.vertices.consult(i);
 		}
 		return null;
 	}
-	public GraphEdge<X> consultEdge(VertexNode<X> Oelement, X Delement) {
-		VertexNode<X> temp = ((VertexNode<X>) vertices.consult(Oelement));
+	public GraphEdge<X> consultEdge(VertexNode<X> oVertex, X Delement) {
+		VertexNode<X> temp = ((VertexNode<X>) vertices.consult(oVertex));
 		for(int i = 0; i < temp.getEdges().getSize(); i++) {
 			if(temp.getEdges().consult(i).equals(Delement))
 				return temp.getEdges().consult(i);
@@ -46,8 +46,8 @@ public class Graph<X> implements StructureBehavior<VertexNode<X>> {
 			vertices.consult(i).setVisited(false);
 		}
 	}
-	public void DFS(VertexNode<X> Oelement) {
-		VertexNode<X> current = consult(Oelement);
+	public void DFS(VertexNode<X> oVertex) {
+		VertexNode<X> current = consult(oVertex);
 		while(current != null) {
 			if(!current.isVisited()) {
 				System.out.println(current);
@@ -62,11 +62,9 @@ public class Graph<X> implements StructureBehavior<VertexNode<X>> {
 	public int getSize() {
 		return vertices.getSize();
 	}
-
 	public void clear() {
 		vertices.clear();
 	}
-
 	public boolean isEmpty() {
 		return vertices.getSize() == 0;
 	}
