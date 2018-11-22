@@ -35,7 +35,7 @@ public class API {
 	}
 	public void Test() throws ApiException, InterruptedException, IOException {
 		context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
-		GeocodingResult[] results =  GeocodingApi.geocode(context,"1600 Amphitheatre Parkway Mountain View, CA 94043").await();
+		GeocodingResult[] results =  GeocodingApi.geocode(context,"9.9380473,-84.0752574").await();
 		gson = new GsonBuilder().setPrettyPrinting().create();
 		System.out.println(gson.toJson(results[0].addressComponents));
 		System.out.println(gson.toJson(results[0].placeId));
