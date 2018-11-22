@@ -3,9 +3,18 @@ package com.logic.objects;
 
 public class Client {
 	//attributes class
-	private String name;
-	private int id, phone, birthdate;
+	private String name, birthdate;
+	private int id, phone;
 	
+	
+	//Constructor de la clase
+	
+	public Client(String name, String birthdate, int id, int phone){
+		this.name = name;
+		this.birthdate = birthdate;
+		this.id = id;
+		this.phone = phone;
+	}
 	
 	//getters and setters
 	public String getName() {
@@ -26,10 +35,10 @@ public class Client {
 	public void setPhone(int phone) {
 		this.phone = phone;
 	}
-	public int getBirthdate() {
+	public String getBirthdate() {
 		return birthdate;
 	}
-	public void setBirthdate(int birthdate) {
+	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
 }
