@@ -7,8 +7,20 @@ public class Place {
 
 	
 	//getters and setters of class
+	
 	public String getLatitude() {
 		return latitude;
+	}
+
+	public Place(String latitude, String lenght, String addres, String placeName, String description,
+			String placeActivities, String placeVisit) {
+		this.latitude = latitude;
+		this.lenght = lenght;
+		this.addres = addres;
+		this.placeName = placeName;
+		Description = description;
+		this.placeActivities = placeActivities;
+		this.placeVisit = placeVisit;
 	}
 
 	public void setLatitude(String latitude) {
@@ -62,11 +74,7 @@ public class Place {
 	public void setPlaceVisit(String placeVisit) {
 		this.placeVisit = placeVisit;
 	}
-	
-	
-	
-	
-	
-	
-
+	public String toString() {
+		return this.placeName;
+	}
 }

@@ -1,21 +1,23 @@
 package com.logic.objects;
 
+import com.structures.graph.Graph;
 
 public class Client implements Comparable<Client> {
 	//attributes class
 	private String name, birthdate;
 	private int id, phone;
-	
-	
+	private Graph graph;
+
 	//Constructor de la clase
-	
+
 	public Client(String name, String birthdate, int id, int phone){
 		this.name = name;
 		this.birthdate = birthdate;
 		this.id = id;
 		this.phone = phone;
+		this.graph = null;
 	}
-	
+
 	//getters and setters
 	public String getName() {
 		return name;
@@ -52,11 +54,8 @@ public class Client implements Comparable<Client> {
 			return -1;
 		return 0;
 	}
-	
+
 	public String toString() {
 		return this.name;
 	}
 }
-	
-	
-	
