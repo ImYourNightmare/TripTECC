@@ -14,10 +14,11 @@ public class App
 {
     public static void main( String[] args ) throws ApiException, InterruptedException, IOException
     {
-        //API api = new API();
-        //api.Test();
+        API api = new API();
+        api.Test();
+        api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
         //System.out.println(api.placeDetails(api.getContext(), api.getPlaceId()).await());
-    	Place lugar1 = new Place(null, null, null, "Mollejones", null, null, null);
+    	/*Place lugar1 = new Place(null, null, null, "Mollejones", null, null, null);
     	Place lugar2 = new Place(null, null, null, "San Isidro", null, null, null);
     	Place lugar3 = new Place(null, null, null, "San Pablo", null, null, null);
     	Place lugar4 = new Place(null, null, null, "San Rafael", null, null, null);
@@ -51,6 +52,6 @@ public class App
     	dijkstra = new Dijkstra(gestion.getGraph());
     	dijkstra.runGraph(dijkstra.getVertices().get(1));
     	System.out.println(dijkstra.getDistancias().toString());
-    	//System.out.println(cliente1.getGraph().getVertices());	
+    	//System.out.println(cliente1.getGraph().getVertices());	*/
     }
 }

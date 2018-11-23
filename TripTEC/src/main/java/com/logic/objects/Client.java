@@ -18,6 +18,14 @@ public class Client implements Comparable<Client> {
 		this.graph = null;
 	}
 
+	public Graph getGraph() {
+		return graph;
+	}
+
+	public void setGraph(Graph graph) {
+		this.graph = graph;
+	}
+
 	//getters and setters
 	public String getName() {
 		return name;

@@ -17,6 +17,9 @@ public class API {
 	Gson gson;
 	String placeId;
 	
+	
+	String data = ""; 
+	
 	public GeoApiContext getContext() {
 		return context;
 	}
@@ -44,12 +47,13 @@ public class API {
 		//System.out.println(gson.toJson(results[0]));
 		placeId = results[0].placeId;
 	}
-	public PlaceDetailsRequest placeDetails(GeoApiContext context, String placeId) throws ApiException, InterruptedException, IOException {
+	public String placeDetails(GeoApiContext context, String placeId) throws ApiException, InterruptedException, IOException {
 		PlaceDetailsRequest request = new PlaceDetailsRequest(context);
 		request.placeId(placeId);
 		gson = new GsonBuilder().setPrettyPrinting().create();
 		
 		//System.out.println(gson.toJson(request.await()));
+		data = gson.toJson(request.await());
 		
 		
 		
@@ -57,14 +61,29 @@ public class API {
 		
 		
 		
-		
-		return request;
+		return data;
 		
 	}
 	
-	public void Parse(String gson) {
+	public void Parse(String data) {
 		
-		//gson = new GsonBuilder().setPrettyPrinting().create();
+		final String regex = "\"website\": ([\\a-zA-Z].*),";
+		final String dataD= data;
+		
+		
+		final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+		final Matcher matcher = pattern.matcher(dataD);
+
+		while (matcher.find()) {
+		    //System.out.println("Full match: " + matcher.group(0));
+		    for (int i = 1; i <= matcher.groupCount(); i++) {
+		        System.out.println(matcher.group(i));
+		    }
+		}		
+		
+		
+		
+		
 		
 		
 		
