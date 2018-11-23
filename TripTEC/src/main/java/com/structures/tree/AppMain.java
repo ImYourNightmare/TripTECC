@@ -13,11 +13,6 @@ public class AppMain {
 		bst.insertarNodo(cliente1);
 		bst.insertarNodo(cliente2);
 		bst.insertarNodo(cliente3);
-		//bst.insertarNodo(cliente4);
 		bst.posOrder();
-		if (bst.searchNode(cliente4))
-			System.out.println("Si estoy");
-		else
-			System.out.println("No estoy");
 	}
 }
