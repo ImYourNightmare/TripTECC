@@ -2,48 +2,48 @@ package com.structures.graph;
 
 
 public class AppMain {
-	private static ControladorGrafo controlador;
-	private static Grafo grafo;
+	private static GraphManager controlador;
+	private static Graph grafo;
 	private static Dijkstra dijkstra;
 
 	public static void main(String[] args) {
 		// Primeramente, se utiliza el controlador para crear las listas de v�rtices y
 		// aristas
-		controlador = new ControladorGrafo();
-
-		controlador.nuevoVertice("A", "ALELUYA");
-		controlador.nuevoVertice("B", "QWERTY");
-		controlador.nuevoVertice("C", "ASDFGH");
-		controlador.nuevoVertice("D", "POIUYY");
-		controlador.nuevoVertice("E", "MHJBOIN");
-
-		controlador.nuevaArista("AB", 0, 1, 23.8);
-		controlador.nuevaArista("BA", 1, 0, 23.8);
-		controlador.nuevaArista("AD", 0, 3, 5.8);
-		controlador.nuevaArista("DA", 3, 0, 5.8);
+		controlador = new GraphManager();
 		
-		controlador.nuevaArista("AC", 0, 2, 17.2);
-		controlador.nuevaArista("CA", 2, 0, 17.2);
+		controlador.newVertes("A", "ALELUYA");
+		controlador.newVertes("B", "QWERTY");
+		controlador.newVertes("C", "ASDFGH");
+		controlador.newVertes("D", "POIUYY");
+		controlador.newVertes("E", "MHJBOIN");
 
-		controlador.nuevaArista("BC", 1, 2, 36.2);
-		controlador.nuevaArista("CB", 2, 1, 36.2);
-
-		controlador.nuevaArista("CD", 1, 3, 25.1);
-		controlador.nuevaArista("DC", 3, 1, 25.1);
+		controlador.newEdge("AB", 0, 1, 23.8);
+		controlador.newEdge("BA", 1, 0, 23.8);
+		controlador.newEdge("AD", 0, 3, 5.8);
+		controlador.newEdge("DA", 3, 0, 5.8);
 		
-		controlador.nuevaArista("DE", 3, 4, 86.4);
-		controlador.nuevaArista("ED", 4, 3, 86.4);
+		controlador.newEdge("AC", 0, 2, 17.2);
+		controlador.newEdge("CA", 2, 0, 17.2);
+
+		controlador.newEdge("BC", 1, 2, 36.2);
+		controlador.newEdge("CB", 2, 1, 36.2);
+
+		controlador.newEdge("CD", 1, 3, 25.1);
+		controlador.newEdge("DC", 3, 1, 25.1);
+		
+		controlador.newEdge("DE", 3, 4, 86.4);
+		controlador.newEdge("ED", 4, 3, 86.4);
 
 
 		// Luego se inicializa el grafo que actuar� directamente sobre las listas del
 		// controlador
-		grafo = new Grafo(controlador.getVertices(), controlador.getAristas());
+		grafo = new Graph(controlador.getVertices(), controlador.getEdges());
 		//System.out.println(grafo.toString());
 
 		// Por �ltimo se utliza el Dijkstra para obtener la ruta m�s corta de un punto a
 		// otro
 		dijkstra = new Dijkstra(grafo);
-		dijkstra.ejecutarGrafo(dijkstra.getVertices().get(2));
+		dijkstra.runGraph(dijkstra.getVertices().get(2));
 		
 		///OBTIENE LAS DISTANCIAS A TODOS LOS VERTICES A PARTIR DEL GET(NUM) anterior
 		System.out.println(dijkstra.getDistancias().toString());
