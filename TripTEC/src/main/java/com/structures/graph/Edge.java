@@ -4,24 +4,24 @@ package com.structures.graph;
  * Esta clase posee el comportamiento que tendrá el Dijkstra en el momento de
  * ser ejecutado
  */
-public class Arista {
-	private String id_arista;
-	private Vertice<Object> puntoPartida;
-	private Vertice<Object> puntoLlegada;
-	private double longitud;
+public class Edge {
+	private String edge_ID;
+	private Vertex<Object> startPoint;
+	private Vertex<Object> endPoint;
+	private double lenght;
 
 	/**
          * constructor
-         * @param pId_arista id de la arista
-         * @param pPartida punto de partida (vértice)
-         * @param pLlegada punto de llegada (vértice)
-         * @param pLongitud peso de la relación
+         * @param edge_ID id de la arista
+         * @param startPoint punto de partida (vértice)
+         * @param endPoint punto de llegada (vértice)
+         * @param lenght peso de la relación
          */
-	public Arista(String pId_arista, Vertice<Object> pPartida, Vertice<Object> pLlegada, double pLongitud) {
-		this.id_arista = pId_arista;
-		this.puntoPartida = pPartida;
-		this.puntoLlegada = pLlegada;
-		this.longitud = pLongitud;
+	public Edge(String edge_ID, Vertex<Object> startPoint, Vertex<Object> endPoint, double lenght) {
+		this.edge_ID = edge_ID;
+		this.startPoint = startPoint;
+		this.endPoint = endPoint;
+		this.lenght = lenght;
 	}
 	/**
          * get para arista
@@ -29,56 +29,56 @@ public class Arista {
          */
 
 	public String getId_arista() {
-		return id_arista;
+		return edge_ID;
 	}
         /**
          * set para id de arista
          * @param id_arista id de arista nuevo
          */
 	public void setId_arista(String id_arista) {
-		this.id_arista = id_arista;
+		this.edge_ID = id_arista;
 	}
         /**
          * get del punto de partida
          * @return punto de partida (vértice)
          */
-	public Vertice<Object> getPuntoPartida() {
-		return puntoPartida;
+	public Vertex<Object> getPuntoPartida() {
+		return startPoint;
 	}
         /**
          * set del punto de partida
          * @param puntoPartida nuevo vértice
          */
-	public void setPuntoPartida(Vertice<Object> puntoPartida) {
-		this.puntoPartida = puntoPartida;
+	public void setPuntoPartida(Vertex<Object> puntoPartida) {
+		this.startPoint = puntoPartida;
 	}
         /**
          * get del punto de llegada
          * @return punto de llegada(vértice)
          */
-	public Vertice<Object> getPuntoLlegada() {
-		return puntoLlegada;
+	public Vertex<Object> getPuntoLlegada() {
+		return endPoint;
 	}
         /**
          * set del punto de llegada 
          * @param puntoLlegada punto nuevo de llegada (vértice)
          */
-	public void setPuntoLlegada(Vertice<Object> puntoLlegada) {
-		this.puntoLlegada = puntoLlegada;
+	public void setPuntoLlegada(Vertex<Object> puntoLlegada) {
+		this.endPoint = puntoLlegada;
 	}
         /**
          * get del peso de la arista
          * @return peso 
          */
 	public double getLongitud() {
-		return longitud;
+		return lenght;
 	}
         /**
          * set de la longitud de la arista
          * @param longitud peso nuevo de la arista
          */
 	public void setLongitud(int longitud) {
-		this.longitud = longitud;
+		this.lenght = longitud;
 	}
 	/**
          * método para obtener un string con todas la variables
@@ -86,11 +86,11 @@ public class Arista {
          */
 	public String toString() {
 		String msj = "";
-		msj += "ID: " + id_arista + "\n";
+		msj += "ID: " + edge_ID + "\n";
 		msj += "VERTICE PARTIDA: \n";
-		msj += puntoPartida.toString();
-		msj += puntoLlegada.toString();
-		msj += "Longitud: " + longitud;
+		msj += startPoint.toString();
+		msj += endPoint.toString();
+		msj += "Longitud: " + lenght;
 		return msj;
 	}
 }

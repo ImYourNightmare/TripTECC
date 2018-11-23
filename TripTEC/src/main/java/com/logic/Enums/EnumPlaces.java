@@ -8,7 +8,6 @@ public enum EnumPlaces {
 	private int order;
 	private String place;
 
-	
 	public int getOrder() {
 		return order;
 	}
@@ -30,7 +29,4 @@ public enum EnumPlaces {
 		this.place = place;
 		
 	}
-	
-	
-
 }
