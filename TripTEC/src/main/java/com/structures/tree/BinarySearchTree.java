@@ -7,20 +7,19 @@ import java.util.Stack;
 public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	/**
 	 * Al ser recursivo es totalmente necesario que el nodo se encuentre dentro de la clase
-	 * Debido a que debe tener acceso directo a los parámetros de memoria dentro del código
+	 * Debido a que debe tener acceso directo a los parï¿½metros de memoria dentro del codigo
 	 * @author jearo
 	 *
 	 * @param <X>
 	 */
-	@SuppressWarnings("hiding")
-	private class Node<X> {
-		private X elemento;
-		private Node<X> izq, der;
+	@SuppressWarnings("hiding") class Node<X> {
+		private X element;
+		private Node<X> left, right;
 
-		public Node(X data, Node<X> izq, Node<X> der) {
-			this.izq = izq;
-			this.der = der;
-			this.elemento = data;
+		public Node(X data, Node<X> left, Node<X> right) {
+			this.left = left;
+			this.right = right;
+			this.element = data;
 		}
 
 		public Node(X data) {
@@ -28,22 +27,46 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 		}
 
 		public String toString() {
-			return elemento.toString();
+			return element.toString();
+		}
+
+		public X getElement() {
+			return element;
+		}
+
+		public void setElement(X element) {
+			this.element = element;
+		}
+
+		public Node<X> getLeft() {
+			return left;
+		}
+
+		public void setLeft(Node<X> left) {
+			this.left = left;
+		}
+
+		public Node<X> getRight() {
+			return right;
+		}
+
+		public void setRight(Node<X> right) {
+			this.right = right;
 		}
 	}
 	
 	/**
-	 * Atributos de la clase Árbol
+	 * Atributos de la clase ï¿½rbol
 	 */
-	private Node<X> raiz;
+	private Node<X> root;
 	private Comparator<X> comparator;
 
 	public Node<X> getRoot() {
-		return raiz;
+		return root;
 	}
 
 	public void setRoot(Node<X> root) {
-		this.raiz = root;
+		this.root = root;
 	}
 
 	public Comparator<X> getComparator() {
@@ -55,19 +78,19 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	}
 
 	/**
-	 * Constructir de la clase
+	 * Constructor de la clase
 	 */
 	public BinarySearchTree() {
-		raiz = null;
+		root = null;
 		comparator = null;
 	}
 
 	public BinarySearchTree(Comparator<X> comp) {
-		raiz = null;
+		root = null;
 		comparator = comp;
 	}
 
-	private int compare(X elemA, X elemB) {
+	public int compare(X elemA, X elemB) {
 		if (comparator == null)
 			return elemA.compareTo(elemB);
 		else
@@ -80,20 +103,21 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	 * @param data
 	 */
 	public void insertarNodo(X data) {
-		raiz = insert(raiz, data);
+		root = insert(root, data);
 	}
-
+	//Auxiliar de la funcion recursiva de insertar
 	private Node<X> insert(Node<X> nuevoNodo, X nodoInsertado) {
 		if (nuevoNodo == null)
 			return new Node<X>(nodoInsertado);
-
-		if (compare(nodoInsertado, nuevoNodo.elemento) == 0)
+		//Si el comparable retorna 0, significa que el id del cliente ya existe y no puede ser insertado de nuevo
+		if (compare(nodoInsertado, nuevoNodo.element) == 0)
 			return nuevoNodo;
-
-		if (compare(nodoInsertado, nuevoNodo.elemento) < 0)
-			nuevoNodo.izq = insert(nuevoNodo.izq, nodoInsertado);
+		//Cuando el comparable retorna -1, significa que el nuevo ID es menor y debe ir a la izquierda
+		if (compare(nodoInsertado, nuevoNodo.element) < 0)
+			nuevoNodo.left = insert(nuevoNodo.left, nodoInsertado);
+		//De otra manera, el comparable retorna 1 y el nuevo nodo va a la derecha del arbol
 		else
-			nuevoNodo.der = insert(nuevoNodo.der, nodoInsertado);
+			nuevoNodo.right = insert(nuevoNodo.right, nodoInsertado);
 
 		return nuevoNodo;
 	}
@@ -104,19 +128,23 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	 * @param toSearch
 	 * @return
 	 */
-	public boolean buscarNodo(X toSearch) {
-		return search(raiz, toSearch);
+	public boolean searchNode(X toSearch) {
+		return search(root, toSearch);
 	}
-
+	//Funcion auxiliar del buscador
 	private boolean search(Node<X> p, X toSearch) {
+		//Si mientras se esta buscando se encuentra con que p es nulo, significa que la busqueda ya termino y el elemento no se encuentra en el arbol
 		if (p == null)
 			return false;
-		else if (compare(toSearch, p.elemento) == 0)
+		//Se usa el compare para guiar la busqueda.
+		//Si el compare retorna 0, quiere decir que el elemento fue encontrado dentro del arbol
+		else if (compare(toSearch, p.element) == 0)
 			return true;
-		else if (compare(toSearch, p.elemento) < 0)
-			return search(p.izq, toSearch);
+		//Si aun no se ha encontrado el elemento y hay mas hijos, se utilizan los valores del compare para ir ya sea a la izq. o a la der.
+		else if (compare(toSearch, p.element) < 0)
+			return search(p.left, toSearch);
 		else
-			return search(p.der, toSearch);
+			return search(p.right, toSearch);
 	}
 
 	/**
@@ -124,37 +152,38 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	 * 
 	 * @param eliminarNodo
 	 */
-	public void eliminarNodo(X eliminarNodo) {
-		raiz = delete(raiz, eliminarNodo);
+	public void deleteNode(X eliminarNodo) {
+		root = delete(root, eliminarNodo);
 	}
-
+	//Funcion auxiliar del deleteNode
 	private Node<X> delete(Node<X> nodoTemp, X nodoElim) {
+		//Si se busca eliminar un nodo que no esta dentro del arbol, se envia un error para avisar
 		if (nodoTemp == null)
 			throw new RuntimeException("cannot delete.");
-		else if (compare(nodoElim, nodoTemp.elemento) < 0)
-			nodoTemp.izq = delete(nodoTemp.izq, nodoElim);
-		else if (compare(nodoElim, nodoTemp.elemento) > 0)
-			nodoTemp.der = delete(nodoTemp.der, nodoElim);
+		else if (compare(nodoElim, nodoTemp.element) < 0)
+			nodoTemp.left = delete(nodoTemp.left, nodoElim);
+		else if (compare(nodoElim, nodoTemp.element) > 0)
+			nodoTemp.right = delete(nodoTemp.right, nodoElim);
 		else {
-			if (nodoTemp.izq == null)
-				return nodoTemp.der;
-			else if (nodoTemp.der == null)
-				return nodoTemp.izq;
+			if (nodoTemp.left == null)
+				return nodoTemp.right;
+			else if (nodoTemp.left == null)
+				return nodoTemp.right;
 			else {
 				// Obtiene los datos por el lado derecho
-				nodoTemp.elemento = obtenerDato(nodoTemp.izq);
+				nodoTemp.element = recieveData(nodoTemp.left);
 				// Obtiene los datos del lado izquierdo
-				nodoTemp.izq = delete(nodoTemp.izq, nodoTemp.elemento);
+				nodoTemp.left = delete(nodoTemp.right, nodoTemp.element);
 			}
 		}
 		return nodoTemp;
 	}
 
-	private X obtenerDato(Node<X> p) {
-		while (p.der != null)
-			p = p.der;
+	private X recieveData(Node<X> p) {
+		while (p.right != null)
+			p = p.right;
 
-		return p.elemento;
+		return p.element;
 	}
 
 	/**
@@ -171,44 +200,47 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	/**
 	 * Preorden
 	 */
+	//Tipo de recorrido para el toString. Va en el orden Root-Left-Right
 	public void preOrder() {
-		preOrderHelper(raiz);
+		preOrderHelper(root);
 	}
 
 	private void preOrderHelper(Node<X> nodoTemp) {
 		if (nodoTemp != null) {
 			System.out.print(nodoTemp + " ");
-			preOrderHelper(nodoTemp.izq);
-			preOrderHelper(nodoTemp.der);
+			preOrderHelper(nodoTemp.left);
+			preOrderHelper(nodoTemp.right);
 		}
 	}
 
 	/**
 	 * En orden
 	 */
+	//Tipo de toString con el orden Left-Root-Right
 	public void inOrder() {
-		inOrderHelper(raiz);
+		inOrderHelper(root);
 	}
 
 	private void inOrderHelper(Node<X> nodoTemp) {
 		if (nodoTemp != null) {
-			inOrderHelper(nodoTemp.izq);
+			inOrderHelper(nodoTemp.left);
 			System.out.print(nodoTemp + " ");
-			inOrderHelper(nodoTemp.der);
+			inOrderHelper(nodoTemp.right);
 		}
 	}
 
 	/**
 	 * Post Orden
 	 */
+	//Tipo de recorrido que va Left-Right-Root
 	public void posOrder() {
-		postOrderHelper(raiz);
+		postOrderHelper(root);
 	}
 
 	private void postOrderHelper(Node<X> nodoTemp) {
 		if (nodoTemp != null) {
-			inOrderHelper(nodoTemp.izq);
-			inOrderHelper(nodoTemp.der);
+			inOrderHelper(nodoTemp.left);
+			inOrderHelper(nodoTemp.right);
 			System.out.print(nodoTemp + " ");
 		}
 	}
@@ -224,7 +256,7 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 		else
 			twin = new BinarySearchTree<X>(comparator);
 
-		twin.raiz = cloneHelper(raiz);
+		twin.root = cloneHelper(root);
 		return twin;
 	}
 
@@ -232,51 +264,51 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 		if (p == null)
 			return null;
 		else
-			return new Node<X>(p.elemento, cloneHelper(p.izq), cloneHelper(p.der));
+			return new Node<X>(p.element, cloneHelper(p.left), cloneHelper(p.right));
 	}
 
 	/**
-	 * Altura del árbol
+	 * Altura del ï¿½rbol
 	 * 
 	 * @return
 	 */
 	public int height() {
-		return height(raiz);
+		return height(root);
 	}
 
 	private int height(Node<X> p) {
 		if (p == null)
 			return -1;
 		else
-			return 1 + Math.max(height(p.izq), height(p.der));
+			return 1 + Math.max(height(p.left), height(p.right));
 	}
 
 	/**
-	 * Contar las horas del árbol
+	 * Contar las horas del ï¿½rbol
 	 * 
 	 * @return
 	 */
 	public int countLeaves() {
-		return countLeaves(raiz);
+		return countLeaves(root);
 	}
 
 	private int countLeaves(Node<X> p) {
 		if (p == null)
 			return 0;
-		else if (p.izq == null && p.der == null)
+		else if (p.left == null && p.right == null)
 			return 1;
 		else
-			return countLeaves(p.izq) + countLeaves(p.der);
+			return countLeaves(p.left) + countLeaves(p.right);
 	}
 
 	/**
-	 * Restaura el árbol en orden y preorden
+	 * Restaura el ï¿½rbol en orden y preorden
 	 * 
 	 * @param pre
 	 * @param in
 	 */
 	public void restore(X[] pre, X[] in) {
-		raiz = restore(pre, 0, pre.length - 1, in, 0, in.length - 1);
+		root = restore(pre, 0, pre.length - 1, in, 0, in.length - 1);
 	}
 
 	private Node<X> restore(X[] pre, int preL, int preR, X[] in, int inL, int inR) {
@@ -287,22 +319,22 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 				count++;
 
 			Node<X> tmp = new Node<X>(pre[preL]);
-			tmp.izq = restore(pre, preL + 1, preL + count, in, inL, inL + count - 1);
-			tmp.der = restore(pre, preL + count + 1, preR, in, inL + count + 1, inR);
+			tmp.left = restore(pre, preL + 1, preL + count, in, inL, inL + count - 1);
+			tmp.right = restore(pre, preL + count + 1, preR, in, inL + count + 1, inR);
 			return tmp;
 		} else
 			return null;
 	}
 
 	/**
-	 * Corresponde al máximo número de elementos en un nivel del árbol
+	 * Corresponde al mï¿½ximo nï¿½mero de elementos en un nivel del ï¿½rbol
 	 * 
 	 * @return
 	 */
 	public int width() {
 		int max = 0;
 		for (int k = 0; k <= height(); k++) {
-			int tmp = width(raiz, k);
+			int tmp = width(root, k);
 			if (tmp > max)
 				max = tmp;
 		}
@@ -310,7 +342,7 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	}
 
 	/**
-	 * Retorna el número de nodos de un determinado nivel
+	 * Retorna el nï¿½mero de nodos de un determinado nivel
 	 * 
 	 * @param p
 	 * @param depth
@@ -322,28 +354,28 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 		else if (depth == 0)
 			return 1;
 		else
-			return width(p.izq, depth - 1) + width(p.der, depth - 1);
+			return width(p.left, depth - 1) + width(p.right, depth - 1);
 	}
 
 	/**
-	 * El diametro del árbol es el número de nodos El camino más largo entre dos
+	 * El diametro del ï¿½rbol es el nï¿½mero de nodos El camino mï¿½s largo entre dos
 	 * hojas
 	 * 
 	 * @return
 	 */
 	public int diameter() {
-		return diameter(raiz);
+		return diameter(root);
 	}
 
 	private int diameter(Node<X> p) {
 		if (p == null)
 			return 0;
 
-		// El camino va por la raíz
-		int len1 = height(p.izq) + height(p.der) + 3;
+		// El camino va por la raï¿½z
+		int len1 = height(p.left) + height(p.right) + 3;
 
-		// El camino no pasa por la raíz
-		int len2 = Math.max(diameter(p.izq), diameter(p.der));
+		// El camino no pasa por la raï¿½z
+		int len2 = Math.max(diameter(p.left), diameter(p.right));
 
 		return Math.max(len1, len2);
 	}
@@ -357,8 +389,8 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 		Stack<Node<X>> stk = new Stack<Node<X>>();
 
 		public IteradorBST() {
-			if (raiz != null)
-				stk.push(raiz);
+			if (root != null)
+				stk.push(root);
 		}
 
 		public boolean hasNext() {
@@ -367,23 +399,20 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 
 		public X next() {
 			Node<X> cur = stk.peek();
-			if (cur.izq != null) {
-				stk.push(cur.izq);
+			if (cur.left != null) {
+				stk.push(cur.left);
 			} else {
 				Node<X> tmp = stk.pop();
-				while (tmp.der == null) {
+				while (tmp.right == null) {
 					if (stk.isEmpty())
-						return cur.elemento;
+						return cur.element;
 					tmp = stk.pop();
 				}
-				stk.push(tmp.der);
+				stk.push(tmp.right);
 			}
 
-			return cur.elemento;
-		}
-
-		public void remove() {
-
+			return cur.element;
 		}
 	}
+	
 }
