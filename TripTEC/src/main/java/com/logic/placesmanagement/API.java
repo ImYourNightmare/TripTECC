@@ -35,15 +35,19 @@ public class API {
 	}
 	public void Test() throws ApiException, InterruptedException, IOException {
 		context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
-		GeocodingResult[] results =  GeocodingApi.geocode(context,"1600 Amphitheatre Parkway Mountain View, CA 94043").await();
+		GeocodingResult[] results =  GeocodingApi.geocode(context,"9.9380473,-84.0752574").await();
 		gson = new GsonBuilder().setPrettyPrinting().create();
-		System.out.println(gson.toJson(results[0].addressComponents));
-		System.out.println(gson.toJson(results[0].placeId));
+		//System.out.println(gson.toJson(results[0].addressComponents));
+		//System.out.println(gson.toJson(results[0].placeId));
+		//System.out.println(gson.toJson(results[0]));
 		placeId = results[0].placeId;
 	}
-	public PlaceDetailsRequest placeDetails(GeoApiContext context, String placeId) {
+	public PlaceDetailsRequest placeDetails(GeoApiContext context, String placeId) throws ApiException, InterruptedException, IOException {
 		PlaceDetailsRequest request = new PlaceDetailsRequest(context);
 		request.placeId(placeId);
+		gson = new GsonBuilder().setPrettyPrinting().create();
+		System.out.println(gson.toJson(request.await()));
+		
 		return request;
 	}
 }
