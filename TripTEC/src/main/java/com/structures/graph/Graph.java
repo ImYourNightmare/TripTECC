@@ -1,7 +1,7 @@
 package com.structures.graph;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+
 import java.util.List;
 
 /**
@@ -10,12 +10,13 @@ import java.util.List;
  * @author AARON RM
  *
  */
+//atributos
 public class Graph {
 	private List<Vertex<Object>> vertex;
 	private List<Edge> edges;
 
 	/**
-	 * constructor del grafo
+	 * constructores del grafo
 	 * 
 	 * @param pVertices lista de vertices del grafo
 	 * @param pEdges  lista de aristas del grafo

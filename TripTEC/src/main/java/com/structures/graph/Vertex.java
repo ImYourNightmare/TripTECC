@@ -1,7 +1,7 @@
 package com.structures.graph;
 
 /**
- * Los v�rtices del Dijkstra son sus nodos de información, por lo que estos
+ * Los vértices del Dijkstra son sus nodos de información, por lo que estos
  * pueden generar dependencia con otros objetos que se deseen ubicar al grafo.
  *
  * @param <GenericObject>

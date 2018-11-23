@@ -7,6 +7,8 @@ import java.util.List;
 /**
  * clase para controlar el grafo
  */
+
+//atributos
 public class GraphManager {
 	private List<Vertex<Object>> vertices;
 	private List<Edge> edges;
@@ -121,9 +123,17 @@ public class GraphManager {
 		}
 		return null;
 	}
+	/** metodo para remover un vertice
+	 * 
+	*  @param vertex vértice que se quiere borrar
+	*/
 	public void removeVertex(Vertex<Object> vertex) {
 		vertices.remove(vertex);
 	}
+	/** metodo para remover una arista
+	 * 
+	*  @param edge arista que se quiere borrar
+	*/
 	public void removeEdge(Edge edge) {
 		edges.remove(edge);
 	}
