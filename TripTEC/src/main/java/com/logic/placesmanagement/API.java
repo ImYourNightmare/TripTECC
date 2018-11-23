@@ -3,7 +3,7 @@ package com.logic.placesmanagement;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import com.logic.objects.Place;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.maps.GeoApiContext;
@@ -64,22 +64,82 @@ public class API {
 		return data;
 		
 	}
+
+
 	
 	public void Parse(String data) {
 		
-		final String regex = "\"website\": ([\\a-zA-Z].*),";
 		final String dataD= data;
 		
+		Place place = new Place();//Se crea un objeto tipo place
 		
-		final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-		final Matcher matcher = pattern.matcher(dataD);
+		//Try para poder obtener del código json los diferentes datos del lugar
+		//Try para obtener el website del lugar 
+		try {
+			final String regex = "\"website\": ([\\a-zA-Z].*),";
+			
+			
+			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+			final Matcher matcher = pattern.matcher(dataD);
 
-		while (matcher.find()) {
+		
+		
+		
+			while (matcher.find()) {
 		    //System.out.println("Full match: " + matcher.group(0));
-		    for (int i = 1; i <= matcher.groupCount(); i++) {
-		        System.out.println(matcher.group(i));
-		    }
-		}		
+				for (int i = 1; i <= matcher.groupCount(); i++) {
+					System.out.println(matcher.group(i));
+			place.setWebsite(matcher.group(i));
+				
+					}
+				}
+		}catch (Exception e){
+			place.setWebsite(null);
+			}
+		
+		
+		//Try para obtener el nombre del lugar
+		try {
+			final String regex = "\"name\": ([\\a-zA-Z].*),";
+			
+			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+			final Matcher matcher = pattern.matcher(dataD);
+			
+			while (matcher.find()) {
+			    //System.out.println("Full match: " + matcher.group(0));
+					for (int i = 1; i <= matcher.groupCount(); i++) {
+						System.out.println(matcher.group(i));
+				place.setPlaceName(matcher.group(i));
+					}
+			}
+			
+		}catch(Exception e) {
+			place.setPlaceName(null);
+			
+		}
+		
+		//Try para obtener el nombre del lugar
+		try {
+			final String regex = "\"lat\": ([\\d].*)";
+					
+			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+			final Matcher matcher = pattern.matcher(dataD);
+					
+			while (matcher.find()) {
+			    //System.out.println("Full match: " + matcher.group(0));
+				for (int i = 1; i <= matcher.groupCount(); i++) {
+					System.out.println(matcher.group(i));
+					place.setLatitude(matcher.group(i));
+					
+					}
+				break;
+			
+		}
+					
+		}catch(Exception e) {
+			place.setLatitude(null);			
+				}
+		System.out.println(place.toString());
 		
 		
 		
@@ -87,12 +147,15 @@ public class API {
 		
 		
 		
+		}
+	
+			
+		
+			
+		}
 		
 		
-	}
-}
 
 
-
-
+	
 
