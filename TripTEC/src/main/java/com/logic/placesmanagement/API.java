@@ -1,6 +1,8 @@
 package com.logic.placesmanagement;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,7 +37,7 @@ public class API {
 	}
 	public void Test() throws ApiException, InterruptedException, IOException {
 		context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
-		GeocodingResult[] results =  GeocodingApi.geocode(context,"9.9380473,-84.0752574").await();
+		GeocodingResult[] results =  GeocodingApi.geocode(context,"9.945722,-84.105160").await();
 		gson = new GsonBuilder().setPrettyPrinting().create();
 		//System.out.println(gson.toJson(results[0].addressComponents));
 		//System.out.println(gson.toJson(results[0].placeId));
@@ -46,8 +48,32 @@ public class API {
 		PlaceDetailsRequest request = new PlaceDetailsRequest(context);
 		request.placeId(placeId);
 		gson = new GsonBuilder().setPrettyPrinting().create();
-		System.out.println(gson.toJson(request.await()));
+		
+		//System.out.println(gson.toJson(request.await()));
+		
+		
+		
+		
+		
+		
+		
 		
 		return request;
+		
+	}
+	
+	public void Parse(String gson) {
+		
+		//gson = new GsonBuilder().setPrettyPrinting().create();
+		
+		
+		
+		
+		
 	}
 }
+
+
+
+
+
