@@ -117,7 +117,5 @@ public class Place {
 	public void setPlaceVisit(String placeVisit) {
 		this.placeVisit = placeVisit;
 	}
-	public String toString() {
-		return this.placeName;
-	}
+	
 }

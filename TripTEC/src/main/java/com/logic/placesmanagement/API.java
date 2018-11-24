@@ -76,7 +76,7 @@ public class API {
 		//Try para poder obtener del código json los diferentes datos del lugar
 		//Try para obtener el website del lugar 
 		try {
-			final String regex = "\"website\": ([\\a-zA-Z].*),";
+			final String regex = "\"website\": ([\\a-zA-Z].*),";//SE busca los carácteres que puedan obetner dol website
 			
 			
 			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
@@ -118,7 +118,7 @@ public class API {
 			
 		}
 		
-		//Try para obtener el nombre del lugar
+		//Try para obtener el la latitud del lugar 
 		try {
 			final String regex = "\"lat\": ([\\d].*)";
 					
@@ -139,7 +139,92 @@ public class API {
 		}catch(Exception e) {
 			place.setLatitude(null);			
 				}
-		System.out.println(place.toString());
+		
+		
+		//Try para obtener el la longitud del lugar 
+		try {
+			final String regex = "\"lng\": (-[\\d].*)";
+							
+			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+			final Matcher matcher = pattern.matcher(dataD);
+							
+			while (matcher.find()) {
+			    //System.out.println("Full match: " + matcher.group(0));
+				for (int i = 1; i <= matcher.groupCount(); i++) {
+					System.out.println(matcher.group(i));
+					place.setLenght((matcher.group(i)));
+						
+					}
+					break;
+					
+			}
+							
+			}catch(Exception e) {
+				place.setLenght(null);			
+						}
+		
+		
+		
+		//Se obtiene el numero internacional  del lugar
+		try {
+			final String regex = "\"internationalPhoneNumber\": ([\\0-9]*)";
+							
+			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+			final Matcher matcher = pattern.matcher(dataD);
+							
+			while (matcher.find()) {
+			    //System.out.println("Full match: " + matcher.group(0));
+				for (int i = 1; i <= matcher.groupCount(); i++) {
+					System.out.println(matcher.group(i));
+					place.setPhoneNumber((matcher.group(i)));
+						
+					}
+					break;
+					
+			}
+							
+			}catch(Exception e) {
+				place.setPhoneNumber(null);			
+						}		
+		
+		
+		//Se obtiene el rating del lugar
+				try {
+					final String regex = "\"rating\": ([\\d].[\\d])";
+									
+					final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+					final Matcher matcher = pattern.matcher(dataD);
+									
+					while (matcher.find()) {
+					    //System.out.println("Full match: " + matcher.group(0));
+						for (int i = 1; i <= matcher.groupCount(); i++) {
+							System.out.println(matcher.group(i));
+							place.setRating((matcher.group(i)));
+							}
+							break;
+							
+					}
+									
+					}catch(Exception e) {
+						place.setRating(null);			
+								}
+				
+				
+				
+				
+				
+				
+		
+				
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
