@@ -3,7 +3,7 @@ package com.logic.objects;
 public class Place {
 	
 	//Atrbutos de la clase place
-	private String latitude, lenght, addres, placeName, Description, placeActivities, placeVisit, website, phoneNumber, direction, rating;
+	private String latitude, lenght, addres, placeName, Description, placeActivities, website, phoneNumber,rating;
 
 	
 	//getters and setters of class
@@ -24,8 +24,6 @@ public class Place {
 		this.placeName = placeName;
 		Description = description;
 		this.placeActivities = placeActivities;
-		this.placeVisit = placeVisit;
-		this.direction = direction;
 		this.website = website;
 		this.phoneNumber = phoneNumber;
 		this.rating = rating;
@@ -49,15 +47,6 @@ public class Place {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
-	public String getDirection() {
-		return direction;
-	}
-
-	public void setDirection(String direction) {
-		this.direction = direction;
-	}
-
 	public String getRating() {
 		return rating;
 	}
@@ -110,12 +99,12 @@ public class Place {
 		this.placeActivities = placeActivities;
 	}
 
-	public String getPlaceVisit() {
-		return placeVisit;
+	@Override
+	public String toString() {
+		return "Place [latitude=" + latitude + ", lenght=" + lenght + ", addres=" + addres + ", placeName=" + placeName
+				+ ", Description=" + Description + ", placeActivities=" + placeActivities + " website=" + website + ", phoneNumber=" + phoneNumber +" rating="
+				+ rating + "]";
 	}
-
-	public void setPlaceVisit(String placeVisit) {
-		this.placeVisit = placeVisit;
-	}
+	
 	
 }

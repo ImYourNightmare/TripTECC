@@ -40,7 +40,7 @@ public class API {
 	}
 	public void Test() throws ApiException, InterruptedException, IOException {
 		context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
-		GeocodingResult[] results =  GeocodingApi.geocode(context,"9.945722,-84.105160").await();
+		GeocodingResult[] results =  GeocodingApi.geocode(context,"9.928932, -84.067237").await();
 		gson = new GsonBuilder().setPrettyPrinting().create();
 		//System.out.println(gson.toJson(results[0].addressComponents));
 		//System.out.println(gson.toJson(results[0].placeId));
@@ -54,6 +54,7 @@ public class API {
 		
 		//System.out.println(gson.toJson(request.await()));
 		data = gson.toJson(request.await());
+		
 		
 		
 		
@@ -167,7 +168,7 @@ public class API {
 		
 		//Se obtiene el numero internacional  del lugar
 		try {
-			final String regex = "\"internationalPhoneNumber\": ([\\0-9]*)";
+			final String regex = "\"internationalPhoneNumber\": ([\\a-ZA-Z]*),";
 							
 			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
 			final Matcher matcher = pattern.matcher(dataD);
@@ -184,60 +185,92 @@ public class API {
 			}
 							
 			}catch(Exception e) {
-				place.setPhoneNumber(null);			
+				place.setPhoneNumber("NO ENCONTRADO");			
 						}		
 		
 		
 		//Se obtiene el rating del lugar
-				try {
-					final String regex = "\"rating\": ([\\d].[\\d])";
-									
-					final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-					final Matcher matcher = pattern.matcher(dataD);
-									
-					while (matcher.find()) {
-					    //System.out.println("Full match: " + matcher.group(0));
-						for (int i = 1; i <= matcher.groupCount(); i++) {
-							System.out.println(matcher.group(i));
-							place.setRating((matcher.group(i)));
-							}
-							break;
+		try {
+			final String regex = "\"rating\": ([\\d].[\\d])";
 							
+			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+			final Matcher matcher = pattern.matcher(dataD);
+								
+			while (matcher.find()) {
+			    //System.out.println("Full match: " + matcher.group(0));
+				for (int i = 1; i <= matcher.groupCount(); i++) {
+					System.out.println(matcher.group(i));
+					place.setRating((matcher.group(i)));
 					}
-									
+					break;
+							
+			}				
 					}catch(Exception e) {
 						place.setRating(null);			
 								}
 				
 				
 				
-				
-				
-				
+		//Se obtiene el addres del lugar
+		try {
+			final String regex = "\"formattedAddress\": ([\\a-zA-Z].*),";
+							
+			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+			final Matcher matcher = pattern.matcher(dataD);
+										
+			while (matcher.find()) {
+			    //System.out.println("Full match: " + matcher.group(0));
+				for (int i = 1; i <= matcher.groupCount(); i++) {
+					System.out.println(matcher.group(i));
+					place.setAddres((matcher.group(i)));
+					}
+					break;
+								
+			}				
+					}catch(Exception e) {
+						place.setAddres(null);			
+								}
 		
-				
 		
 		
 		
+						
+						
+		//Se obtiene el tipo de lugar
+		try {
+			final String regex = "\"types\": ([\\a-zA-Z]*)]";
+							
+			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+			final Matcher matcher = pattern.matcher(dataD);
+											
+			while (matcher.find()) {
+			    //System.out.println("Full match: " + matcher.group(0));
+				for (int i = 1; i <= matcher.groupCount(); i++) {
+					System.out.println(matcher.group(i));
+					place.setPlaceActivities((matcher.group(i)));
+					}
+					break;
 		
+									
+			}				
+					}catch(Exception e) {
+						place.setPlaceActivities(null);			
+						}
+		System.out.println(place.toString());
+						
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		}
+	}
+	
+	
+	
+	
+	
+
 	
 			
 		
 			
-		}
+}
 		
 		
 

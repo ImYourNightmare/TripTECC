@@ -17,7 +17,10 @@ public class App
         API api = new API();
         api.Test();
         api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
-        //System.out.println(api.placeDetails(api.getContext(), api.getPlaceId()).await());
+        //api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
+        
+        
+        //System.out.println(api.placeDetails(api.getContext(), api.getPlaceId()));
     	/*Place lugar1 = new Place(null, null, null, "Mollejones", null, null, null);
     	Place lugar2 = new Place(null, null, null, "San Isidro", null, null, null);
     	Place lugar3 = new Place(null, null, null, "San Pablo", null, null, null);
@@ -53,5 +56,6 @@ public class App
     	dijkstra.runGraph(dijkstra.getVertices().get(1));
     	System.out.println(dijkstra.getDistancias().toString());
     	//System.out.println(cliente1.getGraph().getVertices());	*/
+    
     }
 }
