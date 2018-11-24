@@ -87,10 +87,10 @@ public class Edge {
 	public String toString() {
 		String msj = "";
 		msj += "ID: " + edge_ID + "\n";
-		msj += "VERTICE PARTIDA: \n";
-		msj += startPoint.toString();
-		msj += endPoint.toString();
-		msj += "Longitud: " + lenght;
+		msj += "Start Vertex: \n";
+		msj += startPoint.toString()+" ";
+		msj += endPoint.toString()+" ";
+		msj += "Lenght: " + lenght;
 		return msj;
 	}
 }

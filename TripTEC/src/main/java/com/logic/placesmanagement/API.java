@@ -6,18 +6,27 @@ import java.util.regex.Pattern;
 import com.logic.objects.Place;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.maps.DirectionsApi.RouteRestriction;
+import com.google.maps.DistanceMatrixApi;
+import com.google.maps.DistanceMatrixApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.PlaceDetailsRequest;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.GeocodingResult;
+import com.google.maps.model.TravelMode;
+import com.google.maps.errors.ApiException;
+import com.google.maps.internal.ApiConfig;
+import com.google.maps.internal.ApiResponse;
+import com.google.maps.model.DistanceMatrix;
+import com.google.maps.model.DistanceMatrixRow;
 
 public class API {
 	GeoApiContext context;
 	Gson gson;
 	String placeId;
-	Place place;
-	
+	String origin;
+	String destiny;
 	
 	String data = ""; 
 	
@@ -39,14 +48,28 @@ public class API {
 	public void setPlaceId(String placeId) {
 		this.placeId = placeId;
 	}
+	public String getDestiny() {
+		return destiny;
+	}
+	public void setDestiny(String destiny) {
+		this.destiny = destiny;
+	}
+	
+	
+	
 	public void Test() throws ApiException, InterruptedException, IOException {
 		context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
-		GeocodingResult[] results =  GeocodingApi.geocode(context,"9.945722,-84.105160").await();
+		GeocodingResult[] results =  GeocodingApi.geocode(context,"tecnoogico de costa rica").await();
+		GeocodingResult[] results2 =  GeocodingApi.geocode(context,"basilica de los angeles").await();
+		
+		
 		gson = new GsonBuilder().setPrettyPrinting().create();
 		//System.out.println(gson.toJson(results[0].addressComponents));
 		//System.out.println(gson.toJson(results[0].placeId));
-		//System.out.println(gson.toJson(results[0]));
+		System.out.println(gson.toJson(results2[0]));
 		placeId = results[0].placeId;
+		destiny = results2[0].placeId;
+		
 	}
 	public String placeDetails(GeoApiContext context, String placeId) throws ApiException, InterruptedException, IOException {
 		PlaceDetailsRequest request = new PlaceDetailsRequest(context);
@@ -57,15 +80,40 @@ public class API {
 		data = gson.toJson(request.await());
 		
 		
-		
-		
-		
-		
-		
 		return data;
+		}
+	
+	
+	
+	public  long getDriveDist(String placeId, String destiny) throws ApiException, InterruptedException, IOException{
 		
+		//set up key
+	   	GeoApiContext distCalcer = new GeoApiContext.Builder()
+			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")
+			    .build();
+	   	
+	   	DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(distCalcer); 
+	       DistanceMatrix result = req.origins(placeId)
+	               .destinations(destiny)
+	               .mode(TravelMode.DRIVING)
+	               .avoid(RouteRestriction.TOLLS)
+	               .language("en-US")
+	               .await();
+	       
+				long distApart = result.rows[0].elements[0].distance.inMeters;
+		
+		return distApart;
 	}
+	
+	
+	
 
+	
+	
+	
+	
+	
+	
 
 	
 	public void Parse(String data) {
@@ -168,7 +216,7 @@ public class API {
 		
 		//Se obtiene el numero internacional  del lugar
 		try {
-			final String regex = "\"internationalPhoneNumber\": ([\\0-9]*)";
+			final String regex = "\"internationalPhoneNumber\": ([\\a-ZA-Z]*),";
 							
 			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
 			final Matcher matcher = pattern.matcher(dataD);
@@ -180,12 +228,12 @@ public class API {
 					place.setPhoneNumber((matcher.group(i)));
 						
 					}
-					//break;
+					break;
 					
 			}
 							
 			}catch(Exception e) {
-				place.setPhoneNumber(null);			
+				place.setPhoneNumber("NO ENCONTRADO");			
 						}		
 		
 		
@@ -238,26 +286,57 @@ public class API {
 						
 		//Se obtiene el tipo de lugar
 		try {
-			final String regex = "\"types\": ([\\a-zA-Z]*)]";
+			final String regex = "\"types\": (.*[\\a-z].*),";
 							
 			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
 			final Matcher matcher = pattern.matcher(dataD);
 											
 			while (matcher.find()) {
-			    //System.out.println("Full match: " + matcher.group(0));
+			    //System.out.println(matcher.group(0));
 				for (int i = 1; i <= matcher.groupCount(); i++) {
-					System.out.println(matcher.group(i));
-					place.setPlaceActivities((matcher.group(i)));
+					//System.out.println(matcher.group(i));
+					
+					place.setPlaceActivities((matcher.group(i)) + "]");
 					}
-					break;
+				
+				
 									
 			}				
 					}catch(Exception e) {
 						place.setPlaceActivities(null);			
 						}
+		
+		
+		//Se extrae el tipo de lugar
+		try {
+			final String regex = "\"weekdayText\":(.*.*\\n.*\\n.*\\n.*\\n.*\\n.*\\n.*\\n.*)";
+							
+			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+			final Matcher matcher = pattern.matcher(dataD);
+										
+			while (matcher.find()) {
+			    System.out.println("Full match: " + matcher.group(0));
+				for (int i = 1; i <= matcher.groupCount(); i++) {
+					System.out.println(matcher.group(i));
+					place.setSchedule((matcher.group(i)));
+					}
+					
+								
+			}				
+					}catch(Exception e) {
+						place.setSchedule(null);			
+								}
+		
+		
+		
+		System.out.println(place.toString());
 						
 		
 	}
+	
+	
+	
+	
 	
 
 	

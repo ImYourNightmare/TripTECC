@@ -17,10 +17,11 @@ public class App
         API api = new API();
         api.Test();
         api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
-        api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
+        //api.getDriveDist(api.placeDetails(api.getContext(), api.getPlaceId()), api.placeDetails(api.getContext(), api.getDestiny());
+        //api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
         
         
-        //System.out.println(api.placeDetails(api.getContext(), api.getPlaceId()).await());
+        //System.out.println(api.placeDetails(api.getContext(), api.getPlaceId()));
     	/*Place lugar1 = new Place(null, null, null, "Mollejones", null, null, null);
     	Place lugar2 = new Place(null, null, null, "San Isidro", null, null, null);
     	Place lugar3 = new Place(null, null, null, "San Pablo", null, null, null);
