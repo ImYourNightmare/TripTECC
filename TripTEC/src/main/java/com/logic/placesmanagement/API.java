@@ -40,7 +40,7 @@ public class API {
 	}
 	public void Test() throws ApiException, InterruptedException, IOException {
 		context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
-		GeocodingResult[] results =  GeocodingApi.geocode(context,"9.928932, -84.067237").await();
+		GeocodingResult[] results =  GeocodingApi.geocode(context,"tecnoogico de costa rica").await();
 		gson = new GsonBuilder().setPrettyPrinting().create();
 		//System.out.println(gson.toJson(results[0].addressComponents));
 		//System.out.println(gson.toJson(results[0].placeId));
@@ -238,24 +238,49 @@ public class API {
 						
 		//Se obtiene el tipo de lugar
 		try {
-			final String regex = "\"types\": ([\\a-zA-Z]*)]";
+			final String regex = "\"types\": (.*[\\a-z].*),";
 							
 			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
 			final Matcher matcher = pattern.matcher(dataD);
 											
 			while (matcher.find()) {
-			    //System.out.println("Full match: " + matcher.group(0));
+			    //System.out.println(matcher.group(0));
 				for (int i = 1; i <= matcher.groupCount(); i++) {
-					System.out.println(matcher.group(i));
-					place.setPlaceActivities((matcher.group(i)));
+					//System.out.println(matcher.group(i));
+					
+					place.setPlaceActivities((matcher.group(i)) + "]");
 					}
-					break;
-		
+				
+				
 									
 			}				
 					}catch(Exception e) {
 						place.setPlaceActivities(null);			
 						}
+		
+		
+		//Se extrae el tipo de lugar
+		try {
+			final String regex = "\"weekdayText\":(.*.*\\n.*\\n.*\\n.*\\n.*\\n.*\\n.*\\n.*)";
+							
+			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+			final Matcher matcher = pattern.matcher(dataD);
+										
+			while (matcher.find()) {
+			    System.out.println("Full match: " + matcher.group(0));
+				for (int i = 1; i <= matcher.groupCount(); i++) {
+					System.out.println(matcher.group(i));
+					place.setSchedule((matcher.group(i)));
+					}
+					
+								
+			}				
+					}catch(Exception e) {
+						place.setSchedule(null);			
+								}
+		
+		
+		
 		System.out.println(place.toString());
 						
 		
