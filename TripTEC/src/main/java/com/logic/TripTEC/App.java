@@ -17,7 +17,7 @@ public class App
         API api = new API();
         api.Test();
         api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
-        api.Parse(api.placeDetails(api.getContext(), api.getPlaceId())).toString();
+        api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
         
         
         //System.out.println(api.placeDetails(api.getContext(), api.getPlaceId()).await());
