@@ -6,7 +6,7 @@ import com.structures.tree.BinarySearchTree;;
 public class Service {
 	private Graph graph;
 	private BinarySearchTree<Client> clientTree = new BinarySearchTree<Client>();
-	private final String password = "TRIPTEC";
+	private static String password = "TRIPTEC";
 	
 	//Getters y setters
 	public Graph getGraph() {

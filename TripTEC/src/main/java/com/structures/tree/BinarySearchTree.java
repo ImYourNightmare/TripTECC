@@ -4,6 +4,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Stack;
 
+import com.logic.objects.Client;
+
 public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	/**
 	 * Al ser recursivo es totalmente necesario que el nodo se encuentre dentro de la clase
@@ -128,6 +130,7 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	 * @param toSearch
 	 * @return
 	 */
+	//Funcion utilizada para saber si algun elemento se encuentra dentro del arbol (retorna un boolean)
 	public boolean searchNode(X toSearch) {
 		return search(root, toSearch);
 	}
@@ -146,6 +149,28 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 		else
 			return search(p.right, toSearch);
 	}
+	/**
+	 * Retornar un cliente. Metodo no generico
+	 */
+	//Funcion utilizada para buscar un cliente por su ID y retornarlo
+		/*public Node<Client> searchClient(int toSearch) {
+			return searchClientHelper(root, toSearch);
+		}
+		//Funcion auxiliar del buscador
+		private Node<Client> searchClientHelper(Node<Client> p, int toSearch) {
+			//Si mientras se esta buscando se encuentra con que p es nulo, significa que la busqueda ya termino y el elemento no se encuentra en el arbol
+			if (p == null)
+				return null;
+			//Se usa el compare para guiar la busqueda.
+			//Si el compare retorna 0, quiere decir que el elemento fue encontrado dentro del arbol
+			else if (p.getElement().getId() == toSearch)
+				return p;
+			//Si aun no se ha encontrado el elemento y hay mas hijos, se utilizan los valores del compare para ir ya sea a la izq. o a la der.
+			else if (p.getElement().getId() > toSearch)
+				return searchClientHelper(p.left, toSearch);
+			else
+				return searchClientHelper(p.right, toSearch);
+		}*/
 
 	/**
 	 * Eliminar
