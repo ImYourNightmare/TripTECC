@@ -16,6 +16,7 @@ public class API {
 	GeoApiContext context;
 	Gson gson;
 	String placeId;
+	Place place;
 	
 	
 	String data = ""; 
@@ -23,21 +24,43 @@ public class API {
 	public GeoApiContext getContext() {
 		return context;
 	}
+	
 	public void setContext(GeoApiContext context) {
 		this.context = context;
 	}
+	
 	public Gson getGson() {
 		return gson;
 	}
+	
 	public void setGson(Gson gson) {
 		this.gson = gson;
 	}
+	
 	public String getPlaceId() {
 		return placeId;
 	}
+	
 	public void setPlaceId(String placeId) {
 		this.placeId = placeId;
 	}
+	
+	public Place getPlace() {
+		return place;
+	}
+	
+	public void setPlace(Place place) {
+		this.place = place;
+	}
+	
+	public String getData() {
+		return data;
+	}
+	
+	public void setData(String data) {
+		this.data = data;
+	}
+	
 	public void Test() throws ApiException, InterruptedException, IOException {
 		context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
 		GeocodingResult[] results =  GeocodingApi.geocode(context,"9.945722,-84.105160").await();
@@ -67,11 +90,11 @@ public class API {
 
 
 	
-	public void Parse(String data) {
+	public Place Parse(String data) {
 		
 		final String dataD= data;
 		
-		Place place = new Place();//Se crea un objeto tipo place
+		//Place place = new Place();//Se crea un objeto tipo place
 		
 		//Try para poder obtener del código json los diferentes datos del lugar
 		//Try para obtener el website del lugar 
@@ -179,7 +202,7 @@ public class API {
 					place.setPhoneNumber((matcher.group(i)));
 						
 					}
-					break;
+					//break;
 					
 			}
 							
@@ -189,55 +212,81 @@ public class API {
 		
 		
 		//Se obtiene el rating del lugar
-				try {
-					final String regex = "\"rating\": ([\\d].[\\d])";
-									
-					final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-					final Matcher matcher = pattern.matcher(dataD);
-									
-					while (matcher.find()) {
-					    //System.out.println("Full match: " + matcher.group(0));
-						for (int i = 1; i <= matcher.groupCount(); i++) {
-							System.out.println(matcher.group(i));
-							place.setRating((matcher.group(i)));
-							}
-							break;
+		try {
+			final String regex = "\"rating\": ([\\d].[\\d])";
 							
+			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+			final Matcher matcher = pattern.matcher(dataD);
+								
+			while (matcher.find()) {
+			    //System.out.println("Full match: " + matcher.group(0));
+				for (int i = 1; i <= matcher.groupCount(); i++) {
+					System.out.println(matcher.group(i));
+					place.setRating((matcher.group(i)));
 					}
-									
+					break;
+							
+			}				
 					}catch(Exception e) {
 						place.setRating(null);			
 								}
 				
 				
 				
-				
-				
-				
+		//Se obtiene el addres del lugar
+		try {
+			final String regex = "\"formattedAddress\": ([\\a-zA-Z].*),";
+							
+			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+			final Matcher matcher = pattern.matcher(dataD);
+										
+			while (matcher.find()) {
+			    //System.out.println("Full match: " + matcher.group(0));
+				for (int i = 1; i <= matcher.groupCount(); i++) {
+					System.out.println(matcher.group(i));
+					place.setAddres((matcher.group(i)));
+					}
+					break;
+								
+			}				
+					}catch(Exception e) {
+						place.setAddres(null);			
+								}
 		
-				
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		}
+						
+						
+		//Se obtiene el tipo de lugar
+		try {
+			final String regex = "\"types\": ([\\a-zA-Z]*)]";
+							
+			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+			final Matcher matcher = pattern.matcher(dataD);
+											
+			while (matcher.find()) {
+			    //System.out.println("Full match: " + matcher.group(0));
+				for (int i = 1; i <= matcher.groupCount(); i++) {
+					System.out.println(matcher.group(i));
+					place.setPlaceActivities((matcher.group(i)));
+					}
+					break;
+									
+			}				
+					}catch(Exception e) {
+						place.setPlaceActivities(null);			
+						}
+						
+		return place;
+	}
+	
+
 	
 			
 		
 			
-		}
+}
 		
 		
 

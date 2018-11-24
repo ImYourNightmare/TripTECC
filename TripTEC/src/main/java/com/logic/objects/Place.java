@@ -117,5 +117,14 @@ public class Place {
 	public void setPlaceVisit(String placeVisit) {
 		this.placeVisit = placeVisit;
 	}
+
+	@Override
+	public String toString() {
+		return "Place [latitude=" + latitude + ", lenght=" + lenght + ", addres=" + addres + ", placeName=" + placeName
+				+ ", Description=" + Description + ", placeActivities=" + placeActivities + ", placeVisit=" + placeVisit
+				+ ", website=" + website + ", phoneNumber=" + phoneNumber + ", direction=" + direction + ", rating="
+				+ rating + "]";
+	}
+	
 	
 }
