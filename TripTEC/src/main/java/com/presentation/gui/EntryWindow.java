@@ -67,13 +67,9 @@ public class EntryWindow extends JFrame {
 		contentPane.add(lblParaEjecutarLas);
 		contentPane.add(lblIngreseSuId);
 		
-		TextField textField = new TextField();
-		textField.setBounds(152, 139, 295, 42);
-		contentPane.add(textField);
-		
-		Label label = new Label("New label");
-		label.setBackground(Color.WHITE);
-		label.setBounds(-11, 0, 630, 315);
-		contentPane.add(label);
+		TextField txtID = new TextField();
+		txtID.setFont(new Font("Arial", Font.PLAIN, 24));
+		txtID.setBounds(152, 139, 295, 42);
+		contentPane.add(txtID);
 	}
 }

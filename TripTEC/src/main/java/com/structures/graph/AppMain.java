@@ -1,12 +1,21 @@
 package com.structures.graph;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.NotSerializableException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 
 public class AppMain {
 	private static GraphManager controlador;
 	private static Graph grafo;
 	private static Dijkstra dijkstra;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
 		// Primeramente, se utiliza el controlador para crear las listas de v�rtices y
 		// aristas
 		controlador = new GraphManager();
@@ -46,13 +55,39 @@ public class AppMain {
 		dijkstra.runGraph(dijkstra.getVertices().get(2));
 		
 		///OBTIENE LAS DISTANCIAS A TODOS LOS VERTICES A PARTIR DEL GET(NUM) anterior
-		System.out.println(dijkstra.getDistancias().toString());
+		//System.out.println(dijkstra.getDistancias().toString());
 
 		///OBTIENE EL CAMINO M�S CORTO A PARTIR DE get(0) a get(4) EN ESTE CASO , puede ser cualquiera
 		//System.out.println(dijkstra.obtenerListadoCamino(dijkstra.getVertices().get(0)));
 		
+		
 		//Obtener la distancia entre dos v�rtices
-		double distanciaMinima = dijkstra.getDistancias().get(dijkstra.getVertices().get(1));
-		System.out.println(distanciaMinima);
+		//double distanciaMinima = dijkstra.getDistancias().get(dijkstra.getVertices().get(1));
+		//System.out.println(distanciaMinima);
+		FileOutputStream f = new FileOutputStream(new File("myObjects.txt"));
+		ObjectOutputStream o = new ObjectOutputStream(f);
+		String data="";
+		// Write objects to file
+		for(int i=0;i < grafo.getVertices().size();i++) {
+			data+=grafo.getVertices().get(i)+",";
+			
+		}
+		o.writeObject(data);
+
+		o.close();
+		f.close();
+
+		FileInputStream fi = new FileInputStream(new File("myObjects.txt"));
+		ObjectInputStream oi = new ObjectInputStream(fi);
+
+		// Read objects
+		String pr2 = (String) oi.readObject();
+		String[] split = pr2.split(",");
+		
+		//System.out.println(pr2);
+		System.out.println(split[1]);
+
+		oi.close();
+		fi.close();
 	}
 }
