@@ -131,23 +131,28 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	 * @return
 	 */
 	//Funcion utilizada para saber si algun elemento se encuentra dentro del arbol (retorna un boolean)
-	public boolean searchNode(X toSearch) {
+	public X searchNode(X toSearch) {
 		return search(root, toSearch);
 	}
 	//Funcion auxiliar del buscador
-	private boolean search(Node<X> p, X toSearch) {
+	private X search(Node<X> p, X toSearch) {
 		//Si mientras se esta buscando se encuentra con que p es nulo, significa que la busqueda ya termino y el elemento no se encuentra en el arbol
 		if (p == null)
-			return false;
+			return null;
 		//Se usa el compare para guiar la busqueda.
 		//Si el compare retorna 0, quiere decir que el elemento fue encontrado dentro del arbol
-		else if (compare(toSearch, p.element) == 0)
-			return true;
+		else if (compare(toSearch, p.element) == 0) {
+			getElement(p);
+			return p.getElement();
+		}	
 		//Si aun no se ha encontrado el elemento y hay mas hijos, se utilizan los valores del compare para ir ya sea a la izq. o a la der.
 		else if (compare(toSearch, p.element) < 0)
 			return search(p.left, toSearch);
 		else
 			return search(p.right, toSearch);
+	}
+	private X getElement(Node<X> p) {
+		return p.getElement();
 	}
 	/**
 	 * Retornar un cliente. Metodo no generico
