@@ -17,6 +17,7 @@ public class App
         API api = new API();
         api.Test();
         api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
+        //api.getDriveDist(api.placeDetails(api.getContext(), api.getPlaceId()), api.placeDetails(api.getContext(), api.getDestiny());
         //api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
         
         
