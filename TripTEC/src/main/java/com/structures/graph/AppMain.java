@@ -70,7 +70,6 @@ public class AppMain {
 		// Write objects to file
 		for(int i=0;i < grafo.getVertices().size();i++) {
 			data+=grafo.getVertices().get(i)+",";
-			
 		}
 		o.writeObject(data);
 
@@ -85,7 +84,7 @@ public class AppMain {
 		String[] split = pr2.split(",");
 		
 		//System.out.println(pr2);
-		System.out.println(split[1]);
+		System.out.println(split[2]);
 
 		oi.close();
 		fi.close();

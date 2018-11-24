@@ -39,8 +39,9 @@ public class Vertex<GenericObject> {
          */
 	public String toString() {
 		String msj = "";
-		msj += "Vertex: ID:*" + vertex_ID + "*"+" ";
-		msj += element.toString();
+		//msj += "Vertex: ID:*" + vertex_ID + "*"+" ";
+		msj+= vertex_ID;
+		//msj += element.toString();
 		return msj;
 	}
 }
