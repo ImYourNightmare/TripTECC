@@ -62,6 +62,11 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	 */
 	private Node<X> root;
 	private Comparator<X> comparator;
+	String preorder="";
+	
+	public String getpreorder() {
+		return this.preorder;
+	}
 
 	public Node<X> getRoot() {
 		return root;
@@ -219,7 +224,6 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 		StringBuffer sb = new StringBuffer();
 		for (X data : this)
 			sb.append(data.toString());
-
 		return sb.toString();
 	}
 
@@ -230,13 +234,14 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	public void preOrder() {
 		preOrderHelper(root);
 	}
-
-	private void preOrderHelper(Node<X> nodoTemp) {
+	private String preOrderHelper(Node<X> nodoTemp) {
 		if (nodoTemp != null) {
-			System.out.print(nodoTemp + " ");
+			preorder+= nodoTemp + "\n";
+			//System.out.print(nodoTemp + " ");
 			preOrderHelper(nodoTemp.left);
 			preOrderHelper(nodoTemp.right);
 		}
+		return preorder;
 	}
 
 	/**

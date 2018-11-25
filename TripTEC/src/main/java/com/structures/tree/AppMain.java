@@ -18,9 +18,14 @@ public class AppMain {
 		//Client cliente5 = bst.searchNode(cliente1); // Se extrae un cliente del árbol para clonar un usuario
 =======
 		
->>>>>>> d6873b6a51ffbb9903a471be423e22611996c047
+		bst.insertarNodo(cliente4);
+		//Client cliente5 = bst.searchNode(cliente1); // Se extrae un cliente del árbol para clonar un usuario
+		bst.preOrder();
+		String prueba = bst.getpreorder();
+		System.out.println(prueba);
+>>>>>>> 4c11a1a46964c9da20eb81a2939f7d980bb87623
 		//System.out.println(cliente5);
-		System.out.println(bst.searchClient(14));
+		//System.out.println(bst.searchClient(14));
 		//bst.posOrder();
 	}
 }
