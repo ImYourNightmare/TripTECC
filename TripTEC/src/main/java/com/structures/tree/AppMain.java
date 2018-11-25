@@ -13,12 +13,14 @@ public class AppMain {
 		bst.insertarNodo(cliente1);
 		bst.insertarNodo(cliente2);
 		bst.insertarNodo(cliente3);
-
+		
 		bst.insertarNodo(cliente4);
 		//Client cliente5 = bst.searchNode(cliente1); // Se extrae un cliente del árbol para clonar un usuario
-
+		bst.preOrder();
+		String prueba = bst.getpreorder();
+		System.out.println(prueba);
 		//System.out.println(cliente5);
-		System.out.println(bst.searchClient(14));
+		//System.out.println(bst.searchClient(14));
 		//bst.posOrder();
 	}
 }
