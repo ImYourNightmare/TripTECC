@@ -15,20 +15,15 @@ import com.logic.objects.*;
 public class AppMain {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		System.out.println("PROBANDO CON CLIENTES");
-<<<<<<< HEAD
-		Client cliente1 = new Client("Marcos","5-10",13,201520);
-		Client cliente2 = new Client("Bryan","6",3,20);
-		Client cliente3 = new Client("Manuel","3",65,20);
-		Client cliente4 = new Client("Melina","5",14,20);
-		Client cliente5 = new Client("ChiquiDios","45",45,20);
-		Client cliente6 = new Client("Messi","9",6,20);
-		Client cliente7 = new Client("Ronaldo","47",4,20);
-=======
 		Client cliente1 = new Client("Marcos","5-10",13,"201520");
 		Client cliente2 = new Client("Bryan","6",3,"20");
 		Client cliente3 = new Client("Manuel","3",65,"20");
 		Client cliente4 = new Client("Melina","5",14,"20");
->>>>>>> d1a99233869a0d067508ed7cb56a9f40864ba74a
+		Client cliente5 = new Client("ChiquiDios","45",45,"20");
+		Client cliente6 = new Client("Messi","9",6,"20");
+		Client cliente7 = new Client("Ronaldo","47",4,"20");
+
+
 		BinarySearchTree<Client> bst = new BinarySearchTree<Client>();
 		bst.insertarNodo(cliente1);
 		bst.insertarNodo(cliente2);
@@ -59,9 +54,8 @@ public class AppMain {
 		ObjectInputStream oi = new ObjectInputStream(fi);
 
 		// Read objects
-		int p=7;
 		String pr2 = (String) oi.readObject();
-		for (int i=0;i<=bst.width();i++) {
+		for (int i=0;i<=bst.getSize();i++) {
 			String[] split = pr2.split("\n");
 			System.out.println(split[i]);
 		}
