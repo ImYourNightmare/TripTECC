@@ -8,27 +8,26 @@ import com.logic.management.Management;
 import com.logic.objects.Client;
 import com.logic.objects.Place;
 import com.logic.placesmanagement.API;
-import com.presentation.gui.EntryWindow;
 import com.structures.graph.Dijkstra;
 
-public class App 
-{
-    public static void main( String[] args ) throws ApiException, InterruptedException, IOException
-    {
+public class App {
+    public static void main( String[] args ) throws ApiException, InterruptedException, IOException{
     	
     	
     	
         API api = new API();
         
+        
         api.Test();
         
-        new EntryWindow().setVisible(true);
+        
         
         
         
         
         //api.getDriveDist(api.placeDetails(api.getContext(), api.getPlaceId()), api.placeDetails(api.getContext(), api.getDestiny());
         api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
+        
         
         
         //System.out.println(api.placeDetails(api.getContext(), api.getPlaceId()));
