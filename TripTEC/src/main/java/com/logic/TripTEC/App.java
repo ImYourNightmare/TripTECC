@@ -16,22 +16,19 @@ public class App
     public static void main( String[] args ) throws ApiException, InterruptedException, IOException
     {
     	
-    	String direction1;
-    	String direction2;
     	
     	
         API api = new API();
-        API api2 = new API();
+        
         api.Test();
-        api2.Test();
         
         new EntryWindow().setVisible(true);
         
         
-        direction1 = api.Parse(api.placeDetails(api.getContext(), api.getDestiny()));
-        System.out.println(direction1);
+        
+        
         //api.getDriveDist(api.placeDetails(api.getContext(), api.getPlaceId()), api.placeDetails(api.getContext(), api.getDestiny());
-        //api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
+        api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
         
         
         //System.out.println(api.placeDetails(api.getContext(), api.getPlaceId()));
