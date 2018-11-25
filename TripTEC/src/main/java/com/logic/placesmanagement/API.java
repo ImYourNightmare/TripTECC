@@ -14,6 +14,7 @@ import com.google.maps.GeocodingApi;
 import com.google.maps.PlaceDetailsRequest;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.GeocodingResult;
+import com.google.maps.model.Geometry;
 import com.google.maps.model.TravelMode;
 import com.google.maps.errors.ApiException;
 import com.google.maps.internal.ApiConfig;
@@ -27,8 +28,9 @@ public class API {
 	GeoApiContext context;
 	Gson gson;
 	String placeId;
-	String origin;
+	Geometry origin;
 	String destiny;
+	
 	//Route rutaEntreDosPuntos=new Route();
 	
 	String data = ""; 
@@ -69,11 +71,11 @@ public class API {
 		gson = new GsonBuilder().setPrettyPrinting().create();
 		//System.out.println(gson.toJson(results[0].addressComponents));
 		//System.out.println(gson.toJson(results[0].placeId));
-		System.out.println(gson.toJson(results2[0]));
+		System.out.println(gson.toJson(results2[0].geometry));
 		placeId = results[0].placeId;
 		
-		//destiny = results2[0];
-		//origin = results[0].geometry;
+		destiny = results2[0].placeId;
+		origin = results[0].geometry;
 
 		
 	}
@@ -154,7 +156,9 @@ public class API {
 	               .await();
 	       
 				long distApart = result.rows[0].elements[0].distance.inMeters;
-		
+				
+				System.out.println(distApart);
+				
 		return distApart;
 	}
 	 
