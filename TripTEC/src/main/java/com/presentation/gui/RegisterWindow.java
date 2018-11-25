@@ -10,14 +10,15 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+import javax.swing.JButton;
 
 public class RegisterWindow extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtName;
+	private JTextField txtId;
+	private JTextField txtPhone;
+	private JTextField txtBirth;
 
 	/**
 	 * Launch the application.
@@ -39,41 +40,66 @@ public class RegisterWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public RegisterWindow() {
+		setTitle("Sing in window");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 592, 502);
+		setBounds(100, 100, 523, 472);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRegistro = new JLabel("REGISTRO");
-		lblRegistro.setFont(new Font("OCR A Extended", Font.PLAIN, 33));
-		lblRegistro.setBounds(202, 24, 174, 56);
+		JLabel lblRegistro = new JLabel("SIGN IN");
+		lblRegistro.setFont(new Font("OCR A Extended", Font.PLAIN, 38));
+		lblRegistro.setBounds(143, 10, 174, 56);
 		contentPane.add(lblRegistro);
 		
-		textField = new JTextField();
-		textField.setBounds(263, 92, 229, 30);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtName = new JTextField();
+		txtName.setBounds(233, 79, 229, 30);
+		contentPane.add(txtName);
+		txtName.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(263, 152, 229, 30);
-		contentPane.add(textField_1);
+		txtId = new JTextField();
+		txtId.setColumns(10);
+		txtId.setBounds(233, 143, 229, 30);
+		contentPane.add(txtId);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(263, 212, 229, 30);
-		contentPane.add(textField_2);
+		txtPhone = new JTextField();
+		txtPhone.setColumns(10);
+		txtPhone.setBounds(233, 204, 229, 30);
+		contentPane.add(txtPhone);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(263, 268, 229, 30);
-		contentPane.add(textField_3);
+		txtBirth = new JTextField();
+		txtBirth.setColumns(10);
+		txtBirth.setBounds(233, 267, 229, 30);
+		contentPane.add(txtBirth);
 		
-		JLabel lblBackground = new JLabel("New label");
+		JButton btnNewButton = new JButton("SIGN IN");
+		btnNewButton.setBounds(199, 344, 111, 56);
+		contentPane.add(btnNewButton);
+		
+		JLabel lblNombre = new JLabel("NAME");
+		lblNombre.setFont(new Font("Sitka Text", Font.PLAIN, 22));
+		lblNombre.setBounds(39, 82, 103, 23);
+		contentPane.add(lblNombre);
+		
+		JLabel lblId = new JLabel("IDENTIFICATION");
+		lblId.setFont(new Font("Sitka Text", Font.PLAIN, 22));
+		lblId.setBounds(39, 146, 206, 23);
+		contentPane.add(lblId);
+		
+		JLabel lblPhone = new JLabel("PHONE");
+		lblPhone.setFont(new Font("Sitka Text", Font.PLAIN, 22));
+		lblPhone.setBounds(39, 207, 103, 23);
+		contentPane.add(lblPhone);
+		
+		JLabel lblBirthdate = new JLabel("BIRTHDATE");
+		lblBirthdate.setFont(new Font("Sitka Text", Font.PLAIN, 22));
+		lblBirthdate.setBounds(39, 270, 137, 23);
+		contentPane.add(lblBirthdate);
+		
+		JLabel lblBackground = new JLabel("");
 		lblBackground.setIcon(new ImageIcon(RegisterWindow.class.getResource("/com/images/white background.jpg")));
-		lblBackground.setBounds(-21, -31, 617, 517);
+		lblBackground.setBounds(-47, -39, 617, 517);
 		contentPane.add(lblBackground);
 	}
 }

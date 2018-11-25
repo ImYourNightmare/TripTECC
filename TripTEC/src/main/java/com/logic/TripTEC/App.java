@@ -8,6 +8,7 @@ import com.logic.management.Management;
 import com.logic.objects.Client;
 import com.logic.objects.Place;
 import com.logic.placesmanagement.API;
+import com.presentation.gui.EntryWindow;
 import com.structures.graph.Dijkstra;
 
 public class App 
@@ -24,7 +25,7 @@ public class App
         api.Test();
         api2.Test();
         
-        
+        new EntryWindow().setVisible(true);
         
         
         direction1 = api.Parse(api.placeDetails(api.getContext(), api.getDestiny()));
