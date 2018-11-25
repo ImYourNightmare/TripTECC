@@ -1,6 +1,7 @@
 package com.logic.placesmanagement;
 
 import java.io.IOException;
+
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.regex.Matcher;
