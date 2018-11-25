@@ -23,7 +23,7 @@ public class AppMain {
 		String prueba = bst.getpreorder();
 		System.out.println(prueba);
 
-		//System.out.println(cliente5);
+		System.out.println(bst.getSize());
 		//System.out.println(bst.searchClient(14));
 		//bst.posOrder();
 	}
