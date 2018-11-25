@@ -1,6 +1,7 @@
 package com.logic.placesmanagement;
 
 import java.io.IOException;
+
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.regex.Matcher;
@@ -32,6 +33,7 @@ public class API {
 	String placeId;
 	String origin;
 	String destiny;
+	Place place = new Place();
 	
 	//Route rutaEntreDosPuntos=new Route();
 	
@@ -67,18 +69,14 @@ public class API {
 	public void Test() throws ApiException, InterruptedException, IOException {
 		context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
 		GeocodingResult[] results =  GeocodingApi.geocode(context,"tecnologico de costa rica").await();
-		GeocodingResult[] results2 =  GeocodingApi.geocode(context,"basilica de los angeles").await();
+		
 		// GeocodingApi.geocode(context, "hotel barcelo");
 		
-		gson = new GsonBuilder().setPrettyPrinting().create();
-		//System.out.println(gson.toJson(results[0].addressComponents));
-		//System.out.println(gson.toJson(results[0].placeId));
-		//System.out.println(gson.toJson(results2[0].geometry));
+		
 		placeId = results[0].placeId;
 		
-		destiny = results[0].placeId;
-		origin = results2[0].placeId;
 		
+
 
 		
 	}
@@ -144,8 +142,8 @@ public class API {
 	
 
 	public long getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
-		addrOne = origin;
-		addrTwo = destiny;
+		addrOne = place.getPlaceName();
+		addrTwo = place.getPlaceName();
 		//set up key
 	   	GeoApiContext distCalcer = new GeoApiContext.Builder()
 			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")
@@ -178,7 +176,7 @@ public class API {
 	
 
 	
-	public String Parse(String data) {
+	public void  Parse(String data) {
 		
 		final String dataD= data;
 		
@@ -393,7 +391,6 @@ public class API {
 		
 		System.out.println(place.toString());
 		
-		return place.toString();
 						
 		
 	}
