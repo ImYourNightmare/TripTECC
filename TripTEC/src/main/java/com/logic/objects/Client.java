@@ -4,13 +4,13 @@ import com.structures.graph.Graph;
 
 public class Client implements Comparable<Client> {
 	//attributes class
-	private String name, birthdate;
-	private int id, phone;
+	private String name, birthdate, phone;
+	private int id;
 	private Graph graph;
 
 	//Constructor de la clase
 
-	public Client(String name, String birthdate, int id, int phone){
+	public Client(String name, String birthdate, int id, String phone){
 		this.name = name;
 		this.birthdate = birthdate;
 		this.id = id;
@@ -36,10 +36,10 @@ public class Client implements Comparable<Client> {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 	public void setPhone(int phone) {

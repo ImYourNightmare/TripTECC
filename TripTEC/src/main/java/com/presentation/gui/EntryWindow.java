@@ -100,6 +100,10 @@ public class EntryWindow extends JFrame {
 		contentPane.add(btnIngresar);
 
 		JButton btnRegistro = new JButton("Registro");
+		btnRegistro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnRegistro.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnRegistro.setBounds(469, 207, 108, 53);
 		contentPane.add(btnRegistro);
