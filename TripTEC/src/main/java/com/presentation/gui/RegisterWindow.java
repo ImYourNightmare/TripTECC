@@ -50,7 +50,7 @@ public class RegisterWindow extends JFrame {
 		
 		JLabel lblRegistro = new JLabel("SIGN IN");
 		lblRegistro.setFont(new Font("OCR A Extended", Font.PLAIN, 38));
-		lblRegistro.setBounds(143, 10, 174, 56);
+		lblRegistro.setBounds(155, 10, 174, 56);
 		contentPane.add(lblRegistro);
 		
 		txtName = new JTextField();
