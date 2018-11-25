@@ -1,6 +1,7 @@
 package com.structures.tree;
 
 import java.util.Comparator;
+
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -62,12 +63,15 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	 */
 	private Node<X> root;
 	private Comparator<X> comparator;
-	String preorder="";
+	private String preorder="";
+	private int size = -1;
 	
 	public String getpreorder() {
 		return this.preorder;
 	}
-
+	public int getSize() {
+		return this.size;
+	}
 	public Node<X> getRoot() {
 		return root;
 	}
@@ -111,6 +115,7 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	 */
 	public void insertarNodo(X data) {
 		root = insert(root, data);
+		size++;
 	}
 	//Auxiliar de la funcion recursiva de insertar
 	private Node<X> insert(Node<X> nuevoNodo, X nodoInsertado) {
@@ -185,6 +190,7 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	 */
 	public void deleteNode(X eliminarNodo) {
 		root = delete(root, eliminarNodo);
+		size--;
 	}
 	//Funcion auxiliar del deleteNode
 	private Node<X> delete(Node<X> nodoTemp, X nodoElim) {
