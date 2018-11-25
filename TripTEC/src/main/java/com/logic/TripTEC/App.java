@@ -31,10 +31,10 @@ public class App
         //api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
         api.Parse(api.placeDetails(api.getContext(), api.getAddrTwo()));
         
-        api.getDriveDist("palceId:"+api.getAddrOne(), "palceId:"+api.getAddrTwo());
-        System.out.println( api.getDriveDist("placeId:"+api.getAddrOne(),"palceId:"+ api.getAddrTwo()));
+        api.getDriveDist("place_Id:"+api.getAddrOne(), "place_Id:"+api.getAddrTwo());
+        //System.out.println();
         
-        System.out.println(api.getAddrTwo());
+        //System.out.println(api.getAddrTwo());
         
         
         //System.out.println(api.placeDetails(api.getContext(), api.getPlaceId()));

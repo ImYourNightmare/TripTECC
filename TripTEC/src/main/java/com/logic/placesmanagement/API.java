@@ -27,6 +27,17 @@ import com.google.maps.model.DistanceMatrixElement;
 import com.google.maps.model.DistanceMatrixRow;
 import com.google.maps.*;
 import java.util.ArrayList;
+import com.google.maps.DirectionsApi.RouteRestriction;
+import com.google.maps.DistanceMatrixApi;
+import com.google.maps.model.DistanceMatrix;
+import com.google.maps.model.LatLng;
+import com.google.maps.model.TrafficModel;
+import com.google.maps.model.TransitMode;
+import com.google.maps.model.TransitRoutingPreference;
+import com.google.maps.model.TravelMode;
+import com.google.maps.model.Unit;
+import java.time.Instant;
+
 
 public class API {
 	
@@ -128,8 +139,10 @@ public class API {
 		}
 	
 
-	public DistanceMatrixElement[] getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
+	/*public DistanceMatrixElement getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
 	
+		
+		System.out.println();
 		//set up key
 	   	GeoApiContext distCalcer = new GeoApiContext.Builder()
 			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")
@@ -143,19 +156,54 @@ public class API {
 	               .language("en-US")
 	               .await();
 	       
+	       String[] hola = result.destinationAddresses;
 	       
-				DistanceMatrixElement[] distApart = result.rows[0].elements;
+				DistanceMatrixElement distApart = result.rows[0].elements[0];
 				
-				System.out.println(distApart);
+				System.out.println(distApart.toString());
+				
+				System.out.println(distApart.distance.toString());
 				
 		return distApart;
+	}*/
+	
+	
+	public void getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
+		
+		//set up key
+	   	GeoApiContext distCalcer = new GeoApiContext.Builder()
+			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")
+			    .build();
+	   	
+	   	DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(distCalcer); 
+	       DistanceMatrix result = req.origins(addrOne)
+	               .destinations(addrTwo)
+	               .mode(TravelMode.DRIVING)
+	               .avoid(RouteRestriction.TOLLS)
+	               .language("en-US")
+	               .await();
+	       
+				long distApart = result.rows[0].elements[0].distance.inMeters;
+		
+		System.out.println(distApart);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public void  Parse(String data) {
 		
 		final String dataD= data;
 		
-		Place place = new Place();//Se crea un objeto tipo place
+		//Place place = new Place();//Se crea un objeto tipo place
 		
 		//Try para poder obtener del código json los diferentes datos del lugar
 		//Try para obtener el website del lugar 
