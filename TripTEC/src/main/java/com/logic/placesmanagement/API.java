@@ -1,6 +1,7 @@
 package com.logic.placesmanagement;
 
 import java.io.IOException;
+
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.regex.Matcher;
@@ -25,7 +26,6 @@ import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.DistanceMatrixRow;
 import com.google.maps.*;
 import java.util.ArrayList;
-import okhttp3.Route;;
 
 public class API {
 	GeoApiContext context;
@@ -33,26 +33,6 @@ public class API {
 	String placeId;
 	String origin;
 	String destiny;
-	String rutaEntreDosPuntos;
-	public String getRutaEntreDosPuntos() {
-		return rutaEntreDosPuntos;
-	}
-	public void setRutaEntreDosPuntos(String rutaEntreDosPuntos) {
-		this.rutaEntreDosPuntos = rutaEntreDosPuntos;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 	Place place = new Place();
 	
 	//Route rutaEntreDosPuntos=new Route();
@@ -89,12 +69,12 @@ public class API {
 	public void Test() throws ApiException, InterruptedException, IOException {
 		context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
 		GeocodingResult[] results =  GeocodingApi.geocode(context,"tecnologico de costa rica").await();
-		GeocodingResult[] result2 =  GeocodingApi.geocode(context,"basilica de los angeles").await();
+		
 		// GeocodingApi.geocode(context, "hotel barcelo");
 		
 		
 		placeId = results[0].placeId;
-		destiny = result2[0].placeId;
+		
 		
 
 
@@ -113,8 +93,7 @@ public class API {
 		}
 	
 	/*public ArrayList<Double> distaciaTiempoDosPuntos(String pOrigen, String pDestino) throws MalformedURLException, UnsupportedEncodingException{
-        String rutaEntreDosPuntos;
-		String[][] resultado=rutaEntreDosPuntos.getRoute(pOrigen, pDestino, null, Boolean.TRUE, Route.mode.driving, Route.avoids.nothing);
+        String[][] resultado=rutaEntreDosPuntos.getRoute(pOrigen, pDestino, null, Boolean.TRUE, Route.mode.driving, Route.avoids.nothing);
         ArrayList<Integer> tiempoTotal=rutaEntreDosPuntos.getTotalTime();
          int tiempoAux=0;
          for(Integer item:tiempoTotal){
@@ -135,25 +114,23 @@ public class API {
          myList.add(distancia);
          myList.add(tiempo);
          
-        return myList;
-        }*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+        return myList;*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -203,7 +180,7 @@ public class API {
 		
 		final String dataD= data;
 		
-		//Se crea un objeto tipo place
+		Place place = new Place();//Se crea un objeto tipo place
 		
 		//Try para poder obtener del código json los diferentes datos del lugar
 		//Try para obtener el website del lugar 
