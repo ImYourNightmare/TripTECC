@@ -59,11 +59,11 @@ public class MainWindow extends JFrame {
 		tblClientRoute = new JTable();
 		tblClientRoute.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
+				{"Tecnologico de Costa Rica", "university", "Cartago, Costa Rica"},
+				{"basilica de los angeles", "church", "Cartago, Costa Rica"},
+				{"Estadio Nacional", "Stadium", "San Jose, Costa Rica"},
+				{"Parque la sabana", "park", ""},
+				{"El manantial", "pool", null},
 				{null, null, null},
 				{null, null, null},
 				{null, null, null},
@@ -111,9 +111,9 @@ public class MainWindow extends JFrame {
 		tblRoute = new JTable();
 		tblRoute.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null},
-				{"", null, null},
-				{null, null, null},
+				{"0", "basililca de los angeles", "0.0km"},
+				{"1", "Tecnologico de Costa Rica", "0.8km"},
+				{"2", "Estadio NacionalC", "27.5km"},
 				{null, null, null},
 				{null, null, null},
 				{null, null, null},
