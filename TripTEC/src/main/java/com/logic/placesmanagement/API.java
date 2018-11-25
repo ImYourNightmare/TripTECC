@@ -23,21 +23,55 @@ import com.google.maps.errors.ApiException;
 import com.google.maps.internal.ApiConfig;
 import com.google.maps.internal.ApiResponse;
 import com.google.maps.model.DistanceMatrix;
+import com.google.maps.model.DistanceMatrixElement;
 import com.google.maps.model.DistanceMatrixRow;
 import com.google.maps.*;
 import java.util.ArrayList;
 
 public class API {
+	
+	
 	GeoApiContext context;
 	Gson gson;
-	String placeId;
+	String placeId, addrOne, addrTwo;
 	String origin;
 	String destiny;
 	Place place = new Place();
-	
-	//Route rutaEntreDosPuntos=new Route();
-	
 	String data = ""; 
+	
+	
+	//Atributos de la clase
+	
+	public String getAddrOne() {
+		return addrOne;
+	}
+	public void setAddrOne(String addrOne) {
+		this.addrOne = addrOne;
+	}
+	public String getAddrTwo() {
+		return addrTwo;
+	}
+	public void setAddrTwo(String addrTwo) {
+		this.addrTwo = addrTwo;
+	}
+	public String getOrigin() {
+		return origin;
+	}
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+	public Place getPlace() {
+		return place;
+	}
+	public void setPlace(Place place) {
+		this.place = place;
+	}
+	public String getData() {
+		return data;
+	}
+	public void setData(String data) {
+		this.data = data;
+	}
 	
 	public GeoApiContext getContext() {
 		return context;
@@ -69,17 +103,18 @@ public class API {
 	public void Test() throws ApiException, InterruptedException, IOException {
 		context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
 		GeocodingResult[] results =  GeocodingApi.geocode(context,"tecnologico de costa rica").await();
-		
+		GeocodingResult[] results2 =  GeocodingApi.geocode(context,"basilica de los angeles").await();
 		// GeocodingApi.geocode(context, "hotel barcelo");
 		
 		
 		placeId = results[0].placeId;
-		
-		
+		addrOne = results[0].placeId;
+		addrTwo = results2[0].placeId;
 
 
 		
 	}
+
 	public String placeDetails(GeoApiContext context, String placeId) throws ApiException, InterruptedException, IOException {
 		PlaceDetailsRequest request = new PlaceDetailsRequest(context);
 		request.placeId(placeId);
@@ -92,58 +127,9 @@ public class API {
 		return data;
 		}
 	
-	/*public ArrayList<Double> distaciaTiempoDosPuntos(String pOrigen, String pDestino) throws MalformedURLException, UnsupportedEncodingException{
-        String[][] resultado=rutaEntreDosPuntos.getRoute(pOrigen, pDestino, null, Boolean.TRUE, Route.mode.driving, Route.avoids.nothing);
-        ArrayList<Integer> tiempoTotal=rutaEntreDosPuntos.getTotalTime();
-         int tiempoAux=0;
-         for(Integer item:tiempoTotal){
-             tiempoAux+=item;
-         }
-         ArrayList<Integer> distanciaTotal=rutaEntreDosPuntos.getTotalDistance();
-         int distanciaAux=0;
-         for(Integer item:distanciaTotal){
-             distanciaAux+=item;
-         }
-         double tiempo=(double)(tiempoAux);
-         tiempo=(tiempo/60)/60;
-         tiempo=Math.rint(tiempo*1000)/1000;;
-         double distancia=(double)(distanciaAux);
-         distancia=distancia/1000;   
-         
-        ArrayList<Double> myList = new ArrayList<Double>();
-         myList.add(distancia);
-         myList.add(tiempo);
-         
-        return myList;*/
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	public long getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
-		addrOne = place.getPlaceName();
-		addrTwo = place.getPlaceName();
+	public DistanceMatrixElement[] getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
+	
 		//set up key
 	   	GeoApiContext distCalcer = new GeoApiContext.Builder()
 			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")
@@ -157,24 +143,13 @@ public class API {
 	               .language("en-US")
 	               .await();
 	       
-				long distApart = result.rows[0].elements[0].distance.inMeters;
+	       
+				DistanceMatrixElement[] distApart = result.rows[0].elements;
 				
 				System.out.println(distApart);
 				
 		return distApart;
 	}
-	 
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-
 	
 	public void  Parse(String data) {
 		
