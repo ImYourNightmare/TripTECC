@@ -28,7 +28,13 @@ public class App
         
         
         //api.getDriveDist(api.placeDetails(api.getContext(), api.getPlaceId()), api.placeDetails(api.getContext(), api.getDestiny());
-        api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
+        //api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
+        api.Parse(api.placeDetails(api.getContext(), api.getAddrTwo()));
+        
+        api.getDriveDist("palceId:"+api.getAddrOne(), "palceId:"+api.getAddrTwo());
+        System.out.println( api.getDriveDist("placeId:"+api.getAddrOne(),"palceId:"+ api.getAddrTwo()));
+        
+        System.out.println(api.getAddrTwo());
         
         
         //System.out.println(api.placeDetails(api.getContext(), api.getPlaceId()));
