@@ -1,6 +1,8 @@
 package com.logic.placesmanagement;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.logic.objects.Place;
@@ -14,12 +16,15 @@ import com.google.maps.GeocodingApi;
 import com.google.maps.PlaceDetailsRequest;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.GeocodingResult;
+import com.google.maps.model.Geometry;
 import com.google.maps.model.TravelMode;
 import com.google.maps.errors.ApiException;
 import com.google.maps.internal.ApiConfig;
 import com.google.maps.internal.ApiResponse;
 import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.DistanceMatrixRow;
+import com.google.maps.*;
+import java.util.ArrayList;
 
 public class API {
 	GeoApiContext context;
@@ -27,6 +32,8 @@ public class API {
 	String placeId;
 	String origin;
 	String destiny;
+	
+	//Route rutaEntreDosPuntos=new Route();
 	
 	String data = ""; 
 	
@@ -59,16 +66,20 @@ public class API {
 	
 	public void Test() throws ApiException, InterruptedException, IOException {
 		context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
-		GeocodingResult[] results =  GeocodingApi.geocode(context,"tecnoogico de costa rica").await();
+		GeocodingResult[] results =  GeocodingApi.geocode(context,"tecnologico de costa rica").await();
 		GeocodingResult[] results2 =  GeocodingApi.geocode(context,"basilica de los angeles").await();
-		
+		// GeocodingApi.geocode(context, "hotel barcelo");
 		
 		gson = new GsonBuilder().setPrettyPrinting().create();
 		//System.out.println(gson.toJson(results[0].addressComponents));
 		//System.out.println(gson.toJson(results[0].placeId));
-		System.out.println(gson.toJson(results2[0]));
+		//System.out.println(gson.toJson(results2[0].geometry));
 		placeId = results[0].placeId;
-		destiny = results2[0].placeId;
+		
+		destiny = results[0].placeId;
+		origin = results2[0].placeId;
+		
+
 		
 	}
 	public String placeDetails(GeoApiContext context, String placeId) throws ApiException, InterruptedException, IOException {
@@ -83,27 +94,78 @@ public class API {
 		return data;
 		}
 	
+	/*public ArrayList<Double> distaciaTiempoDosPuntos(String pOrigen, String pDestino) throws MalformedURLException, UnsupportedEncodingException{
+        String[][] resultado=rutaEntreDosPuntos.getRoute(pOrigen, pDestino, null, Boolean.TRUE, Route.mode.driving, Route.avoids.nothing);
+        ArrayList<Integer> tiempoTotal=rutaEntreDosPuntos.getTotalTime();
+         int tiempoAux=0;
+         for(Integer item:tiempoTotal){
+             tiempoAux+=item;
+         }
+         ArrayList<Integer> distanciaTotal=rutaEntreDosPuntos.getTotalDistance();
+         int distanciaAux=0;
+         for(Integer item:distanciaTotal){
+             distanciaAux+=item;
+         }
+         double tiempo=(double)(tiempoAux);
+         tiempo=(tiempo/60)/60;
+         tiempo=Math.rint(tiempo*1000)/1000;;
+         double distancia=(double)(distanciaAux);
+         distancia=distancia/1000;   
+         
+        ArrayList<Double> myList = new ArrayList<Double>();
+         myList.add(distancia);
+         myList.add(tiempo);
+         
+        return myList;*/
 	
 	
-	public  long getDriveDist(String placeId, String destiny) throws ApiException, InterruptedException, IOException{
-		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	public long getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
+		addrOne = origin;
+		addrTwo = destiny;
 		//set up key
 	   	GeoApiContext distCalcer = new GeoApiContext.Builder()
 			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")
 			    .build();
 	   	
 	   	DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(distCalcer); 
-	       DistanceMatrix result = req.origins(placeId)
-	               .destinations(destiny)
+	       DistanceMatrix result = req.origins(addrOne)
+	               .destinations(addrTwo)
 	               .mode(TravelMode.DRIVING)
 	               .avoid(RouteRestriction.TOLLS)
 	               .language("en-US")
 	               .await();
 	       
 				long distApart = result.rows[0].elements[0].distance.inMeters;
-		
+				
+				System.out.println(distApart);
+				
 		return distApart;
 	}
+	 
 	
 	
 	
@@ -116,7 +178,7 @@ public class API {
 	
 
 	
-	public void Parse(String data) {
+	public String Parse(String data) {
 		
 		final String dataD= data;
 		
@@ -330,6 +392,8 @@ public class API {
 		
 		
 		System.out.println(place.toString());
+		
+		return place.toString();
 						
 		
 	}

@@ -61,20 +61,20 @@ public class EntryWindow extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		JLabel lblIngreseSuId = new JLabel("INGRESE SU ID O BIEN, LA CONTRASEÑA ESTABLECIDA");
+		JLabel lblIngreseSuId = new JLabel("ENTER YOUR ID, OR THE ADMIN PASSWORD TO RUN");
 		lblIngreseSuId.setForeground(Color.BLACK);
 		lblIngreseSuId.setFont(new Font("Sitka Text", Font.PLAIN, 18));
 		lblIngreseSuId.setBounds(47, 72, 486, 31);
 		contentPane.setLayout(null);
 
-		JLabel lblBienvenidoATriptec = new JLabel("BIENVENIDO A TRIPTEC");
+		JLabel lblBienvenidoATriptec = new JLabel("WELCOME TO TRIPTEC");
 		lblBienvenidoATriptec.setBackground(Color.WHITE);
 		lblBienvenidoATriptec.setForeground(Color.BLACK);
 		lblBienvenidoATriptec.setBounds(53, 13, 493, 60);
 		lblBienvenidoATriptec.setFont(new Font("OCR A Extended", Font.PLAIN, 38));
 		contentPane.add(lblBienvenidoATriptec);
 
-		JLabel lblParaEjecutarLas = new JLabel("PARA EJECUTAR LAS FUNCIONES DE ADMINISTRADOR");
+		JLabel lblParaEjecutarLas = new JLabel("THE ADMNISTRATOR FUNCTIONS");
 		lblParaEjecutarLas.setForeground(Color.BLACK);
 		lblParaEjecutarLas.setFont(new Font("Sitka Text", Font.PLAIN, 18));
 		lblParaEjecutarLas.setBounds(47, 102, 486, 16);
@@ -85,7 +85,7 @@ public class EntryWindow extends JFrame {
 		txtID.setBounds(133, 139, 315, 40);
 		contentPane.add(txtID);
 
-		JButton btnIngresar = new JButton("Ingresar");
+		JButton btnIngresar = new JButton("Login");
 		btnIngresar.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

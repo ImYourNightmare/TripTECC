@@ -62,6 +62,11 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	 */
 	private Node<X> root;
 	private Comparator<X> comparator;
+	String preorder="";
+	
+	public String getpreorder() {
+		return this.preorder;
+	}
 
 	public Node<X> getRoot() {
 		return root;
@@ -131,19 +136,18 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	 * @return
 	 */
 	//Funcion utilizada para saber si algun elemento se encuentra dentro del arbol (retorna un boolean)
-	public X searchNode(X toSearch) {
+	public boolean searchNode(X toSearch) {
 		return search(root, toSearch);
 	}
 	//Funcion auxiliar del buscador
-	private X search(Node<X> p, X toSearch) {
+	private boolean search(Node<X> p, X toSearch) {
 		//Si mientras se esta buscando se encuentra con que p es nulo, significa que la busqueda ya termino y el elemento no se encuentra en el arbol
 		if (p == null)
-			return null;
+			return false;
 		//Se usa el compare para guiar la busqueda.
 		//Si el compare retorna 0, quiere decir que el elemento fue encontrado dentro del arbol
 		else if (compare(toSearch, p.element) == 0) {
-			getElement(p);
-			return p.getElement();
+			return true;
 		}	
 		//Si aun no se ha encontrado el elemento y hay mas hijos, se utilizan los valores del compare para ir ya sea a la izq. o a la der.
 		else if (compare(toSearch, p.element) < 0)
@@ -151,15 +155,12 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 		else
 			return search(p.right, toSearch);
 	}
-	private X getElement(Node<X> p) {
-		return p.getElement();
-	}
 	/**
 	 * Retornar un cliente. Metodo no generico
 	 */
 	//Funcion utilizada para buscar un cliente por su ID y retornarlo
-		/*public Node<Client> searchClient(int toSearch) {
-			return searchClientHelper(root, toSearch);
+		public Node<Client> searchClient(int toSearch) {
+			return searchClientHelper((BinarySearchTree<X>.Node<Client>) root, toSearch);
 		}
 		//Funcion auxiliar del buscador
 		private Node<Client> searchClientHelper(Node<Client> p, int toSearch) {
@@ -175,7 +176,7 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 				return searchClientHelper(p.left, toSearch);
 			else
 				return searchClientHelper(p.right, toSearch);
-		}*/
+		}
 
 	/**
 	 * Eliminar
@@ -223,7 +224,6 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 		StringBuffer sb = new StringBuffer();
 		for (X data : this)
 			sb.append(data.toString());
-
 		return sb.toString();
 	}
 
@@ -234,13 +234,14 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	public void preOrder() {
 		preOrderHelper(root);
 	}
-
-	private void preOrderHelper(Node<X> nodoTemp) {
+	private String preOrderHelper(Node<X> nodoTemp) {
 		if (nodoTemp != null) {
-			System.out.print(nodoTemp + " ");
+			preorder+= nodoTemp + "\n";
+			//System.out.print(nodoTemp + " ");
 			preOrderHelper(nodoTemp.left);
 			preOrderHelper(nodoTemp.right);
 		}
+		return preorder;
 	}
 
 	/**
