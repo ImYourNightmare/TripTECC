@@ -13,6 +13,9 @@ public class AppMain {
 		bst.insertarNodo(cliente1);
 		bst.insertarNodo(cliente2);
 		bst.insertarNodo(cliente3);
-		bst.posOrder();
+		Client cliente5 = bst.searchNode(cliente1); // Se extrae un cliente del árbol para clonar un usuario
+		//System.out.println(cliente5);
+		System.out.println(bst.searchClient(13));
+		//bst.posOrder();
 	}
 }
