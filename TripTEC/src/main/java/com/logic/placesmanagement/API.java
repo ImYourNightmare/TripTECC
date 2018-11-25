@@ -1,6 +1,8 @@
 package com.logic.placesmanagement;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.logic.objects.Place;
@@ -28,7 +30,7 @@ public class API {
 	GeoApiContext context;
 	Gson gson;
 	String placeId;
-	Geometry origin;
+	String origin;
 	String destiny;
 	
 	//Route rutaEntreDosPuntos=new Route();
@@ -71,11 +73,12 @@ public class API {
 		gson = new GsonBuilder().setPrettyPrinting().create();
 		//System.out.println(gson.toJson(results[0].addressComponents));
 		//System.out.println(gson.toJson(results[0].placeId));
-		System.out.println(gson.toJson(results2[0].geometry));
+		//System.out.println(gson.toJson(results2[0].geometry));
 		placeId = results[0].placeId;
 		
-		destiny = results2[0].placeId;
-		origin = results[0].geometry;
+		destiny = results[0].placeId;
+		origin = results2[0].placeId;
+		
 
 		
 	}
@@ -140,8 +143,9 @@ public class API {
 	
 	
 
-	public static long getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
-		
+	public long getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
+		addrOne = origin;
+		addrTwo = destiny;
 		//set up key
 	   	GeoApiContext distCalcer = new GeoApiContext.Builder()
 			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")
@@ -174,7 +178,7 @@ public class API {
 	
 
 	
-	public void Parse(String data) {
+	public String Parse(String data) {
 		
 		final String dataD= data;
 		
@@ -388,6 +392,8 @@ public class API {
 		
 		
 		System.out.println(place.toString());
+		
+		return place.toString();
 						
 		
 	}
