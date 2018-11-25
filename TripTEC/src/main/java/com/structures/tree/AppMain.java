@@ -1,9 +1,11 @@
 package com.structures.tree;
 
+import java.io.*;
+
 import com.logic.objects.*;
 
 public class AppMain {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		BinarySearchTree<Client> bst = new BinarySearchTree<Client>();
 		System.out.println("PROBANDO CON CLIENTES");
 		Client cliente1 = new Client("Marcos","5-10",13,"201520");
@@ -21,8 +23,32 @@ public class AppMain {
 		bst.preOrder();
 		String prueba = bst.getpreorder();
 		System.out.println(prueba);
+		
 
-		System.out.println(bst.getSize());
+
+		FileOutputStream f = new FileOutputStream(new File("Usuarios.txt"));
+		ObjectOutputStream o = new ObjectOutputStream(f);
+		String data="";
+		// Write objects to file
+		
+		o.writeObject(prueba);
+
+		o.close();
+		f.close();
+
+		FileInputStream fi = new FileInputStream(new File("Usuarios.txt"));
+		ObjectInputStream oi = new ObjectInputStream(fi);
+
+		// Read objects
+		int p=7;
+		String pr2 = (String) oi.readObject();
+		for (int i=0;i<=bst.getSize();i++) {
+			String[] split = pr2.split("\n");
+			System.out.println(split[i]);
+		}
+		//System.out.println(pr2);
+		oi.close();
+		fi.close();
 		//System.out.println(bst.searchClient(14));
 		//bst.posOrder();
 	}
