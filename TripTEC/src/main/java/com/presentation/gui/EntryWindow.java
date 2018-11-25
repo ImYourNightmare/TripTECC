@@ -61,23 +61,23 @@ public class EntryWindow extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		JLabel lblIngreseSuId = new JLabel("INGRESE SU ID O BIEN, LA CONTRASEÑA ESTABLECIDA");
+		JLabel lblIngreseSuId = new JLabel("ENTER YOUR ID, OR THE ADMIN PASSWORD TO RUN");
 		lblIngreseSuId.setForeground(Color.BLACK);
 		lblIngreseSuId.setFont(new Font("Sitka Text", Font.PLAIN, 18));
-		lblIngreseSuId.setBounds(47, 72, 486, 31);
+		lblIngreseSuId.setBounds(64, 72, 486, 31);
 		contentPane.setLayout(null);
 
-		JLabel lblBienvenidoATriptec = new JLabel("BIENVENIDO A TRIPTEC");
+		JLabel lblBienvenidoATriptec = new JLabel("WELCOME TO TRIPTEC");
 		lblBienvenidoATriptec.setBackground(Color.WHITE);
 		lblBienvenidoATriptec.setForeground(Color.BLACK);
-		lblBienvenidoATriptec.setBounds(53, 13, 493, 60);
+		lblBienvenidoATriptec.setBounds(85, 13, 440, 60);
 		lblBienvenidoATriptec.setFont(new Font("OCR A Extended", Font.PLAIN, 38));
 		contentPane.add(lblBienvenidoATriptec);
 
-		JLabel lblParaEjecutarLas = new JLabel("PARA EJECUTAR LAS FUNCIONES DE ADMINISTRADOR");
+		JLabel lblParaEjecutarLas = new JLabel("THE ADMNISTRATOR FUNCTIONS");
 		lblParaEjecutarLas.setForeground(Color.BLACK);
 		lblParaEjecutarLas.setFont(new Font("Sitka Text", Font.PLAIN, 18));
-		lblParaEjecutarLas.setBounds(47, 102, 486, 16);
+		lblParaEjecutarLas.setBounds(134, 103, 331, 16);
 		contentPane.add(lblParaEjecutarLas);
 		contentPane.add(lblIngreseSuId);
 
@@ -85,9 +85,9 @@ public class EntryWindow extends JFrame {
 		txtID.setBounds(133, 139, 315, 40);
 		contentPane.add(txtID);
 
-		JButton btnIngresar = new JButton("Ingresar");
-		btnIngresar.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
-		btnIngresar.addActionListener(new ActionListener() {
+		JButton btnLogin = new JButton("Login");
+		btnLogin.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
+		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (txtID.getText().toUpperCase().equals(password)) {
 					JOptionPane.showMessageDialog(panel, "Entra un administrador", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
@@ -96,13 +96,17 @@ public class EntryWindow extends JFrame {
 				}
 			}
 		});
-		btnIngresar.setBounds(238, 207, 108, 53);
-		contentPane.add(btnIngresar);
+		btnLogin.setBounds(238, 207, 108, 53);
+		contentPane.add(btnLogin);
 
-		JButton btnRegistro = new JButton("Registro");
-		btnRegistro.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
-		btnRegistro.setBounds(469, 207, 108, 53);
-		contentPane.add(btnRegistro);
+		JButton btnSingIn = new JButton("Sign in");
+		btnSingIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnSingIn.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
+		btnSingIn.setBounds(469, 207, 108, 53);
+		contentPane.add(btnSingIn);
 
 		JLabel lblBackground = new JLabel("New label");
 		lblBackground.setBackground(new Color(240, 240, 240));

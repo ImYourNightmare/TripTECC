@@ -8,6 +8,7 @@ import com.logic.management.Management;
 import com.logic.objects.Client;
 import com.logic.objects.Place;
 import com.logic.placesmanagement.API;
+import com.presentation.gui.EntryWindow;
 import com.structures.graph.Dijkstra;
 
 public class App 
@@ -21,7 +22,7 @@ public class App
         
         api.Test();
         
-        
+        new EntryWindow().setVisible(true);
         
         
         
