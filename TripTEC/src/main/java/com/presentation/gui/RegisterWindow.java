@@ -6,11 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.logic.management.ClientManagement;
+import com.logic.objects.Client;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RegisterWindow extends JFrame {
 
@@ -19,6 +27,7 @@ public class RegisterWindow extends JFrame {
 	private JTextField txtId;
 	private JTextField txtPhone;
 	private JTextField txtBirth;
+	private ClientManagement manage = new ClientManagement();
 
 	/**
 	 * Launch the application.
@@ -74,6 +83,11 @@ public class RegisterWindow extends JFrame {
 		contentPane.add(txtBirth);
 		
 		JButton btnNewButton = new JButton("SIGN IN");
+		btnNewButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent event) {
+				registrar(event);
+			}
+		});
 		btnNewButton.setBounds(199, 344, 111, 56);
 		contentPane.add(btnNewButton);
 		
@@ -101,5 +115,20 @@ public class RegisterWindow extends JFrame {
 		lblBackground.setIcon(new ImageIcon(RegisterWindow.class.getResource("/com/images/white background.jpg")));
 		lblBackground.setBounds(-47, -39, 617, 517);
 		contentPane.add(lblBackground);
+	}
+	public void registrar(java.awt.event.ActionEvent event) {
+		if(txtName.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "THE NAME FIELD IS OBLIGATORY");
+		}else if(txtId.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "THE ID FIELD IS OBLIGATORY");
+		}else if(txtPhone.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "THE PHONE FIELD IS OBLIGATORY");
+		}else if(txtBirth.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "THE BIRTHDATE FIELD IS OBLIGATORY");
+		}else {
+			Client client = new Client(txtName.getText(), txtBirth.getText() ,Integer.valueOf(txtId.getText()), txtPhone.getText());
+			manage.addclients(client);
+			JOptionPane.showMessageDialog(null, "Succesfull Registration");
+		}
 	}
 }
