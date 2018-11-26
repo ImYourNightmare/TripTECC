@@ -7,16 +7,6 @@ public class Place {
 
 	
 	//getters and setters of class
-	
-	
-	
-	
-	public Place() {
-		
-	}
-	
-	
-
 	public String getSchedule() {
 		return schedule;
 	}
@@ -26,7 +16,6 @@ public class Place {
 	public void setSchedule(String schedule) {
 		this.schedule = schedule;
 	}
-
 
 
 	public String getLatitude() {
@@ -117,10 +106,10 @@ public class Place {
 		this.price = price;
 	}
 
-	
-
-	
-
+	public Place() {
+		
+	}
+	//Constructor que recibe todos los atributos de la clase
 	public Place(String latitude, String lenght, String addres, String placeName, String placeActivities,
 			String website, String phoneNumber, String rating,String schedule, String description, String activities, String price) {
 		super();
@@ -141,6 +130,7 @@ public class Place {
 
 
 	@Override
+	//Funcion utilizada para convertir la clase a Strings
 	public String toString() {
 		return "Place [latitude=" + latitude + ", lenght=" + lenght + ", addres=" + addres + ", placeName=" + placeName
 				+ ", placeActivities=" + placeActivities + ", website=" + website + ", phoneNumber=" + phoneNumber
