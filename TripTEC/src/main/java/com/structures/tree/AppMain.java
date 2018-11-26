@@ -21,7 +21,7 @@ public class AppMain {
 		//Client cliente5 = bst.searchNode(cliente1); // Se extrae un cliente del árbol para clonar un usuario
 		bst.preOrder();
 		String prueba = bst.getpreorder();
-		System.out.println(prueba);
+		//System.out.println(prueba);
 		
 		Object arreglo[]= {"a","b","c"};
 
@@ -41,22 +41,19 @@ public class AppMain {
 		// Read objects
 
 		String pr2 = (String) oi.readObject();
-		String[] split = pr2.split("\n");
+		String[] gran = pr2.split("\n");
 		for (int i=0;i<=bst.getSize();i++) {
 			int cuantity=5;
 			for(int p=0;p<=cuantity;p++) {
-				
+				String[] gr = pr2.split("");
+				System.out.print(gr[p]);
 			}
-			//System.out.println(split[i]);
+			//System.out.println(gran[i]);
 		}
 		//System.out.println(pr2);
 		oi.close();
 		fi.close();
 		//System.out.println(bst.searchClient(14));
 		//bst.posOrder();
-		int hola=9;
-		for(int g=0;g<hola;g++) {
-			
-		}
 	}
 }
