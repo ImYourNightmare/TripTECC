@@ -22,7 +22,7 @@ public class App
        
         
         
-        place1.createPlaceName("Parque la sabana");//Se puede ingresar las coordenadas o nombre
+        place1.createPlaceName("Cartago");//Se puede ingresar las coordenadas o nombre
        
         place1.ConexionPlace(); 
         //System.out.println(api.getPlace().getPlaceId());
@@ -44,6 +44,12 @@ public class App
         
         System.out.println(place2.getPlace().toString());
         place1.getDriveDist("place_id:"+place1.getPlaceId(), "place_id:"+place2.getPlaceId());
+        
+        place1.getDistance();
+        System.out.println(place1.getDistance());
+        System.out.println(place1.getTime());
+
+       
       
         
         

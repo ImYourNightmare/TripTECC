@@ -46,11 +46,37 @@ public class API{
 	String placeId, placeName;
 	Place place = new Place();
 	String data = ""; 
+	double distance;
+	int time;
+	
+	
+	
 	
 	
 	//Atributos de la clase
+	
+	
 	public Place getPlace() {
 		return place;
+	}
+	public String getPlaceName() {
+		return placeName;
+	}
+	public void setPlaceName(String placeName) {
+		this.placeName = placeName;
+	}
+	public double getDistance() {
+		return distance;
+	}
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+	
+	public int getTime() {
+		return time;
+	}
+	public void setTime(int time) {
+		this.time = time;
 	}
 	public void setPlace(Place place) {
 		this.place = place;
@@ -86,17 +112,17 @@ public class API{
 		this.placeName = placeName;
 		
 		}
-	
+	//Método que establece la cnexion con los lugares que ofrece google maps
 	public void ConexionPlace() throws ApiException, InterruptedException, IOException {
-		this.context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
+		this.context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();//Obtiene en results los lugares qe coincidan con la busqueda
 		GeocodingResult[] results =  GeocodingApi.geocode(context, placeName).await();
-		placeId = results[0].placeId;
-		place.setPlaceId(placeId);
+		placeId = results[0].placeId;//se guarda en la variable placeid el id del lugar
+		place.setPlaceId(placeId);// se guarda el placeid 
 	}
 	public String placeDetails(GeoApiContext context, String placeId) throws ApiException, InterruptedException, IOException {
-		PlaceDetailsRequest request = new PlaceDetailsRequest(context);
+		PlaceDetailsRequest request = new PlaceDetailsRequest(context);//Se guarda en request los detalles que no estan parseados
 		request.placeId(placeId);
-		gson = new GsonBuilder().setPrettyPrinting().create();
+		gson = new GsonBuilder().setPrettyPrinting().create();//se guarada en gson el json de los datos del lugar 
 		data = gson.toJson(request.await());//Se guarda el codigo json en data para luego parsear el codigo	
 		return data;
 		
@@ -105,7 +131,7 @@ public class API{
 	//Métedo que permite obtener los datos del api ya parseados
 	public Place  Parse(String data) {
 		
-		final String dataD= data;
+		final String dataD= data;//se obtine los datos de json para parsearlos
 		// Se hace un Try y execpt para poder obtener del código json los diferentes datos del lugar
 		//Try para obtener el website del lugar 
 		try {
@@ -270,42 +296,39 @@ public class API{
 		return place;
 }
 	public void getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
-		//set up key
-		
-		 
+		//se crea la variable de tipo GeoApiContext llamdada distCAlcer que ayuda los request de DistanceMAtrixApiRequest
 	   	GeoApiContext distCalcer = new GeoApiContext.Builder()
-			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")
-			    .build();
+			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")//Se necesita la apiKey para poder ejecutar el método
+			    .build();//Llama al método construir
 	   	
 	   		DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(distCalcer); 
-	   	
+	   	//Se crea la matriz con los origenes y destinos de la 
 	       DistanceMatrix result = req.origins(addrOne)
 	               .destinations(addrTwo)
 	               .mode(TravelMode.DRIVING)
 	               .avoid(RouteRestriction.TOLLS)
 	               .language("en-US")
 	               .await();
-	       
-	       //String[] hola = result.destinationAddresses;
-	       
+	       //se crea la matriz	       
 				DistanceMatrixElement distApart = result.rows[0].elements[0];
 				
-				System.out.println(distApart.toString());
-				/*String textD = distApart.distance.toString();
-				String textT = distApart.duration.toString();
 				
+				String textD = distApart.distance.toString();//se obtione en string la distancia
+				long textT = distApart.duration.inSeconds;//se obtiene la duracion en segundos en tipo de dato long
 				
+				/*
+				 * Se calcula la distacia
+				 * 1) Se obtiene la distancia en string y se pasa a una variable tipo duoble que servirá para las arista del grafo
+				 */
 				String []  distAnce = textD. split(" ");
-				String []  time = textT. split(" ");
+				distance = Double.parseDouble(distAnce[0]);
 				
-				System.out.println(distAnce[0]);
-				//int d = Integer.parseInt(distAnce[0]);
-				System.out.println(time[0]);
-				
-				
-				
-				System.out.println(distApart.duration.toString()+"\n");*/
-				//System.out.println(distApart.durationInTraffic.toString())
+				/*
+				 * Se pasa de long a int para obtener los segundos en int
+				 * luego se divide en 60 para hacer la conversión a minutes
+				 */
+				int i = (int) textT;
+				time = i/60;		
 	}
 	
 	
