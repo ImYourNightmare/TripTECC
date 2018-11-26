@@ -39,37 +39,16 @@ import com.google.maps.model.Unit;
 import java.time.Instant;
 
 
-public class API {
+public class API{
 	//Atributos de la clases
 	GeoApiContext context;
 	Gson gson;
-	String placeId, addrOne, addrTwo;
-	String origin;
-	String destiny;
+	String placeId, placeName;
 	Place place = new Place();
 	String data = ""; 
 	
 	
 	//Atributos de la clase
-	
-	public String getAddrOne() {
-		return addrOne;
-	}
-	public void setAddrOne(String addrOne) {
-		this.addrOne = addrOne;
-	}
-	public String getAddrTwo() {
-		return addrTwo;
-	}
-	public void setAddrTwo(String addrTwo) {
-		this.addrTwo = addrTwo;
-	}
-	public String getOrigin() {
-		return origin;
-	}
-	public void setOrigin(String origin) {
-		this.origin = origin;
-	}
 	public Place getPlace() {
 		return place;
 	}
@@ -101,105 +80,30 @@ public class API {
 	public void setPlaceId(String placeId) {
 		this.placeId = placeId;
 	}
-	public String getDestiny() {
-		return destiny;
-	}
-	public void setDestiny(String destiny) {
-		this.destiny = destiny;
-	}
 	
-	public void createPlaceDetails(String namePlace) {
-		
-		
-		
-	}
 	
-	public void Test() throws ApiException, InterruptedException, IOException {
-		context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
-		GeocodingResult[] results =  GeocodingApi.geocode(context,"tecnologico de costa rica").await();
-		GeocodingResult[] results2 =  GeocodingApi.geocode(context,"9.932871,-84.079453").await();
-		// GeocodingApi.geocode(context, "hotel barcelo");
+	public void createPlaceName(String placeName) {
+		this.placeName = placeName;
 		
-		
+		}
+	
+	public void ConexionPlace() throws ApiException, InterruptedException, IOException {
+		this.context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
+		GeocodingResult[] results =  GeocodingApi.geocode(context, placeName).await();
 		placeId = results[0].placeId;
-		
-		addrOne = results[0].placeId;
-		addrTwo = results2[0].placeId;
-		//addrTwo = results2[0].addressComponents[0].longName;
-		//addrTwo = results2[0].formattedAddress;
-		//addrTwo = results2[0].formattedAddress;
-		
-		
-		
-		//System.out.println(addrTwo = results2[0].addressComponents[0].longName);
-		
-		//place.
-
-		
+		place.setPlaceId(placeId);
 	}
-
 	public String placeDetails(GeoApiContext context, String placeId) throws ApiException, InterruptedException, IOException {
 		PlaceDetailsRequest request = new PlaceDetailsRequest(context);
 		request.placeId(placeId);
 		gson = new GsonBuilder().setPrettyPrinting().create();
-		//System.out.println(gson.toJson(request.await()));
 		data = gson.toJson(request.await());//Se guarda el codigo json en data para luego parsear el codigo	
-		System.out.println(data);
 		return data;
+		
 		}
 	
-	public void getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
-	
-		
-		System.out.println();
-		//set up key
-	   	GeoApiContext distCalcer = new GeoApiContext.Builder()
-			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")
-			    .build();
-	   	
-	   	
-	   	
-	   		DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(distCalcer); 
-	   	
-	       DistanceMatrix result = req.origins(addrOne)
-	               .destinations(addrTwo)
-	               .mode(TravelMode.DRIVING)
-	               .avoid(RouteRestriction.TOLLS)
-	               .language("en-US")
-	               .await();
-	       
-	       //String[] hola = result.destinationAddresses;
-	       
-				DistanceMatrixElement distApart = result.rows[0].elements[0];
-				
-				System.out.println(distApart.toString());
-				String textD = distApart.distance.toString();
-				String textT = distApart.duration.toString();
-				
-				
-				String []  distAnce = textD. split(" ");
-				String []  time = textT. split(" ");
-				
-				System.out.println(distAnce[0]);
-				int d = Integer.parseInt(distAnce[0]);
-				System.out.println(time[0]);
-				
-				
-				
-				System.out.println(distApart.duration.toString()+"\n");
-				//System.out.println(distApart.durationInTraffic.toString());
-
-
-				
-				
-				
-		
-	
-	
-
-	}
-	
-	public void  Parse(String data) {
+	//Métedo que permite obtener los datos del api ya parseados
+	public Place  Parse(String data) {
 		
 		final String dataD= data;
 		// Se hace un Try y execpt para poder obtener del código json los diferentes datos del lugar
@@ -214,7 +118,7 @@ public class API {
 			while (matcher.find()) {
 		    //System.out.println("Full match: " + matcher.group(0));
 				for (int i = 1; i <= matcher.groupCount(); i++) {
-					System.out.println(matcher.group(i));
+					//System.out.println(matcher.group(i));
 			place.setWebsite(matcher.group(i));	
 					}
 				}
@@ -231,7 +135,7 @@ public class API {
 			while (matcher.find()) {
 			    //System.out.println("Full match: " + matcher.group(0));
 					for (int i = 1; i <= matcher.groupCount(); i++) {
-						System.out.println(matcher.group(i));
+						//System.out.println(matcher.group(i));
 				place.setPlaceName(matcher.group(i));
 					}
 			}
@@ -248,7 +152,7 @@ public class API {
 			while (matcher.find()) {
 			    //System.out.println("Full match: " + matcher.group(0));
 				for (int i = 1; i <= matcher.groupCount(); i++) {
-					System.out.println(matcher.group(i));
+					//System.out.println(matcher.group(i));
 					place.setLatitude(matcher.group(i));
 					
 					}
@@ -267,7 +171,7 @@ public class API {
 			while (matcher.find()) {
 			    //System.out.println("Full match: " + matcher.group(0));
 				for (int i = 1; i <= matcher.groupCount(); i++) {
-					System.out.println(matcher.group(i));
+					//System.out.println(matcher.group(i));
 					place.setLenght((matcher.group(i)));
 					}
 					break;		
@@ -284,7 +188,7 @@ public class API {
 			while (matcher.find()) {
 			    //System.out.println("Full match: " + matcher.group(0));
 				for (int i = 1; i <= matcher.groupCount(); i++) {
-					System.out.println(matcher.group(i));
+					//System.out.println(matcher.group(i));
 					place.setPhoneNumber((matcher.group(i)));
 					}
 					break;			
@@ -301,7 +205,7 @@ public class API {
 			while (matcher.find()) {
 			    //System.out.println("Full match: " + matcher.group(0));
 				for (int i = 1; i <= matcher.groupCount(); i++) {
-					System.out.println(matcher.group(i));
+					//System.out.println(matcher.group(i));
 					place.setRating((matcher.group(i)));
 					}
 					break;
@@ -318,7 +222,7 @@ public class API {
 			while (matcher.find()) {
 			    //System.out.println("Full match: " + matcher.group(0));
 				for (int i = 1; i <= matcher.groupCount(); i++) {
-					System.out.println(matcher.group(i));
+					//System.out.println(matcher.group(i));
 					place.setAddres((matcher.group(i)));
 					}
 					break;
@@ -352,17 +256,55 @@ public class API {
 			final Matcher matcher = pattern.matcher(dataD);
 										
 			while (matcher.find()) {
-			    System.out.println("Full match: " + matcher.group(0));
+			    //System.out.println("Full match: " + matcher.group(0));
 				for (int i = 1; i <= matcher.groupCount(); i++) {
-					System.out.println(matcher.group(i));
+					//System.out.println(matcher.group(i));
 					place.setSchedule((matcher.group(i)));
 					}								
 			}				
 					}catch(Exception e) {
 						place.setSchedule(null);			
 								}
-		System.out.println(place.toString());
+		//System.out.println(place.toString());
+		
+		return place;
 }
+	public void getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
+		//set up key
+	   	GeoApiContext distCalcer = new GeoApiContext.Builder()
+			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")
+			    .build();
+	   	
+	   		DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(distCalcer); 
+	   	
+	       DistanceMatrix result = req.origins(addrOne)
+	               .destinations(addrTwo)
+	               .mode(TravelMode.DRIVING)
+	               .avoid(RouteRestriction.TOLLS)
+	               .language("en-US")
+	               .await();
+	       
+	       //String[] hola = result.destinationAddresses;
+	       
+				DistanceMatrixElement distApart = result.rows[0].elements[0];
+				
+				System.out.println(distApart.toString());
+				String textD = distApart.distance.toString();
+				String textT = distApart.duration.toString();
+				
+				
+				String []  distAnce = textD. split(" ");
+				String []  time = textT. split(" ");
+				
+				System.out.println(distAnce[0]);
+				//int d = Integer.parseInt(distAnce[0]);
+				System.out.println(time[0]);
+				
+				
+				
+				System.out.println(distApart.duration.toString()+"\n");
+				//System.out.println(distApart.durationInTraffic.toString())
+	}
 	
 	
 	

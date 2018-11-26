@@ -3,7 +3,7 @@ package com.logic.objects;
 public class Place {
 	
 	//Atrbutos de la clase place
-	private String latitude, lenght, addres, placeName, placeActivities, website, phoneNumber,rating,schedule , description, activities, price ;
+	private String latitude, lenght, addres, placeName, placeActivities, website, phoneNumber,rating,schedule , description, activities, price, placeId; ;
 
 	
 	//getters and setters of class
@@ -16,6 +16,18 @@ public class Place {
 	}
 	
 	
+
+	public String getPlaceId() {
+		return placeId;
+	}
+
+
+
+	public void setPlaceId(String placeId) {
+		this.placeId = placeId;
+	}
+
+
 
 	public String getSchedule() {
 		return schedule;
@@ -122,7 +134,7 @@ public class Place {
 	
 
 	public Place(String latitude, String lenght, String addres, String placeName, String placeActivities,
-			String website, String phoneNumber, String rating,String schedule, String description, String activities, String price) {
+			String website, String phoneNumber, String rating,String schedule, String description, String activities, String price, String placeId) {
 		super();
 		this.latitude = latitude;
 		this.lenght = lenght;
@@ -136,6 +148,7 @@ public class Place {
 		this.description = description;
 		this.activities = activities;
 		this.price = price;
+		this.placeId = placeId;
 	}
 
 
@@ -145,8 +158,12 @@ public class Place {
 		return "Place [latitude=" + latitude + ", lenght=" + lenght + ", addres=" + addres + ", placeName=" + placeName
 				+ ", placeActivities=" + placeActivities + ", website=" + website + ", phoneNumber=" + phoneNumber
 				+ ", rating=" + rating + ", schedule=" + schedule + ", description=" + description + ", activities="
-				+ activities + ", price=" + price + "]";
+				+ activities + ", price=" + price + ", placeId=" + placeId + "]";
 	}
+
+
+
+	
 
 
 	}
