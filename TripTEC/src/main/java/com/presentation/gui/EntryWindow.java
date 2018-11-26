@@ -1,13 +1,14 @@
 package com.presentation.gui;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.logic.objects.Service;
+import com.structures.tree.BinarySearchTree;
 
 import javax.swing.JLabel;
 import java.awt.CardLayout;
@@ -27,9 +28,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import  javax.swing.JPanel;
 import javax.swing.JOptionPane;
+
 public class EntryWindow extends JFrame {
-	Service tempService = new Service();
-	String password = tempService.getPassword();
+	private static String password = "TRIPTEC";
+	private BinarySearchTree binTree = new BinarySearchTree();
 	JPanel panel = new JPanel();
 	private JPanel contentPane;
 
@@ -93,6 +95,7 @@ public class EntryWindow extends JFrame {
 					JOptionPane.showMessageDialog(panel, "Entra un administrador", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
 				}
 				else {
+					new MainWindowClient().setVisible(true);
 				}
 			}
 		});

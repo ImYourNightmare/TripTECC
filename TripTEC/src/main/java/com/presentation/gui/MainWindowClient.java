@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JSpinner;
 import javax.swing.JButton;
 
-public class MainWindow extends JFrame {
+public class MainWindowClient extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tblRoute;
@@ -30,7 +30,7 @@ public class MainWindow extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainWindow frame = new MainWindow();
+					MainWindowClient frame = new MainWindowClient();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +42,7 @@ public class MainWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainWindow() {
+	public MainWindowClient() {
 		setTitle("Main Window - Client");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 899, 540);
@@ -139,7 +139,7 @@ public class MainWindow extends JFrame {
 		contentPane.add(btnAdd);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(MainWindow.class.getResource("/com/images/live_to_travel_detail.jpg")));
+		lblNewLabel.setIcon(new ImageIcon(MainWindowClient.class.getResource("/com/images/live_to_travel_detail.jpg")));
 		lblNewLabel.setBounds(-15, -42, 896, 591);
 		contentPane.add(lblNewLabel);
 	}
