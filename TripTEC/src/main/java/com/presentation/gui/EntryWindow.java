@@ -59,7 +59,7 @@ public class EntryWindow extends JFrame {
 	public EntryWindow() {
 		setTitle("Entry Window");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 607, 339);
+		setBounds(100, 100, 606, 322);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.control);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -86,6 +86,7 @@ public class EntryWindow extends JFrame {
 		contentPane.add(lblIngreseSuId);
 
 		final TextField txtID = new TextField();
+		txtID.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		txtID.setBounds(133, 139, 315, 40);
 		contentPane.add(txtID);
 
@@ -113,7 +114,7 @@ public class EntryWindow extends JFrame {
 				}
 			}
 		});
-		btnLogin.setBounds(238, 207, 108, 53);
+		btnLogin.setBounds(238, 196, 108, 53);
 		contentPane.add(btnLogin);
 
 		JButton btnSingIn = new JButton("Sign in");
@@ -123,12 +124,12 @@ public class EntryWindow extends JFrame {
 			}
 		});
 		btnSingIn.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
-		btnSingIn.setBounds(469, 207, 108, 53);
+		btnSingIn.setBounds(468, 196, 108, 53);
 		contentPane.add(btnSingIn);
 
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setBackground(new Color(240, 240, 240));
-		lblBackground.setIcon(new ImageIcon("/com/images/white background.jpg"));
+		lblBackground.setIcon(new ImageIcon(EntryWindow.class.getResource("/com/images/white background.jpg")));
 		lblBackground.setBounds(-21, -11, 638, 303);
 		contentPane.add(lblBackground);
 	}
