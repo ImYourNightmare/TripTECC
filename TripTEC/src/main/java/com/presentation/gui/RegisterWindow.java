@@ -28,6 +28,7 @@ public class RegisterWindow extends JFrame {
 	private JTextField txtPhone;
 	private JTextField txtBirth;
 	private ClientManagement manage;
+	JPanel panel = new JPanel();
 
 	/**
 	 * Launch the application.
@@ -44,7 +45,6 @@ public class RegisterWindow extends JFrame {
 	 */
 	public RegisterWindow(ClientManagement pManage) {
 		setTitle("Sing in window");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 523, 472);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -58,26 +58,31 @@ public class RegisterWindow extends JFrame {
 		contentPane.add(lblRegistro);
 		
 		txtName = new JTextField();
+		txtName.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		txtName.setBounds(233, 79, 229, 30);
 		contentPane.add(txtName);
 		txtName.setColumns(10);
 		
 		txtId = new JTextField();
+		txtId.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		txtId.setColumns(10);
 		txtId.setBounds(233, 143, 229, 30);
 		contentPane.add(txtId);
 		
 		txtPhone = new JTextField();
+		txtPhone.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		txtPhone.setColumns(10);
 		txtPhone.setBounds(233, 204, 229, 30);
 		contentPane.add(txtPhone);
 		
 		txtBirth = new JTextField();
+		txtBirth.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		txtBirth.setColumns(10);
 		txtBirth.setBounds(233, 267, 229, 30);
 		contentPane.add(txtBirth);
 		
 		JButton btnNewButton = new JButton("SIGN IN");
+		btnNewButton.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		btnNewButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent event) {
 				registrar(event);
@@ -121,9 +126,15 @@ public class RegisterWindow extends JFrame {
 		}else if(txtBirth.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "THE BIRTHDATE FIELD IS OBLIGATORY");
 		}else {
-			Client client = new Client(txtName.getText(), txtBirth.getText() ,Integer.valueOf(txtId.getText()), txtPhone.getText());
-			manage.addclients(client);
-			JOptionPane.showMessageDialog(null, "Succesfull Registration");
+			try {
+				Client client = new Client(txtName.getText(), txtBirth.getText() ,Integer.valueOf(txtId.getText()), txtPhone.getText());
+				manage.addclients(client);
+				JOptionPane.showMessageDialog(panel, "Succesful registration", "Registration", JOptionPane.INFORMATION_MESSAGE);
+				hide();
+			}
+			catch (Exception e) {
+				JOptionPane.showMessageDialog(panel, "Only numbers accepted on the ID field", "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 }
