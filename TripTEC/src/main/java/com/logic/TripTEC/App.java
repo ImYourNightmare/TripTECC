@@ -4,7 +4,7 @@ import java.io.IOException;
 
 
 import com.google.maps.errors.ApiException;
-import com.logic.management.Management;
+import com.logic.management.GraphManagement;
 import com.logic.objects.Client;
 import com.logic.objects.Place;
 import com.logic.placesmanagement.API;

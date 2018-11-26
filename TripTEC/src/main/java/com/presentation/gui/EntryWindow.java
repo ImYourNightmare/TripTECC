@@ -111,9 +111,9 @@ public class EntryWindow extends JFrame {
 		btnSingIn.setBounds(469, 207, 108, 53);
 		contentPane.add(btnSingIn);
 
-		JLabel lblBackground = new JLabel("New label");
+		JLabel lblBackground = new JLabel("");
 		lblBackground.setBackground(new Color(240, 240, 240));
-		lblBackground.setIcon(new ImageIcon("C:\\Users\\Melina\\Documents\\GitHub\\TripTECC\\TripTEC\\src\\main\\java\\com\\images\\white background.jpg"));
+		lblBackground.setIcon(new ImageIcon("/com/images/white background.jpg"));
 		lblBackground.setBounds(-21, -11, 638, 303);
 		contentPane.add(lblBackground);
 	}

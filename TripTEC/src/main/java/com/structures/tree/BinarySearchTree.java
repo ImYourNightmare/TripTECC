@@ -113,7 +113,7 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	 * 
 	 * @param data
 	 */
-	public void insertarNodo(X data) {
+	public void insertNode(X data) {
 		root = insert(root, data);
 		size++;
 	}

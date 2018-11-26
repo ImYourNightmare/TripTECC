@@ -13,11 +13,11 @@ public class AppMain {
 		Client cliente3 = new Client("Manuel","3",65,"20");
 		Client cliente4 = new Client("Melina","5",14,"20");
 		Client cliente5 = new Client("Segreda","6",18,"20");
-		bst.insertarNodo(cliente1);
-		bst.insertarNodo(cliente2);
-		bst.insertarNodo(cliente3);
-		bst.insertarNodo(cliente4);
-		bst.insertarNodo(cliente5);
+		bst.insertNode(cliente1);
+		bst.insertNode(cliente2);
+		bst.insertNode(cliente3);
+		bst.insertNode(cliente4);
+		bst.insertNode(cliente5);
 		//Client cliente5 = bst.searchNode(cliente1); // Se extrae un cliente del árbol para clonar un usuario
 		bst.preOrder();
 		String prueba = bst.getpreorder();
