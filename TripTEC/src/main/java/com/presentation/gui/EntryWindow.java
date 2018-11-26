@@ -106,11 +106,11 @@ public class EntryWindow extends JFrame {
 							new MainWindowClient(clientManage).setVisible(true);
 						}
 						else {
-							JOptionPane.showMessageDialog(panel, "Cliente no registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(panel, "This client doesn't exist", "ERROR", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 					catch (Exception e) {
-						JOptionPane.showMessageDialog(panel, "Id/contraseña inválido", "ERROR", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(panel, "Invalid Id/password", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
