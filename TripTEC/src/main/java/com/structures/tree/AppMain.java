@@ -22,8 +22,6 @@ public class AppMain {
 		bst.preOrder();
 		String prueba = bst.getpreorder();
 		//System.out.println(prueba);
-		
-		Object arreglo[]= {"a","b","c"};
 
 		FileOutputStream f = new FileOutputStream(new File("Usuarios.txt"));
 		ObjectOutputStream o = new ObjectOutputStream(f);
@@ -43,11 +41,18 @@ public class AppMain {
 		String pr2 = (String) oi.readObject();
 		String[] gran = pr2.split("\n");
 		for (int i=0;i<=bst.getSize();i++) {
-			int cuantity=5;
+			int cuantity=4;
+			String gr = gran[i];
 			for(int p=0;p<=cuantity;p++) {
-				String[] gr = pr2.split("");
-				System.out.print(gr[p]);
+				String[] gr2 = gr.split(" ");
+				//System.out.println(gr2[p]);
 			}
+			String[] gr2 = gr.split(" ");
+			System.out.println(gr2[2]);
+			System.out.println(gr2[4]);
+			System.out.println(gr2[0]);
+			System.out.println(gr2[3]);
+			break;
 			//System.out.println(gran[i]);
 		}
 		//System.out.println(pr2);
