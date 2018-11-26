@@ -20,6 +20,7 @@ import com.logic.objects.Client;
 
 import javax.swing.JSpinner;
 import javax.swing.JButton;
+import javax.swing.JTextPane;
 
 public class MainWindowClient extends JFrame {
 
@@ -45,7 +46,7 @@ public class MainWindowClient extends JFrame {
 	public MainWindowClient(ClientManagement pClientManage) {
 		setTitle("Main Window - Client");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 899, 540);
+		setBounds(100, 100, 899, 629);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -54,7 +55,7 @@ public class MainWindowClient extends JFrame {
 		
 		JButton btnSignOut = new JButton("SIGN OUT");
 		btnSignOut.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
-		btnSignOut.setBounds(757, 443, 97, 37);
+		btnSignOut.setBounds(757, 320, 97, 49);
 		contentPane.add(btnSignOut);
 		
 		tblClientRoute = new JTable();
@@ -85,23 +86,13 @@ public class MainWindowClient extends JFrame {
 		JLabel lblYourRoute = new JLabel("YOUR ROUTE");
 		lblYourRoute.setForeground(Color.WHITE);
 		lblYourRoute.setFont(new Font("OCR A Extended", Font.PLAIN, 27));
-		lblYourRoute.setBounds(107, 13, 166, 75);
+		lblYourRoute.setBounds(124, 13, 166, 75);
 		contentPane.add(lblYourRoute);
 		
 		JButton btnMoreInformation = new JButton("INFORMATION");
 		btnMoreInformation.setFont(new Font("OCR A Extended", Font.PLAIN, 13));
-		btnMoreInformation.setBounds(701, 318, 153, 49);
+		btnMoreInformation.setBounds(688, 238, 166, 49);
 		contentPane.add(btnMoreInformation);
-		
-		JLabel lblNewLabel_1 = new JLabel("SELECT AN INDEX");
-		lblNewLabel_1.setFont(new Font("Sitka Text", Font.PLAIN, 20));
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setBounds(587, 238, 199, 30);
-		contentPane.add(lblNewLabel_1);
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(655, 267, 54, 30);
-		contentPane.add(spinner);
 		
 		JLabel lblRoute = new JLabel("OFFICIAL ROUTE");
 		lblRoute.setForeground(Color.WHITE);
@@ -136,12 +127,22 @@ public class MainWindowClient extends JFrame {
 		
 		JButton btnAdd = new JButton("ADD TO \r\nMY ROUTE");
 		btnAdd.setFont(new Font("OCR A Extended", Font.PLAIN, 13));
-		btnAdd.setBounds(505, 318, 153, 49);
+		btnAdd.setBounds(491, 238, 166, 49);
 		contentPane.add(btnAdd);
+		
+		JTextPane txtInformation = new JTextPane();
+		txtInformation.setBounds(63, 309, 258, 260);
+		contentPane.add(txtInformation);
+		
+		JLabel lblInformation = new JLabel("ROUTE INFORMATION");
+		lblInformation.setForeground(Color.WHITE);
+		lblInformation.setFont(new Font("OCR A Extended", Font.PLAIN, 27));
+		lblInformation.setBounds(54, 254, 288, 75);
+		contentPane.add(lblInformation);
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(MainWindowClient.class.getResource("/com/images/live_to_travel_detail.jpg")));
-		lblNewLabel.setBounds(-15, -42, 896, 591);
+		lblNewLabel.setBounds(-15, -77, 896, 712);
 		contentPane.add(lblNewLabel);
 	}
 }
