@@ -42,6 +42,7 @@ import java.time.Instant;
 public class API {
 	
 	
+	//Atributos de la clases
 	GeoApiContext context;
 	Gson gson;
 	String placeId, addrOne, addrTwo;
@@ -121,7 +122,7 @@ public class API {
 		placeId = results[0].placeId;
 		addrOne = results[0].placeId;
 		addrTwo = results2[0].placeId;
-
+		//place.
 
 		
 	}
@@ -134,7 +135,7 @@ public class API {
 		//System.out.println(gson.toJson(request.await()));
 		data = gson.toJson(request.await());
 		
-		
+		System.out.println(data);
 		return data;
 		}
 	
@@ -187,24 +188,11 @@ public class API {
 		
 		System.out.println(distApart);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public void  Parse(String data) {
 		
 		final String dataD= data;
 		
-		//Place place = new Place();//Se crea un objeto tipo place
-		
+				
 		//Try para poder obtener del código json los diferentes datos del lugar
 		//Try para obtener el website del lugar 
 		try {
@@ -213,23 +201,17 @@ public class API {
 			
 			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
 			final Matcher matcher = pattern.matcher(dataD);
-
-		
-		
-		
+			
 			while (matcher.find()) {
 		    //System.out.println("Full match: " + matcher.group(0));
 				for (int i = 1; i <= matcher.groupCount(); i++) {
 					System.out.println(matcher.group(i));
-			place.setWebsite(matcher.group(i));
-				
+			place.setWebsite(matcher.group(i));	
 					}
 				}
 		}catch (Exception e){
 			place.setWebsite(null);
 			}
-		
-		
 		//Try para obtener el nombre del lugar
 		try {
 			final String regex = "\"name\": ([\\a-zA-Z].*),";
@@ -244,12 +226,9 @@ public class API {
 				place.setPlaceName(matcher.group(i));
 					}
 			}
-			
 		}catch(Exception e) {
-			place.setPlaceName(null);
-			
+			place.setPlaceName(null);	
 		}
-		
 		//Try para obtener el la latitud del lugar 
 		try {
 			final String regex = "\"lat\": ([\\d].*)";
@@ -264,15 +243,11 @@ public class API {
 					place.setLatitude(matcher.group(i));
 					
 					}
-				break;
-			
-		}
-					
+				break;	
+		}		
 		}catch(Exception e) {
 			place.setLatitude(null);			
 				}
-		
-		
 		//Try para obtener el la longitud del lugar 
 		try {
 			final String regex = "\"lng\": (-[\\d].*)";
@@ -285,18 +260,12 @@ public class API {
 				for (int i = 1; i <= matcher.groupCount(); i++) {
 					System.out.println(matcher.group(i));
 					place.setLenght((matcher.group(i)));
-						
 					}
-					break;
-					
-			}
-							
+					break;		
+			}	
 			}catch(Exception e) {
 				place.setLenght(null);			
 						}
-		
-		
-		
 		//Se obtiene el numero internacional  del lugar
 		try {
 			final String regex = "\"internationalPhoneNumber\": ([\\a-ZA-Z]*),";
@@ -309,16 +278,13 @@ public class API {
 				for (int i = 1; i <= matcher.groupCount(); i++) {
 					System.out.println(matcher.group(i));
 					place.setPhoneNumber((matcher.group(i)));
-						
 					}
-					break;
-					
+					break;			
 			}
 							
 			}catch(Exception e) {
 				place.setPhoneNumber("NO ENCONTRADO");			
 						}		
-		
 		
 		//Se obtiene el rating del lugar
 		try {
