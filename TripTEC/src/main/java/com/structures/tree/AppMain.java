@@ -1,10 +1,11 @@
 package com.structures.tree;
 
 import java.io.*;
-
+import com.structures.tree.*;
 import com.logic.objects.*;
 
 public class AppMain {
+	
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		BinarySearchTree<Client> bst = new BinarySearchTree<Client>();
 		System.out.println("PROBANDO CON CLIENTES");
@@ -19,45 +20,9 @@ public class AppMain {
 		bst.insertNode(cliente4);
 		bst.insertNode(cliente5);
 		//Client cliente5 = bst.searchNode(cliente1); // Se extrae un cliente del árbol para clonar un usuario
-		bst.preOrder();
-		String Ordering = bst.getpreorder();
-		//System.out.println(prueba);
 		
-		FileOutputStream create = new FileOutputStream(new File("Usuarios.txt"));
-		ObjectOutputStream o = new ObjectOutputStream(create);
-		// Write objects to file
-		
-		o.writeObject(Ordering);
-
-		o.close();
-		create.close();
-		//leer el archivo txt
-		FileInputStream fi = new FileInputStream(new File("Usuarios.txt"));
-		ObjectInputStream oi = new ObjectInputStream(fi);
-
-		// Read objects
-
-		String pr2 = (String) oi.readObject();
-		String[] gran = pr2.split("\n");
-		for (int i=0;i<=bst.getSize();i++) {
-			int cuantity=4;
-			String gr = gran[i];
-			for(int p=0;p<=cuantity;p++) {
-				String[] gr2 = gr.split(" ");
-				//System.out.println(gr2[p]);
-			}
-			String[] gr2 = gr.split(" ");
-			System.out.println(gr2[2]);
-			System.out.println(gr2[4]);
-			System.out.println(gr2[0]);
-			System.out.println(gr2[3]);
-			break;
-			//System.out.println(gran[i]);
-		}
-		//System.out.println(pr2);
-		oi.close();
-		fi.close();
 		//System.out.println(bst.searchClient(14));
-		//bst.posOrder();
+		bst.posOrder();
+
 	}
 }
