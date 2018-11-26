@@ -45,7 +45,7 @@ public class RegisterWindow extends JFrame {
 	 */
 	public RegisterWindow(ClientManagement pManage) {
 		setTitle("Sing in window");
-		setBounds(100, 100, 526, 445);
+		setBounds(100, 100, 523, 472);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -54,7 +54,7 @@ public class RegisterWindow extends JFrame {
 		
 		JLabel lblRegistro = new JLabel("SIGN IN");
 		lblRegistro.setFont(new Font("OCR A Extended", Font.PLAIN, 38));
-		lblRegistro.setBounds(164, 10, 174, 56);
+		lblRegistro.setBounds(155, 10, 174, 56);
 		contentPane.add(lblRegistro);
 		
 		txtName = new JTextField();
@@ -82,13 +82,13 @@ public class RegisterWindow extends JFrame {
 		contentPane.add(txtBirth);
 		
 		JButton btnNewButton = new JButton("SIGN IN");
-		btnNewButton.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
+		btnNewButton.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		btnNewButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent event) {
 				registrar(event);
 			}
 		});
-		btnNewButton.setBounds(210, 327, 103, 49);
+		btnNewButton.setBounds(199, 344, 111, 56);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNombre = new JLabel("NAME");

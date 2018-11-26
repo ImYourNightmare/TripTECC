@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.logic.management.ClientManagement;
-import com.logic.management.GraphManagement;
 import com.logic.objects.Client;
 import com.structures.tree.BinarySearchTree;
 import com.structures.tree.BinarySearchTree.*;
@@ -38,7 +37,6 @@ import javax.swing.JOptionPane;
 public class EntryWindow extends JFrame {
 	private static String password = "TRIPTEC"; //Contrasenna que se utiliza para utilizar las funciones de administrador
 	private ClientManagement clientManage = new ClientManagement();
-	private GraphManagement graphmanagement= new GraphManagement();
 	JPanel panel = new JPanel();
 	private JPanel contentPane;
 
@@ -100,14 +98,14 @@ public class EntryWindow extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (txtID.getText().equals(password)) {
-					new MainWindowClient(clientManage.getclients().searchClient(Integer.parseInt(txtID.getText())).getElement()).setVisible(true);
+					JOptionPane.showMessageDialog(panel, "Entra un administrador", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
 				}
 				else {
 					try {
 						int id = Integer.parseInt(txtID.getText());
 						BinarySearchTree<Client>.Node<Client> NodeClient = clientManage.getclients().searchClient(id);
 						if (NodeClient != null) {
-							new MainWindowClient(clientManage.getclients().searchClient(Integer.parseInt(txtID.getText())).getElement()).setVisible(true);
+							new MainWindowClient(clientManage).setVisible(true);
 						}
 						else {
 							JOptionPane.showMessageDialog(panel, "This client doesn't exist", "ERROR", JOptionPane.ERROR_MESSAGE);

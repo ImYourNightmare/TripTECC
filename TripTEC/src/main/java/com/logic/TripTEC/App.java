@@ -14,21 +14,60 @@ import com.structures.graph.Dijkstra;
 public class App 
 {
     public static void main( String[] args ) throws ApiException, InterruptedException, IOException{
-        API api = new API();
+        API place1 = new API();
+        API place2 = new API();
         
-        api.Test();
         
+        
+        place1.createPlaceName("Parque la sabana");
         new EntryWindow().setVisible(true);
+        place1.ConexionPlace();
+        //System.out.println(api.getPlace().getPlaceId());
+        place1.placeDetails(place1.getContext(), place1.getPlace().getPlaceId());
+        place1.Parse(place1.getData());
+        
+        System.out.println(place1.getPlace().toString());
+        
+        
+        
+
+        place2.createPlaceName("Parque morazan");
+        new EntryWindow().setVisible(true);
+        place2.ConexionPlace();        
+        //System.out.println(api.getPlace().getPlaceId());
+        place2.placeDetails(place2.getContext(), place2.getPlace().getPlaceId());
+        place2.Parse(place2.getData());
+        
+        System.out.println(place2.getPlace().toString());
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
         
         //api.getDriveDist(api.placeDetails(api.getContext(), api.getPlaceId()), api.placeDetails(api.getContext(), api.getDestiny());
         //api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
-        api.Parse(api.placeDetails(api.getContext(), api.getAddrTwo()));
+        //api.Parse(api.placeDetails(api.getContext(), api.getAddrTwo()));
+        //api.Parse(api.placeDetails(api.getContext(), api.getAddrOne()));
+
         
-        api.getDriveDist("place_id:"+api.getAddrOne(), "place_id:"+api.getAddrTwo());
+       // api.getDriveDist("place_id:"+api.getAddrOne(), "place_id:"+api.getAddrTwo());
         //System.out.println();
+       // api.getPlace().toString();
         
         //System.out.println(api.getAddrTwo());
         
