@@ -10,6 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import com.logic.management.GraphManagement;
+
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -24,27 +27,12 @@ public class GeneralGraphWindow extends JFrame {
 	private JTable tblMainRoute;
 	private JTable tblSearcher;
 	private JTextField txtSearch;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GeneralGraphWindow frame = new GeneralGraphWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private GraphManagement management;
 
 	/**
 	 * Create the frame.
 	 */
-	public GeneralGraphWindow() {
+	public GeneralGraphWindow(GraphManagement management) {
 		setTitle("Administration Window");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 924, 646);
@@ -59,6 +47,7 @@ public class GeneralGraphWindow extends JFrame {
 		lbltittle.setFont(new Font("OCR A Extended", Font.PLAIN, 25));
 		lbltittle.setBounds(179, 13, 250, 68);
 		contentPane.add(lbltittle);
+		this.management = management;
 		
 
 		
@@ -68,7 +57,7 @@ public class GeneralGraphWindow extends JFrame {
 		tblMainRoute.setColumnSelectionAllowed(true);
 		tblMainRoute.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"El manantial", "Muy lindo", "Nadar ", "2,5$", "Piscinas"},
+				{"", "", "", "", ""},
 				{null, null, null, null, null},
 				{null, null, null, null, null},
 				{null, null, null, null, null},
@@ -147,14 +136,14 @@ public class GeneralGraphWindow extends JFrame {
 		cmbDestinity.setBounds(658, 194, 154, 27);
 		contentPane.add(cmbDestinity);
 		
+		JLabel lblAddRoute = new JLabel("New label");
+		lblAddRoute.setBounds(658, 43, 56, 16);
+		contentPane.add(lblAddRoute);
+		
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setIcon(new ImageIcon(RegisterWindow.class.getResource("/com/images/live_to_travel_detail.jpg")));
 		lblBackground.setBounds(-127, -30, 1058, 666);
 		contentPane.add(lblBackground);
-		
-		JLabel lblAddRoute = new JLabel("New label");
-		lblAddRoute.setBounds(658, 43, 56, 16);
-		contentPane.add(lblAddRoute);
 		
 
 	}
