@@ -33,8 +33,10 @@ import java.awt.event.ActionEvent;
 import  javax.swing.JPanel;
 import javax.swing.JOptionPane;
 
+//Ventana inicial para acceder al programa
+
 public class EntryWindow extends JFrame {
-	private static String password = "TRIPTEC";
+	private static String password = "TRIPTEC"; //Contrasenna que se utiliza para utilizar las funciones de administrador
 	private ClientManagement clientManage = new ClientManagement();
 	private GraphManagement graphmanagement= new GraphManagement();
 	JPanel panel = new JPanel();
