@@ -15,7 +15,8 @@ public class BinarySearchTree<X extends Comparable<X>> implements Iterable<X> {
 	 *
 	 * @param <X>
 	 */
-	@SuppressWarnings("hiding") class Node<X> {
+	@SuppressWarnings("hiding")
+	public class Node<X> {
 		private X element;
 		private Node<X> left, right;
 

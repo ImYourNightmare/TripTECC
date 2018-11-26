@@ -23,7 +23,7 @@ public class AppMain {
 		String prueba = bst.getpreorder();
 		System.out.println(prueba);
 		
-
+		Object arreglo[]= {"a","b","c"};
 
 		FileOutputStream f = new FileOutputStream(new File("Usuarios.txt"));
 		ObjectOutputStream o = new ObjectOutputStream(f);
@@ -43,12 +43,20 @@ public class AppMain {
 		String pr2 = (String) oi.readObject();
 		String[] split = pr2.split("\n");
 		for (int i=0;i<=bst.getSize();i++) {
-			System.out.println(split[i]);
+			int cuantity=5;
+			for(int p=0;p<=cuantity;p++) {
+				
+			}
+			//System.out.println(split[i]);
 		}
 		//System.out.println(pr2);
 		oi.close();
 		fi.close();
 		//System.out.println(bst.searchClient(14));
 		//bst.posOrder();
+		int hola=9;
+		for(int g=0;g<hola;g++) {
+			
+		}
 	}
 }

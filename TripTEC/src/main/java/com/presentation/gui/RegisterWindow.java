@@ -6,11 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.logic.management.ClientManagement;
+import com.logic.objects.Client;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RegisterWindow extends JFrame {
 
@@ -19,6 +27,7 @@ public class RegisterWindow extends JFrame {
 	private JTextField txtId;
 	private JTextField txtPhone;
 	private JTextField txtBirth;
+	private ClientManagement manage;
 
 	/**
 	 * Launch the application.
@@ -26,12 +35,6 @@ public class RegisterWindow extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					RegisterWindow frame = new RegisterWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}
 		});
 	}
@@ -39,7 +42,7 @@ public class RegisterWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegisterWindow() {
+	public RegisterWindow(ClientManagement pManage) {
 		setTitle("Sing in window");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 523, 472);
@@ -47,6 +50,7 @@ public class RegisterWindow extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		manage = pManage;
 		
 		JLabel lblRegistro = new JLabel("SIGN IN");
 		lblRegistro.setFont(new Font("OCR A Extended", Font.PLAIN, 38));
@@ -74,6 +78,11 @@ public class RegisterWindow extends JFrame {
 		contentPane.add(txtBirth);
 		
 		JButton btnNewButton = new JButton("SIGN IN");
+		btnNewButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent event) {
+				registrar(event);
+			}
+		});
 		btnNewButton.setBounds(199, 344, 111, 56);
 		contentPane.add(btnNewButton);
 		
@@ -101,5 +110,20 @@ public class RegisterWindow extends JFrame {
 		lblBackground.setIcon(new ImageIcon(RegisterWindow.class.getResource("/com/images/white background.jpg")));
 		lblBackground.setBounds(-47, -39, 617, 517);
 		contentPane.add(lblBackground);
+	}
+	public void registrar(java.awt.event.ActionEvent event) {
+		if(txtName.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "THE NAME FIELD IS OBLIGATORY");
+		}else if(txtId.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "THE ID FIELD IS OBLIGATORY");
+		}else if(txtPhone.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "THE PHONE FIELD IS OBLIGATORY");
+		}else if(txtBirth.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "THE BIRTHDATE FIELD IS OBLIGATORY");
+		}else {
+			Client client = new Client(txtName.getText(), txtBirth.getText() ,Integer.valueOf(txtId.getText()), txtPhone.getText());
+			manage.addclients(client);
+			JOptionPane.showMessageDialog(null, "Succesfull Registration");
+		}
 	}
 }

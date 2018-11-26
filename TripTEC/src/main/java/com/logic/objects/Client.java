@@ -64,6 +64,6 @@ public class Client implements Comparable<Client> {
 	}
 
 	public String toString() {
-		return "["+"ID:"+this.id+" "+"Name:"+" "+this.name+" "+"Phone:"+this.phone+" "+"Birthdate:"+this.birthdate+"]";
+		return this.id+" "+" "+this.name+" "+this.phone+" "+this.birthdate;
 	}
 }
