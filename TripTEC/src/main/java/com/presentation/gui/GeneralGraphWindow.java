@@ -10,6 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import com.logic.management.ClientManagement;
+
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -24,6 +27,7 @@ public class GeneralGraphWindow extends JFrame {
 	private JTable tblMainRoute;
 	private JTable tblSearcher;
 	private JTextField txtSearch;
+	private ClientManagement manage;
 
 	/**
 	 * Launch the application.
@@ -31,28 +35,22 @@ public class GeneralGraphWindow extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					GeneralGraphWindow frame = new GeneralGraphWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
 		});
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public GeneralGraphWindow() {
+	public GeneralGraphWindow(ClientManagement pManage) {
 		setTitle("Administration Window");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 924, 646);
+		manage = pManage;
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		JLabel lbltittle = new JLabel("Main Route");
+		JLabel lbltittle = new JLabel("MAIN TOUR");
 		lbltittle.setHorizontalAlignment(SwingConstants.CENTER);
 		lbltittle.setBackground(Color.BLACK);
 		lbltittle.setForeground(Color.WHITE);
@@ -88,7 +86,7 @@ public class GeneralGraphWindow extends JFrame {
 		
 
 		
-		JLabel lblsearch = new JLabel("Searcher");
+		JLabel lblsearch = new JLabel("SEARCHER");
 		lblsearch.setHorizontalAlignment(SwingConstants.CENTER);
 		lblsearch.setForeground(Color.WHITE);
 		lblsearch.setFont(new Font("OCR A Extended", Font.PLAIN, 25));
@@ -140,21 +138,40 @@ public class GeneralGraphWindow extends JFrame {
 		contentPane.add(btnAdd);
 		
 		JComboBox cmbStart = new JComboBox();
-		cmbStart.setBounds(658, 114, 154, 27);
+		cmbStart.setBounds(644, 114, 168, 27);
 		contentPane.add(cmbStart);
 		
 		JComboBox cmbDestinity = new JComboBox();
-		cmbDestinity.setBounds(658, 194, 154, 27);
+		cmbDestinity.setBounds(644, 194, 168, 27);
 		contentPane.add(cmbDestinity);
+		
+		JLabel lblAddRoute = new JLabel("ADD ROUTE");
+		lblAddRoute.setForeground(Color.WHITE);
+		lblAddRoute.setFont(new Font("OCR A Extended", Font.PLAIN, 25));
+		lblAddRoute.setBounds(649, 28, 145, 38);
+		contentPane.add(lblAddRoute);
+		
+		JLabel lblStart = new JLabel("START");
+		lblStart.setForeground(Color.WHITE);
+		lblStart.setFont(new Font("Sitka Text", Font.PLAIN, 22));
+		lblStart.setBounds(685, 80, 77, 38);
+		contentPane.add(lblStart);
+		
+		JLabel lblDestinity = new JLabel("DESTINITY");
+		lblDestinity.setForeground(Color.WHITE);
+		lblDestinity.setFont(new Font("Sitka Text", Font.PLAIN, 22));
+		lblDestinity.setBounds(668, 155, 126, 38);
+		contentPane.add(lblDestinity);
+		
+		JButton btnAddRoute = new JButton("ADD ROUTE");
+		btnAddRoute.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
+		btnAddRoute.setBounds(666, 234, 128, 37);
+		contentPane.add(btnAddRoute);
 		
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setIcon(new ImageIcon(RegisterWindow.class.getResource("/com/images/live_to_travel_detail.jpg")));
 		lblBackground.setBounds(-127, -30, 1058, 666);
 		contentPane.add(lblBackground);
-		
-		JLabel lblAddRoute = new JLabel("New label");
-		lblAddRoute.setBounds(658, 43, 56, 16);
-		contentPane.add(lblAddRoute);
 		
 
 	}

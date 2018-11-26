@@ -96,7 +96,7 @@ public class EntryWindow extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (txtID.getText().equals(password)) {
-					JOptionPane.showMessageDialog(panel, "Entra un administrador", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
+					new GeneralGraphWindow(clientManage).setVisible(true);;
 				}
 				else {
 					try {
