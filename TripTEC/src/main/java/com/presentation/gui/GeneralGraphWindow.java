@@ -13,6 +13,8 @@ import javax.swing.table.DefaultTableModel;
 
 import com.logic.management.ClientManagement;
 import com.logic.management.GraphManagement;
+import com.logic.objects.Place;
+import com.logic.placesmanagement.API;
 
 import java.awt.Font;
 import java.awt.Color;
@@ -21,6 +23,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JSpinner;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GeneralGraphWindow extends JFrame {
 
@@ -29,6 +33,9 @@ public class GeneralGraphWindow extends JFrame {
 	private JTable tblSearcher;
 	private JTextField txtSearch;
 	private GraphManagement management;
+	private JTextField txtID;
+	private static DefaultTableModel model = new DefaultTableModel();
+	private static DefaultTableModel model2 = new DefaultTableModel();
 
 	/**
 	 * Create the frame.
@@ -56,23 +63,7 @@ public class GeneralGraphWindow extends JFrame {
 		tblMainRoute.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		tblMainRoute.setCellSelectionEnabled(true);
 		tblMainRoute.setColumnSelectionAllowed(true);
-		tblMainRoute.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"", "", "", "", ""},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column", "New column", "New column"
-			}
-		));
+		tblMainRoute.setModel(model);
 		tblMainRoute.setBounds(34, 82, 542, 139);
 		contentPane.add(tblMainRoute);
 
@@ -87,24 +78,8 @@ public class GeneralGraphWindow extends JFrame {
 		contentPane.add(lblsearch);
 
 		tblSearcher = new JTable();
+		tblSearcher.setModel(model2);
 		tblSearcher.setFont(new Font("Sitka Text", Font.PLAIN, 15));
-		tblSearcher.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column", "New column", "New column"
-			}
-		));
 		tblSearcher.setBounds(34, 380, 542, 139);
 		contentPane.add(tblSearcher);
 
@@ -115,25 +90,40 @@ public class GeneralGraphWindow extends JFrame {
 		txtSearch.setColumns(10);
 
 		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new java.awt.event.ActionListener(){
+			public void actionPerformed(java.awt.event.ActionEvent event) {
+				search(event);
+			}
+		});
 		btnSearch.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnSearch.setBounds(487, 328, 89, 39);
 		contentPane.add(btnSearch);
 
 		JButton btnRemove = new JButton("REMOVE");
+		btnRemove.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent event) {
+				remove(event);
+			}
+		});
 		btnRemove.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnRemove.setBounds(253, 234, 101, 37);
 		contentPane.add(btnRemove);
 
 		JButton btnAdd = new JButton("ADD");
+		btnAdd.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent event) {
+				add(event);
+			}
+		});
 		btnAdd.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
-		btnAdd.setBounds(253, 532, 101, 37);
+		btnAdd.setBounds(194, 530, 101, 37);
 		contentPane.add(btnAdd);
 
-		JComboBox cmbStart = new JComboBox();
+		JComboBox<Place> cmbStart = new JComboBox<Place>();
 		cmbStart.setBounds(644, 114, 168, 27);
 		contentPane.add(cmbStart);
 
-		JComboBox cmbDestinity = new JComboBox();
+		JComboBox<Place> cmbDestinity = new JComboBox<Place>();
 		cmbDestinity.setBounds(644, 194, 168, 27);
 		contentPane.add(cmbDestinity);
 
@@ -159,12 +149,40 @@ public class GeneralGraphWindow extends JFrame {
 		btnAddRoute.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnAddRoute.setBounds(666, 234, 128, 37);
 		contentPane.add(btnAddRoute);
-
+		
+		txtID = new JTextField();
+		txtID.setFont(new Font("Sitka Text", Font.PLAIN, 15));
+		txtID.setColumns(10);
+		txtID.setBounds(365, 530, 211, 33);
+		contentPane.add(txtID);
+		
+		JLabel lblID = new JLabel("ID:");
+		lblID.setHorizontalAlignment(SwingConstants.CENTER);
+		lblID.setForeground(Color.WHITE);
+		lblID.setFont(new Font("OCR A Extended", Font.PLAIN, 25));
+		lblID.setBackground(Color.BLACK);
+		lblID.setBounds(305, 527, 63, 37);
+		contentPane.add(lblID);
+		
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setIcon(new ImageIcon(RegisterWindow.class.getResource("/com/images/live_to_travel_detail.jpg")));
 		lblBackground.setBounds(-127, -30, 1058, 666);
 		contentPane.add(lblBackground);
+		
 
-
+	}
+	public void remove(java.awt.event.ActionEvent event){
+		
+	}
+	public void search(java.awt.event.ActionEvent event) {
+		API api = new API();
+		api.
+	}
+	public void add(java.awt.event.ActionEvent event) {
+		int x = tblSearcher.getSelectedColumn();
+		int y = tblSearcher.getSelectedRow();
+		Place place = (Place) tblSearcher.getValueAt(y, x);
+		management.addplace(place,txtID.getText());
+		model.addRow(new Place[] {place});
 	}
 }
