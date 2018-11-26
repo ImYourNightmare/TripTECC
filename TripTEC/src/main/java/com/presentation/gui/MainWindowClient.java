@@ -21,20 +21,29 @@ import com.logic.objects.Client;
 import javax.swing.JSpinner;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class MainWindowClient extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tblRoute;
 	private JTable tblClientRoute;
-	private Client client;
+	private ClientManagement manage;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public MainWindowClient(Client Client) {
+	public MainWindowClient(ClientManagement pClientManage) {
 		setTitle("Main Window - Client");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 899, 629);
@@ -42,13 +51,9 @@ public class MainWindowClient extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		this.client = client;
+		manage = pClientManage;
 		
 		JButton btnSignOut = new JButton("SIGN OUT");
-		btnSignOut.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnSignOut.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnSignOut.setBounds(757, 320, 97, 49);
 		contentPane.add(btnSignOut);
@@ -56,11 +61,11 @@ public class MainWindowClient extends JFrame {
 		tblClientRoute = new JTable();
 		tblClientRoute.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"", "", ""},
-				{"", "", ""},
-				{"", "", ""},
-				{"", "", ""},
-				{"", "", null},
+				{"Tecnologico de Costa Rica", "university", "Cartago, Costa Rica"},
+				{"basilica de los angeles", "church", "Cartago, Costa Rica"},
+				{"Estadio Nacional", "Stadium", "San Jose, Costa Rica"},
+				{"Parque la sabana", "park", ""},
+				{"El manantial", "pool", null},
 				{null, null, null},
 				{null, null, null},
 				{null, null, null},
@@ -98,9 +103,9 @@ public class MainWindowClient extends JFrame {
 		tblRoute = new JTable();
 		tblRoute.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"", "", ""},
-				{"", "", ""},
-				{"", "", ""},
+				{"0", "basililca de los angeles", "0.0km"},
+				{"1", "Tecnologico de Costa Rica", "0.8km"},
+				{"2", "Estadio NacionalC", "27.5km"},
 				{null, null, null},
 				{null, null, null},
 				{null, null, null},

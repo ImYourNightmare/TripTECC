@@ -40,7 +40,7 @@ public class GeneralGraphWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GeneralGraphWindow(GraphManagement management) {
+	public GeneralGraphWindow() {
 		setTitle("Administration Window");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 924, 646);
@@ -48,14 +48,13 @@ public class GeneralGraphWindow extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		JLabel lbltittle = new JLabel("MAIN TOUR");
+		JLabel lbltittle = new JLabel("Main Route");
 		lbltittle.setHorizontalAlignment(SwingConstants.CENTER);
 		lbltittle.setBackground(Color.BLACK);
 		lbltittle.setForeground(Color.WHITE);
 		lbltittle.setFont(new Font("OCR A Extended", Font.PLAIN, 25));
 		lbltittle.setBounds(179, 13, 250, 68);
 		contentPane.add(lbltittle);
-		this.management = management;
 
 
 
@@ -69,7 +68,7 @@ public class GeneralGraphWindow extends JFrame {
 
 
 
-		JLabel lblsearch = new JLabel("SEARCHER");
+		JLabel lblsearch = new JLabel("Searcher");
 		lblsearch.setHorizontalAlignment(SwingConstants.CENTER);
 		lblsearch.setForeground(Color.WHITE);
 		lblsearch.setFont(new Font("OCR A Extended", Font.PLAIN, 25));
@@ -149,13 +148,13 @@ public class GeneralGraphWindow extends JFrame {
 		btnAddRoute.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnAddRoute.setBounds(666, 234, 128, 37);
 		contentPane.add(btnAddRoute);
-		
+
 		txtID = new JTextField();
 		txtID.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		txtID.setColumns(10);
 		txtID.setBounds(365, 530, 211, 33);
 		contentPane.add(txtID);
-		
+
 		JLabel lblID = new JLabel("ID:");
 		lblID.setHorizontalAlignment(SwingConstants.CENTER);
 		lblID.setForeground(Color.WHITE);
@@ -163,16 +162,16 @@ public class GeneralGraphWindow extends JFrame {
 		lblID.setBackground(Color.BLACK);
 		lblID.setBounds(305, 527, 63, 37);
 		contentPane.add(lblID);
-		
+
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setIcon(new ImageIcon(RegisterWindow.class.getResource("/com/images/live_to_travel_detail.jpg")));
 		lblBackground.setBounds(-127, -30, 1058, 666);
 		contentPane.add(lblBackground);
-		
+
 
 	}
 	public void remove(java.awt.event.ActionEvent event){
-		
+
 	}
 	public void search(java.awt.event.ActionEvent event) {
 		API api = new API();
