@@ -31,7 +31,7 @@ public class App
         //api.Parse(api.placeDetails(api.getContext(), api.getPlaceId()));
         api.Parse(api.placeDetails(api.getContext(), api.getAddrTwo()));
         
-        api.getDriveDist("place_Id:"+api.getAddrOne(), "place_Id:"+api.getAddrTwo());
+        api.getDriveDist("place_id:"+api.getAddrOne(), "place_id:"+api.getAddrTwo());
         //System.out.println();
         
         //System.out.println(api.getAddrTwo());

@@ -120,8 +120,17 @@ public class API {
 		
 		
 		placeId = results[0].placeId;
+		
 		addrOne = results[0].placeId;
 		addrTwo = results2[0].placeId;
+		//addrTwo = results2[0].addressComponents[0].longName;
+		//addrTwo = results2[0].formattedAddress;
+		//addrTwo = results2[0].formattedAddress;
+		
+		
+		
+		//System.out.println(addrTwo = results2[0].addressComponents[0].longName);
+		
 		//place.
 
 		
@@ -133,14 +142,15 @@ public class API {
 		gson = new GsonBuilder().setPrettyPrinting().create();
 		
 		//System.out.println(gson.toJson(request.await()));
-		data = gson.toJson(request.await());
+		data = gson.toJson(request.await());//Se guarda el codigo json en data para luego parsear el codigo
 		
 		System.out.println(data);
 		return data;
+		
 		}
 	
 
-	/*public DistanceMatrixElement getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
+	public void getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
 	
 		
 		System.out.println();
@@ -149,7 +159,10 @@ public class API {
 			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")
 			    .build();
 	   	
-	   	DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(distCalcer); 
+	   	
+	   	
+	   		DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(distCalcer); 
+	   	
 	       DistanceMatrix result = req.origins(addrOne)
 	               .destinations(addrTwo)
 	               .mode(TravelMode.DRIVING)
@@ -157,19 +170,30 @@ public class API {
 	               .language("en-US")
 	               .await();
 	       
-	       String[] hola = result.destinationAddresses;
+	       //String[] hola = result.destinationAddresses;
 	       
 				DistanceMatrixElement distApart = result.rows[0].elements[0];
 				
 				System.out.println(distApart.toString());
 				
 				System.out.println(distApart.distance.toString());
+				System.out.println(distApart.duration.toString());
+				//System.out.println(distApart.durationInTraffic.toString());
+
+
 				
-		return distApart;
-	}*/
+				
+				
+		
 	
 	
-	public void getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
+
+	}
+	   	
+	
+	
+	
+	/*public void getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
 		
 		//set up key
 	   	GeoApiContext distCalcer = new GeoApiContext.Builder()
@@ -187,7 +211,7 @@ public class API {
 				long distApart = result.rows[0].elements[0].distance.inMeters;
 		
 		System.out.println(distApart);
-	}
+	}*/
 	public void  Parse(String data) {
 		
 		final String dataD= data;
