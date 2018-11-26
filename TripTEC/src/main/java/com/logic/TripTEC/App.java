@@ -13,11 +13,7 @@ import com.structures.graph.Dijkstra;
 
 public class App 
 {
-    public static void main( String[] args ) throws ApiException, InterruptedException, IOException
-    {
-    	
-    	
-    	
+    public static void main( String[] args ) throws ApiException, InterruptedException, IOException{
         API api = new API();
         
         api.Test();
