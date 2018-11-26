@@ -40,8 +40,6 @@ import java.time.Instant;
 
 
 public class API {
-	
-	
 	//Atributos de la clases
 	GeoApiContext context;
 	Gson gson;
@@ -110,18 +108,31 @@ public class API {
 		this.destiny = destiny;
 	}
 	
-	
+	public void createPlaceDetails(String namePlace) {
+		
+		
+		
+	}
 	
 	public void Test() throws ApiException, InterruptedException, IOException {
 		context = new GeoApiContext.Builder().apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0").build();
 		GeocodingResult[] results =  GeocodingApi.geocode(context,"tecnologico de costa rica").await();
-		GeocodingResult[] results2 =  GeocodingApi.geocode(context,"basilica de los angeles").await();
+		GeocodingResult[] results2 =  GeocodingApi.geocode(context,"9.932871,-84.079453").await();
 		// GeocodingApi.geocode(context, "hotel barcelo");
 		
 		
 		placeId = results[0].placeId;
+		
 		addrOne = results[0].placeId;
 		addrTwo = results2[0].placeId;
+		//addrTwo = results2[0].addressComponents[0].longName;
+		//addrTwo = results2[0].formattedAddress;
+		//addrTwo = results2[0].formattedAddress;
+		
+		
+		
+		//System.out.println(addrTwo = results2[0].addressComponents[0].longName);
+		
 		//place.
 
 		
@@ -131,16 +142,13 @@ public class API {
 		PlaceDetailsRequest request = new PlaceDetailsRequest(context);
 		request.placeId(placeId);
 		gson = new GsonBuilder().setPrettyPrinting().create();
-		
 		//System.out.println(gson.toJson(request.await()));
-		data = gson.toJson(request.await());
-		
+		data = gson.toJson(request.await());//Se guarda el codigo json en data para luego parsear el codigo	
 		System.out.println(data);
 		return data;
 		}
 	
-
-	/*public DistanceMatrixElement getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
+	public void getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
 	
 		
 		System.out.println();
@@ -149,7 +157,10 @@ public class API {
 			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")
 			    .build();
 	   	
-	   	DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(distCalcer); 
+	   	
+	   	
+	   		DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(distCalcer); 
+	   	
 	       DistanceMatrix result = req.origins(addrOne)
 	               .destinations(addrTwo)
 	               .mode(TravelMode.DRIVING)
@@ -157,43 +168,41 @@ public class API {
 	               .language("en-US")
 	               .await();
 	       
-	       String[] hola = result.destinationAddresses;
+	       //String[] hola = result.destinationAddresses;
 	       
 				DistanceMatrixElement distApart = result.rows[0].elements[0];
 				
 				System.out.println(distApart.toString());
+				String textD = distApart.distance.toString();
+				String textT = distApart.duration.toString();
 				
-				System.out.println(distApart.distance.toString());
 				
-		return distApart;
-	}*/
+				String []  distAnce = textD. split(" ");
+				String []  time = textT. split(" ");
+				
+				System.out.println(distAnce[0]);
+				int d = Integer.parseInt(distAnce[0]);
+				System.out.println(time[0]);
+				
+				
+				
+				System.out.println(distApart.duration.toString()+"\n");
+				//System.out.println(distApart.durationInTraffic.toString());
+
+
+				
+				
+				
+		
 	
 	
-	public void getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
-		
-		//set up key
-	   	GeoApiContext distCalcer = new GeoApiContext.Builder()
-			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")
-			    .build();
-	   	
-	   	DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(distCalcer); 
-	       DistanceMatrix result = req.origins(addrOne)
-	               .destinations(addrTwo)
-	               .mode(TravelMode.DRIVING)
-	               .avoid(RouteRestriction.TOLLS)
-	               .language("en-US")
-	               .await();
-	       
-				long distApart = result.rows[0].elements[0].distance.inMeters;
-		
-		System.out.println(distApart);
+
 	}
+	
 	public void  Parse(String data) {
 		
 		final String dataD= data;
-		
-				
-		//Try para poder obtener del código json los diferentes datos del lugar
+		// Se hace un Try y execpt para poder obtener del código json los diferentes datos del lugar
 		//Try para obtener el website del lugar 
 		try {
 			final String regex = "\"website\": ([\\a-zA-Z].*),";//SE busca los carácteres que puedan obetner dol website
@@ -271,8 +280,7 @@ public class API {
 			final String regex = "\"internationalPhoneNumber\": ([\\a-ZA-Z]*),";
 							
 			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-			final Matcher matcher = pattern.matcher(dataD);
-							
+			final Matcher matcher = pattern.matcher(dataD);			
 			while (matcher.find()) {
 			    //System.out.println("Full match: " + matcher.group(0));
 				for (int i = 1; i <= matcher.groupCount(); i++) {
@@ -281,18 +289,15 @@ public class API {
 					}
 					break;			
 			}
-							
 			}catch(Exception e) {
 				place.setPhoneNumber("NO ENCONTRADO");			
 						}		
-		
 		//Se obtiene el rating del lugar
 		try {
 			final String regex = "\"rating\": ([\\d].[\\d])";
 							
 			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-			final Matcher matcher = pattern.matcher(dataD);
-								
+			final Matcher matcher = pattern.matcher(dataD);	
 			while (matcher.find()) {
 			    //System.out.println("Full match: " + matcher.group(0));
 				for (int i = 1; i <= matcher.groupCount(); i++) {
@@ -300,21 +305,16 @@ public class API {
 					place.setRating((matcher.group(i)));
 					}
 					break;
-							
 			}				
 					}catch(Exception e) {
 						place.setRating(null);			
-								}
-				
-				
-				
+								}			
 		//Se obtiene el addres del lugar
 		try {
 			final String regex = "\"formattedAddress\": ([\\a-zA-Z].*),";
-							
+			
 			final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-			final Matcher matcher = pattern.matcher(dataD);
-										
+			final Matcher matcher = pattern.matcher(dataD);			
 			while (matcher.find()) {
 			    //System.out.println("Full match: " + matcher.group(0));
 				for (int i = 1; i <= matcher.groupCount(); i++) {
@@ -322,17 +322,10 @@ public class API {
 					place.setAddres((matcher.group(i)));
 					}
 					break;
-								
 			}				
 					}catch(Exception e) {
 						place.setAddres(null);			
-								}
-		
-		
-		
-		
-						
-						
+								}					
 		//Se obtiene el tipo de lugar
 		try {
 			final String regex = "\"types\": (.*[\\a-z].*),";
@@ -346,16 +339,11 @@ public class API {
 					//System.out.println(matcher.group(i));
 					
 					place.setPlaceActivities((matcher.group(i)) + "]");
-					}
-				
-				
-									
+					}			
 			}				
 					}catch(Exception e) {
 						place.setPlaceActivities(null);			
 						}
-		
-		
 		//Se extrae el tipo de lugar
 		try {
 			final String regex = "\"weekdayText\":(.*.*\\n.*\\n.*\\n.*\\n.*\\n.*\\n.*\\n.*)";
@@ -368,21 +356,13 @@ public class API {
 				for (int i = 1; i <= matcher.groupCount(); i++) {
 					System.out.println(matcher.group(i));
 					place.setSchedule((matcher.group(i)));
-					}
-					
-								
+					}								
 			}				
 					}catch(Exception e) {
 						place.setSchedule(null);			
 								}
-		
-		
-		
 		System.out.println(place.toString());
-		
-						
-		
-	}
+}
 	
 	
 	
