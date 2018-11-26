@@ -145,13 +145,17 @@ public class Place {
 
 	@Override
 	//Funcion utilizada para convertir la clase a Strings
+	/*
 	public String toString() {
 		return "Place [latitude=" + latitude + ", lenght=" + lenght + ", addres=" + addres + ", placeName=" + placeName
 				+ ", placeActivities=" + placeActivities + ", website=" + website + ", phoneNumber=" + phoneNumber
 				+ ", rating=" + rating + ", schedule=" + schedule + ", description=" + description + ", activities="
 				+ activities + ", price=" + price + ", placeId=" + placeId + "]";
 	}
-
+	*/
+	public String toString() {
+		return this.placeName;
+	}
 
 
 

@@ -32,9 +32,9 @@ public class GraphManagement {
 	 * @param destinationID lugar destino
 	 * @param distance distancia entre el lugar de origen y el de destino
 	 */
-	public void addroad(String id,int OriginID,int destinationID,double distance) {
-		manager.newEdge(id, OriginID, destinationID, distance);
-		graph.setEdges(manager.getEdges());
+	public void addroad(String id,Vertex<Object> OriginVertex,Vertex<Object> DestinyVertex,double distance) {
+		Edge edge = new Edge(id, OriginVertex, DestinyVertex, distance);
+		graph.getEdges().add(edge);
 	}
 	/**metodo para remover un lugar de un grafo
 	 * @param vertex vertice del lugar que se quiere remover

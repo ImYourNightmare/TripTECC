@@ -9,7 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.logic.management.ClientManagement;
+import com.logic.management.GraphManagement;
 import com.logic.objects.Client;
+import com.logic.objects.Place;
 import com.structures.tree.BinarySearchTree;
 import com.structures.tree.BinarySearchTree.*;
 
@@ -37,8 +39,10 @@ import javax.swing.JOptionPane;
 public class EntryWindow extends JFrame {
 	private static String password = "TRIPTEC"; //Contrasenna que se utiliza para utilizar las funciones de administrador
 	private ClientManagement clientManage = new ClientManagement();
+	private GraphManagement management = new GraphManagement();
 	JPanel panel = new JPanel();
 	private JPanel contentPane;
+	final TextField txtID = new TextField();
 
 	/**
 	 * Launch the application.
@@ -88,7 +92,7 @@ public class EntryWindow extends JFrame {
 		contentPane.add(lblParaEjecutarLas);
 		contentPane.add(lblIngreseSuId);
 
-		final TextField txtID = new TextField();
+		
 		txtID.setFont(new Font("Sitka Text", Font.PLAIN, 15));
 		txtID.setBounds(133, 139, 315, 40);
 		contentPane.add(txtID);
@@ -98,14 +102,29 @@ public class EntryWindow extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (txtID.getText().equals(password)) {
-					JOptionPane.showMessageDialog(panel, "Entra un administrador", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
+					GeneralGraphWindow window = new GeneralGraphWindow(management);
+					window.getmodel().setRowCount(0);
+					window.getmodel().setColumnCount(2);
+					window.getmodel2().setRowCount(0);
+					window.getmodel2().setColumnCount(1);
+					for(int i = 0; i < management.getGraph().getVertices().size();i++) {
+						window.getmodel().addRow(new Object[] {management.getGraph().getVertices().get(i),String.valueOf(i)});
+						window.getCmbDestinity().addItem((Place) management.getGraph().getVertices().get(i).getElement());
+						window.getCmbStart().addItem((Place) management.getGraph().getVertices().get(i).getElement());
+					}
+					window.setVisible(true);
 				}
 				else {
 					try {
 						int id = Integer.parseInt(txtID.getText());
 						BinarySearchTree<Client>.Node<Client> NodeClient = clientManage.getclients().searchClient(id);
 						if (NodeClient != null) {
-							new MainWindowClient(clientManage).setVisible(true);
+							GeneralGraphWindow window2 = new GeneralGraphWindow(management);
+							MainWindowClient window = new MainWindowClient(clientManage,txtID.getText());
+							window.setmodel2(window2.getmodel());
+							window.getmodel().setRowCount(0);
+							window.getmodel().setColumnCount(2);
+							window.setVisible(true);
 						}
 						else {
 							JOptionPane.showMessageDialog(panel, "This client doesn't exist", "ERROR", JOptionPane.ERROR_MESSAGE);

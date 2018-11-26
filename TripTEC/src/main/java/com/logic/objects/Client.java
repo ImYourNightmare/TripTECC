@@ -15,7 +15,7 @@ public class Client implements Comparable<Client> {
 		this.birthdate = birthdate;
 		this.id = id;
 		this.phone = phone;
-		this.graph = null;
+		this.graph = new Graph();;
 	}
 
 	public Graph getGraph() {
