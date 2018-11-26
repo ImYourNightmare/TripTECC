@@ -32,17 +32,6 @@ public class MainWindowClient extends JFrame {
 	private Client client;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public MainWindowClient(Client Client) {
