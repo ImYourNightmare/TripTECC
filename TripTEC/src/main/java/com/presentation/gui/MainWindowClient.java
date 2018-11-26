@@ -15,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
 
+import com.logic.management.ClientManagement;
 import com.logic.objects.Client;
 
 import javax.swing.JSpinner;
@@ -25,6 +26,7 @@ public class MainWindowClient extends JFrame {
 	private JPanel contentPane;
 	private JTable tblRoute;
 	private JTable tblClientRoute;
+	private ClientManagement manage;
 
 	/**
 	 * Launch the application.
@@ -40,7 +42,7 @@ public class MainWindowClient extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainWindowClient(Client pClient) {
+	public MainWindowClient(ClientManagement pClientManage) {
 		setTitle("Main Window - Client");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 899, 540);
@@ -48,6 +50,7 @@ public class MainWindowClient extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		manage = pClientManage;
 		
 		JButton btnSignOut = new JButton("SIGN OUT");
 		btnSignOut.setFont(new Font("OCR A Extended", Font.PLAIN, 14));

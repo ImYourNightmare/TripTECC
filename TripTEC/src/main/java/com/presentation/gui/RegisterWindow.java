@@ -27,7 +27,7 @@ public class RegisterWindow extends JFrame {
 	private JTextField txtId;
 	private JTextField txtPhone;
 	private JTextField txtBirth;
-	private ClientManagement manage = new ClientManagement();
+	private ClientManagement manage;
 
 	/**
 	 * Launch the application.
@@ -35,12 +35,6 @@ public class RegisterWindow extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					RegisterWindow frame = new RegisterWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}
 		});
 	}
@@ -48,7 +42,7 @@ public class RegisterWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegisterWindow() {
+	public RegisterWindow(ClientManagement pManage) {
 		setTitle("Sing in window");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 523, 472);
@@ -56,6 +50,7 @@ public class RegisterWindow extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		manage = pManage;
 		
 		JLabel lblRegistro = new JLabel("SIGN IN");
 		lblRegistro.setFont(new Font("OCR A Extended", Font.PLAIN, 38));

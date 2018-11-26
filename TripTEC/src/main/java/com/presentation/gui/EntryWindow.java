@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.logic.management.ClientManagement;
 import com.logic.objects.Client;
 import com.structures.tree.BinarySearchTree;
 import com.structures.tree.BinarySearchTree.*;
@@ -33,7 +34,7 @@ import javax.swing.JOptionPane;
 
 public class EntryWindow extends JFrame {
 	private static String password = "TRIPTEC";
-	private BinarySearchTree<Client> binTree = new BinarySearchTree<Client>();
+	private ClientManagement clientManage = new ClientManagement();
 	JPanel panel = new JPanel();
 	private JPanel contentPane;
 
@@ -100,9 +101,9 @@ public class EntryWindow extends JFrame {
 				else {
 					try {
 						int id = Integer.parseInt(txtID.getText());
-						BinarySearchTree<Client>.Node<Client> NodeClient = binTree.searchClient(id);
+						BinarySearchTree<Client>.Node<Client> NodeClient = clientManage.getclients().searchClient(id);
 						if (NodeClient != null) {
-							new MainWindowClient((Client)NodeClient.getElement()).setVisible(true);
+							new MainWindowClient(clientManage).setVisible(true);
 						}
 						else {
 							JOptionPane.showMessageDialog(panel, "Cliente no registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -120,7 +121,7 @@ public class EntryWindow extends JFrame {
 		JButton btnSingIn = new JButton("Sign in");
 		btnSingIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new RegisterWindow().setVisible(true);
+				new RegisterWindow(clientManage).setVisible(true);
 			}
 		});
 		btnSingIn.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
