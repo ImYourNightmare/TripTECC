@@ -98,7 +98,7 @@ public class EntryWindow extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (txtID.getText().equals(password)) {
-					new GeneralGraphWindow(clientManage).setVisible(true);;
+					new MainWindowClient(clientManage.getclients().searchClient(Integer.parseInt(txtID.getText())).getElement()).setVisible(true);
 				}
 				else {
 					try {
