@@ -20,19 +20,18 @@ public class AppMain {
 		bst.insertNode(cliente5);
 		//Client cliente5 = bst.searchNode(cliente1); // Se extrae un cliente del árbol para clonar un usuario
 		bst.preOrder();
-		String prueba = bst.getpreorder();
+		String Ordering = bst.getpreorder();
 		//System.out.println(prueba);
-
-		FileOutputStream f = new FileOutputStream(new File("Usuarios.txt"));
-		ObjectOutputStream o = new ObjectOutputStream(f);
-		String data="";
+		
+		FileOutputStream create = new FileOutputStream(new File("Usuarios.txt"));
+		ObjectOutputStream o = new ObjectOutputStream(create);
 		// Write objects to file
 		
-		o.writeObject(prueba);
+		o.writeObject(Ordering);
 
 		o.close();
-		f.close();
-
+		create.close();
+		//leer el archivo txt
 		FileInputStream fi = new FileInputStream(new File("Usuarios.txt"));
 		ObjectInputStream oi = new ObjectInputStream(fi);
 
