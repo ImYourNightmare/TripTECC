@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import com.logic.management.ClientManagement;
+import com.logic.management.GraphManagement;
 
 import java.awt.Font;
 import java.awt.Color;
@@ -27,17 +28,7 @@ public class GeneralGraphWindow extends JFrame {
 	private JTable tblMainRoute;
 	private JTable tblSearcher;
 	private JTextField txtSearch;
-	private ClientManagement manage;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-		}
-			});
-	}
+	private GraphManagement management;
 
 	/**
 	 * Create the frame.
@@ -46,7 +37,6 @@ public class GeneralGraphWindow extends JFrame {
 		setTitle("Administration Window");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 924, 646);
-		manage = pManage;
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
