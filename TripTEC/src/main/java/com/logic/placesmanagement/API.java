@@ -314,6 +314,7 @@ public class API{
 				
 				
 				String textD = distApart.distance.toString();//se obtione en string la distancia
+				System.out.println(textD);
 				long textT = distApart.duration.inSeconds;//se obtiene la duracion en segundos en tipo de dato long
 				
 				/*
