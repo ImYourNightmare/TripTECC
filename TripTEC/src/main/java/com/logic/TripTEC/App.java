@@ -14,14 +14,17 @@ import com.structures.graph.Dijkstra;
 public class App 
 {
     public static void main( String[] args ) throws ApiException, InterruptedException, IOException{
-        API place1 = new API();
+        
+    	new EntryWindow().setVisible(true);
+    	
+    	API place1 = new API();
         API place2 = new API();
+       
         
         
-        
-        place1.createPlaceName("Parque la sabana");
-        new EntryWindow().setVisible(true);
-        place1.ConexionPlace();
+        place1.createPlaceName("Parque la sabana");//Se puede ingresar las coordenadas o nombre
+       
+        place1.ConexionPlace(); 
         //System.out.println(api.getPlace().getPlaceId());
         place1.placeDetails(place1.getContext(), place1.getPlace().getPlaceId());
         place1.Parse(place1.getData());
@@ -32,13 +35,17 @@ public class App
         
 
         place2.createPlaceName("Parque morazan");
-        new EntryWindow().setVisible(true);
+        
         place2.ConexionPlace();        
         //System.out.println(api.getPlace().getPlaceId());
         place2.placeDetails(place2.getContext(), place2.getPlace().getPlaceId());
         place2.Parse(place2.getData());
         
+        
         System.out.println(place2.getPlace().toString());
+        place1.getDriveDist("place_id:"+place1.getPlaceId(), "place_id:"+place2.getPlaceId());
+      
+        
         
         
         

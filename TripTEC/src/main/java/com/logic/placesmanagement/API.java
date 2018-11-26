@@ -271,6 +271,8 @@ public class API{
 }
 	public void getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException{
 		//set up key
+		
+		 
 	   	GeoApiContext distCalcer = new GeoApiContext.Builder()
 			    .apiKey("AIzaSyAMNKLnQIP4wvOZFQUB0PKnANDMuK9hty0")
 			    .build();
@@ -289,7 +291,7 @@ public class API{
 				DistanceMatrixElement distApart = result.rows[0].elements[0];
 				
 				System.out.println(distApart.toString());
-				String textD = distApart.distance.toString();
+				/*String textD = distApart.distance.toString();
 				String textT = distApart.duration.toString();
 				
 				
@@ -302,7 +304,7 @@ public class API{
 				
 				
 				
-				System.out.println(distApart.duration.toString()+"\n");
+				System.out.println(distApart.duration.toString()+"\n");*/
 				//System.out.println(distApart.durationInTraffic.toString())
 	}
 	
