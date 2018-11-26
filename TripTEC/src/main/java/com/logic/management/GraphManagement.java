@@ -7,7 +7,7 @@ import com.structures.graph.Graph;
 import com.structures.graph.GraphManager;
 import com.structures.graph.Vertex;
 //clase para la creación de grafo general y los subgrafos de los clientes
-public class Management {
+public class GraphManagement {
 	//atributos
 	GraphManager manager = new GraphManager();
 	Graph graph = new Graph(manager.getVertices(),manager.getEdges());
