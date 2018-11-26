@@ -8,7 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.logic.objects.Client;
 import com.structures.tree.BinarySearchTree;
+import com.structures.tree.BinarySearchTree.*;
 
 import javax.swing.JLabel;
 import java.awt.CardLayout;
@@ -31,7 +33,7 @@ import javax.swing.JOptionPane;
 
 public class EntryWindow extends JFrame {
 	private static String password = "TRIPTEC";
-	private BinarySearchTree binTree = new BinarySearchTree();
+	private BinarySearchTree<Client> binTree = new BinarySearchTree<Client>();
 	JPanel panel = new JPanel();
 	private JPanel contentPane;
 
@@ -91,11 +93,23 @@ public class EntryWindow extends JFrame {
 		btnLogin.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (txtID.getText().toUpperCase().equals(password)) {
+				if (txtID.getText().equals(password)) {
 					JOptionPane.showMessageDialog(panel, "Entra un administrador", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
 				}
 				else {
-					new MainWindowClient().setVisible(true);
+					try {
+						int id = Integer.parseInt(txtID.getText());
+						BinarySearchTree<Client>.Node<Client> NodeClient = binTree.searchClient(id);
+						if (NodeClient != null) {
+							new MainWindowClient((Client)NodeClient.getElement()).setVisible(true);
+						}
+						else {
+							JOptionPane.showMessageDialog(panel, "Cliente no registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+					catch (Exception e) {
+						JOptionPane.showMessageDialog(panel, "Id/contraseña inválido", "ERROR", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			}
 		});
@@ -105,6 +119,7 @@ public class EntryWindow extends JFrame {
 		JButton btnSingIn = new JButton("Sign in");
 		btnSingIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				new RegisterWindow().setVisible(true);
 			}
 		});
 		btnSingIn.setFont(new Font("OCR A Extended", Font.PLAIN, 14));

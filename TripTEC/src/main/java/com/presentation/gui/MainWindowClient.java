@@ -14,6 +14,9 @@ import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
+
+import com.logic.objects.Client;
+
 import javax.swing.JSpinner;
 import javax.swing.JButton;
 
@@ -29,12 +32,7 @@ public class MainWindowClient extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					MainWindowClient frame = new MainWindowClient();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				
 			}
 		});
 	}
@@ -42,7 +40,7 @@ public class MainWindowClient extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainWindowClient() {
+	public MainWindowClient(Client pClient) {
 		setTitle("Main Window - Client");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 899, 540);
